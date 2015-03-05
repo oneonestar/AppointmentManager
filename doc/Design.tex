@@ -1,0 +1,44 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\author{Star Poon}
+\title{COMP2432 Group Project Design Documentation}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\begin{document}
+\maketitle
+\section{Data Structure}
+\subsection{struct Appointment}
+The starting time of the appointment is stored in the type \textit{time\_t} which is defined in the standard C library \textless time.h\textgreater. This library provides some time manipulation and conversion functions that are useful in the system design.
+
+The main issue is how should we store the duration of the appointment. The input of the appointment contains the duration of the appointment in the format of n.n hours. We have two choice of storing the ending time:
+\begin{lstlisting}
+time_t start
+float duration
+\end{lstlisting}
+Or we could use:
+\begin{lstlisting}
+time_t start
+time_t end
+\end{lstlisting}
+
+During the insertion, we need to check whether there are collisions between the existing appointments and the new appointment. We need to determinate if the new appointment is in between the start time and the end time of the existing appointments. It is more convenient to store the ending time instead of the duration so that we can simply use \textit{difftime()}. If we stored the duration instead of the time, we need to do more calculation each time we insert a new appointment. For more details about the conflict checking, please referee to \ref{Algorithm:conflict}.
+
+\section{Algorithm}
+\subsection{Check appointment conflict}
+\label{Algorithm:conflict}
+Each time a new appointment is added, we need to check if there is a conflict between the existing and the new appointment.
+\end{document}
