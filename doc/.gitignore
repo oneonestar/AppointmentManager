@@ -1,0 +1,8 @@
+*
+
+!.gitignore
+!Design.tex
+!Design.pdf
+!html/
+!html/*
+!latex/refman.pdf

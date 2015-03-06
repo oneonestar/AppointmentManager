@@ -37,6 +37,24 @@ time_t end
 
 During the insertion, we need to check whether there are collisions between the existing appointments and the new appointment. We need to determinate if the new appointment is in between the start time and the end time of the existing appointments. It is more convenient to store the ending time instead of the duration so that we can simply use \textit{difftime()}. If we stored the duration instead of the time, we need to do more calculation each time we insert a new appointment. For more details about the conflict checking, please referee to \ref{Algorithm:conflict}.
 
+\subsection{struct AppointmentList}
+We need to store all the appointments that are following the input order. Since the amount of input is unknown, we need to use the dynamic memory allocation to store the data. Considering most of the access are in linear order, \textit{hashtable} is not useful in this situation. We have two choices here, either using the \textit{array} or \textit{linklist}.
+
+For the array:
+\begin{itemize}
+\item Insert new item: \textbf{Difficult} \\ When the input is too large, we need to allocate a bigger array and copy the original array into it.
+\item Insert item at the middle: \textbf{Difficult} \\ We need to move all the items behind the insertion point.
+\item Accessing time: \textbf{Fast}
+\end{itemize}
+
+For the linklist
+\begin{itemize}
+\item Insert new item: \textbf{Easy}
+\item Insert item at the middle: \textbf{Easy} \\ Simply modify the two pointers.
+\item Accessing time: \textbf{Slow} \\ We need to go through the pointers in order to jump to next item.
+\end{itemize}
+
+Since there are a lot of the insertions, linklist performs better in this dimension. We need to insert item at the middle when we doing the scheduling. Although the access of linklist is slower, the gain in insertion should overcome this problem.
 \section{Algorithm}
 \subsection{Check appointment conflict}
 \label{Algorithm:conflict}

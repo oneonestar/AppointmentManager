@@ -1,0 +1,4 @@
+<map id="CreateAppointment" name="CreateAppointment">
+<area shape="rect" id="node2" href="$main_8c.html#a56a7d25540cdbd7c059ae7c7122d6767" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="211,5,329,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a70d7b69bab5edaeb32c6d4f4e45f3e9b" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="188,56,352,83"/>
+</map>
