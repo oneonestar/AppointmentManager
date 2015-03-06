@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Manager", "index.html", [
+  [ "Appointment Manager (AMR)", "index.html", [
     [ "Data Structures", null, [
       [ "Data Structures", "annotated.html", "annotated" ],
       [ "Data Structure Index", "classes.html", null ],
