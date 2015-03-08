@@ -6,112 +6,18 @@
 #include <string.h>
 #include <time.h>
 
-/**
-* @def USER_NUMBER
-* The number of users is from 3 to 10, so maximum is 10.
-*/
-#define USER_NUMBER 10
+#include "appointment_list.h"
+#include "user.h"
 
-/**
-* @def MAX_USERNAME
-* Maximum length of the username, 30 for the name and 1 for the null.
-*/
-#define MAX_USERNAME 31
+struct AppointmentList *inputList;
 
-/** 
- * @struct User
- * @brief Store the basic information of the user and the appointments.
- */
-struct User
+void HandleInput(const char *line);
+void HandleSchedule(const char *line);
+
+void HandleSchedule(const char *line)
 {
-	char username[MAX_USERNAME];
-	struct AppointmentList *accepted;
-	struct AppointmentList *rejected;
-} user[USER_NUMBER];
-
-/** 
- * @struct AppointmentType
- * @brief Store all the appointment type.
- */
-enum AppointmentType
-{
-	STUDY = 0, ASSIGNMENT, PROJECT, GATHERING
-};
-const char *AppointmentTypeStr[] = {[STUDY] = "Study", [ASSIGNMENT] = "Assignment", [PROJECT] = "Project",
-	[GATHERING] = "Gathering"};
-
-struct Appointment
-{
-	enum AppointmentType type;
-	int caller_id;
-	int callee_id[10];
-	time_t start;
-	time_t end;
-	int rescheduled;
-	struct Appointment *next;
-};	
-
-struct AppointmentList
-{
-	int count;
-	struct Appointment *head;
-	struct Appointment *tail;
-};
-
-struct AppointmentList* CreateAppointmentList();
-struct Appointment* CreateAppointment();
-
-/**
- * @brief Check whether the the new appointment is conflict with the existing appointments that are already in the list.
- * @param[in] list The destination appointment list.
- * @param[in] newItem The item that needs to add into the list.
- */
-int CheckConflict(const struct AppointmentList *list, const struct Appointment newItem);
-
-/**
- * @brief Insert a copy of the appointment into the end of the appointment list.
- * @param[out] list The destination appointment list.
- * @param[in] newItem The item that needs to add into the list.
- */
-void AddAppointment(struct AppointmentList *list, const struct Appointment *newItem);
-
-/**
- * @brief Insert a copy of the appointment into the sorted appointment list.
- *        Using the start time then end time as the sorting condition.
- * @param[out] list The destination appointment list.
- * @param[in] newItem The item that needs to add into the list.
- */
-void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointment *newItem);
-
-/**
- * @brief Compare the start time and then end time of the appointment.
- *        Used to keep the ordered appointment list.
- * @param[in] a Appointment to be compared.
- * @param[in] b Appointment to be compared.
- * @retval <0 a is before b
- * @retval 0 a is equal to b
- * @retval >0 a is after b
- */
-int CompareAppointment(const struct Appointment *a, const struct Appointment *b);
-
-/**
- * @brief Return the user id that have the same username.
- * @param username The username that are used to compare.
- * @return The user id that have the same username. Return -1 if user is not found.
- */
-int GetUserID(const char *username);
-
-/**
- * @brief Print out the appointment.
- * @param item Appointment to be printed.
- */
-void PrintAppointment(const struct Appointment *item);
-
-/**
- * @brief Print out the appointment list.
- * @param list Appointment list to be printed.
- */
-void PrintAppointmentList(const struct AppointmentList *list);
+	printf("HandleingScheduling: ");
+}
 
 void HandleInput(const char *line)
 {
@@ -120,191 +26,99 @@ void HandleInput(const char *line)
 	int year, month, day;
 	int hour, minutes;
 	float duration;
-	char callee[USER_NUMBER][MAX_USERNAME];
-	int callee_count;
+	int callee_count = 0;
+	char *pch;
 	
 	struct Appointment *item = CreateAppointment();
+	char *myLine = (char*)malloc(strlen(line));
+	strcpy(myLine, line);
 
 	//parse the command
-	sscanf(line, "%s", command);
-	if(strcmp(command, "addStudy"))
+	pch = strtok(myLine, " ");
+	strcpy(command, pch);
+	if(!strcmp(command, "addStudy"))
 		item->type = STUDY;
-	else if(strcmp(command, "addAssignment"))
+	else if(!strcmp(command, "addAssignment"))
 		item->type = ASSIGNMENT;
-	else if(strcmp(command, "addProject"))
+	else if(!strcmp(command, "addProject"))
 		item->type = PROJECT;
-	else if(strcmp(command, "addGathering"))
+	else if(!strcmp(command, "addGathering"))
 		item->type = GATHERING;
-	else if(strcmp(command, "addBatch"))
+	else if(!strcmp(command, "addBatch"))
 		return;	//TODO: call the batch handling function
-	else if(strcmp(command, "printSchd"))
-		return;	//TODO: call the scheduling function
-	else if(strcmp(command, "endProgram"))
+	else if(!strcmp(command, "printSchd"))
+	{
+		HandleSchedule(line);
+		return;
+	}
+	else if(!strcmp(command, "endProgram"))
 	{
 		printf("Received end program command.\n");
 		exit(EXIT_SUCCESS);
 	}
 
-	sscanf(line, "%s", caller);
-	sscanf(line, "%d-%d-%d", &year, &month, &day);
-	sscanf(line, "%d:%d", &hour, &minutes);
-	sscanf(line, "%f", &duration);
-	for(callee_count=0 ; sscanf(line, "%s", callee[callee_count]) > 0; callee_count++)
-		/*empty statement*/;
+	pch = strtok(NULL, " ");
+	strcpy(caller, pch+1);
+
+	pch = strtok(NULL, " ");
+	sscanf(pch, "%d-%d-%d", &year, &month, &day);
+	
+	pch = strtok(NULL, " ");
+	sscanf(pch, "%d:%d", &hour, &minutes);
+	
+	pch = strtok(NULL, " "); duration = atof(pch);
+
+	while(1)
+	{
+		pch = strtok(NULL, " ");
+		if(!pch)
+			break;
+		int id = GetUserID(pch);
+		item->callee_id[callee_count++] = id;
+	}
 
 	item->caller_id = GetUserID(caller);
-	struct tm timeinfo;
+	//time
+	struct tm timeinfo, timeinfo_tmp;
+	memset(&timeinfo, 0, sizeof(timeinfo));
+	timeinfo.tm_isdst = -1;
 	timeinfo.tm_year = year - 1900;
 	timeinfo.tm_mon = month - 1;
 	timeinfo.tm_mday = day;
 	//start time
+	//convert ot half hour base
 	timeinfo.tm_hour = hour;
-	timeinfo.tm_min = minutes;
-	//TODO: move to half hour base
-	item->start = mktime(&timeinfo);
-	//end time
+	if(minutes>=0 && minutes <= 30)
+		timeinfo.tm_min = 0;
+	else
+		timeinfo.tm_min = 30;
+
+	timeinfo_tmp = timeinfo;	//because mktime could modify the value
+	item->start = mktime(&timeinfo_tmp);
+	//convert duration to end time
+	double _;
+	double fractional = modf(duration, &_);
+	minutes += fractional*60;
+	hour = hour+(int)duration;
+	if(minutes>=60)
+		hour++;
+	minutes %= 60;
+
+	timeinfo.tm_hour = hour;
+	if(minutes>0 && minutes <= 30)
+		timeinfo.tm_min = 0;
+	else
+		timeinfo.tm_min = 30;
+	item->end = mktime(&timeinfo);
+
+	AddAppointment(inputList, item);
+	free(myLine);
 	/*
 	int _;
 	timeinfo.tm_hour = hour + (int)duration;
 	timeinfo.tm_min = minutes + modf(duration, &_)*60;
 	item->end = mktime(&timeinfo);
 	*/
-}
-
-static int NumOfUser;
-
-
-/***************************************************
- * Implementation
- ***************************************************/
-struct AppointmentList* CreateAppointmentList()
-{
-	struct AppointmentList *list = (struct AppointmentList*)malloc(sizeof(struct AppointmentList));
-	if(!list)
-	{
-		fprintf(stderr, "Failed to allocate memory.\n");
-		exit(EXIT_FAILURE);
-	}
-	list->count = 0;
-	list->head = NULL;
-	list->tail = NULL;
-	return list;
-}
-
-struct Appointment* CreateAppointment()
-{
-	struct Appointment *item = (struct Appointment*)malloc(sizeof(struct Appointment));
-	if(!item)
-	{
-		fprintf(stderr, "Failed to allocate memory.\n");
-		exit(EXIT_FAILURE);
-	}
-	for(int i=0; i<USER_NUMBER; i++)
-		item->callee_id[i] = -1;
-	item->rescheduled = 0;
-	item->next = NULL;
-	return item;
-}
-
-void AddAppointment(struct AppointmentList *list, const struct Appointment *newItem)
-{
-	struct Appointment *item = CreateAppointment();
-	*item = *newItem;
-	if(!list->head)	//if the list is empty
-		list->head = item;
-	else
-		list->tail->next = item;
-	list->tail = item;
-	list->count++;
-}
-
-void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointment *newItem)
-{
-	struct Appointment *item = CreateAppointment();
-	*item = *newItem;
-	struct Appointment *ptr = list->head;
-	//if the list is empty
-	if(!ptr)
-	{
-		list->head = item;
-		list->tail = item;
-	}
-	else if(CompareAppointment(item, ptr)<0)	//if insert at the head
-	{
-		item->next = list->head;
-		list->head = item;
-	}
-	else	//insert at middle or at the tail
-	{
-		while(ptr->next)	//find the insertion position
-		{
-			if(difftime(item->start, ptr->next->start)<0)
-				break;
-			ptr = ptr->next;
-		}
-		if(ptr == NULL)	//insert at the tail
-		{
-			list->tail->next = item;
-			list->tail = item;
-		}
-		else	//insert after ptr
-		{
-			item->next = ptr->next;
-			ptr->next = item;
-		}
-	}
-	list->count++;
-}
-
-int CompareAppointment(const struct Appointment *a, const struct Appointment *b)
-{
-	if(difftime(a->start, b->start)<0)
-		return -1;	//a before b
-	else if(difftime(a->start, b->start)==0)
-		return difftime(a->end, b->end);
-	else
-		return 1;
-}
-
-
-int GetUserID(const char *username)
-{
-	for(int i=0; i<NumOfUser; i++)
-		if (!strcmp(user[i].username, username))
-			return i;
-	return -1;
-}
-
-void PrintAppointment(const struct Appointment *item)
-{
-	struct tm *tm_start, *tm_end;
-	tm_start = localtime (&item->start);
-	tm_end = localtime (&item->end);
-	printf("%4d   %02d:%02d   %02d:%02d   %-12s ", tm_start->tm_year+1900, tm_start->tm_hour, tm_start->tm_min,
-		tm_end->tm_hour, tm_end->tm_min, AppointmentTypeStr[item->type]);
-	if(item->rescheduled)
-		printf("%-9c ",  'Y');
-	else
-		printf("%-9c ", 'N');
-	if(item->callee_id[0] == -1)
-		printf("-");
-	for(int i=0; i<USER_NUMBER; i++)
-	{
-		if(item->callee_id[i]==-1)
-			break;
-		printf("%s ", user[item->callee_id[i]].username);
-	}
-	printf("\n");
-}
-
-void PrintAppointmentList(const struct AppointmentList *list)
-{
-	struct Appointment *ptr = list->head;
-	while(ptr!=NULL)
-	{
-		PrintAppointment(ptr);
-		ptr = ptr->next;
-	}
 }
 
 /***************************************************
@@ -407,7 +221,26 @@ void test3()
 	AddAppointmentOrdered(list, a);	//<<<<<<Testing
 	PrintAppointmentList(list);	//<<<<<<Testing
 }
-
+void test4()
+{
+	printf("======================\n");
+	printf("TEST 4:\n");
+	HandleInput("addStudy -alice 2015-08-04 13:00 3.0");
+	HandleInput("addStudy -bob 2015-08-04 13:00 3.0");
+	HandleInput("addStudy -charlie 2015-08-04 13:00 3.0");
+	HandleInput("addAssignment -alice 2015-08-04 14:00 3.0");
+	HandleInput("addAssignment -bob 2015-08-04 14:00 3.0");
+	HandleInput("addAssignment -charlie 2015-08-04 14:00 3.0");
+	PrintAppointmentList(inputList);
+}
+void test5()
+{
+	printf("======================\n");
+	printf("TEST 5:\n");
+	HandleInput("addProject -alice 2015-08-04 13:00 3.0 bob");
+	HandleInput("addGathering -bob 2015-08-04 14:00 3.0 alice charlie");
+	PrintAppointmentList(inputList);
+}
 int main(int argc, char* argv[])
 {
 	if (argc < 4 || argc > 11)
@@ -418,12 +251,15 @@ int main(int argc, char* argv[])
 	NumOfUser = argc - 1;
 	for (int i=0; i<NumOfUser; i++)
 	{
-		strcpy(user[i].username, argv[i]);
+		strcpy(user[i].username, argv[i+1]);
 		user[i].username[0] = toupper(user[i].username[0]);
 	}
+	inputList = CreateAppointmentList();
 
 	test1();
 	test2();
 	test3();
+	test4();
+	test5();
 	return EXIT_SUCCESS;
 }
