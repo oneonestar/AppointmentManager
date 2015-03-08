@@ -41,16 +41,16 @@ void PrintRejected(const struct User *user)
 
 void PrintAllUser()
 {
+	printf("***Appointment Schedule – ACCEPTED ***\n\n");
 	for(int i=0; i<NumOfUser; i++)
 	{
-		printf("***Appointment Schedule – ACCEPTED ***\n\n");
 		PrintAccepted(&user[i]);
 	}
 	printf("   -End-\n");
 	printf("===========================================================================\n");
+	printf("***Appointment Schedule – REJECTED ***\n\n");
 	for(int i=0; i<NumOfUser; i++)
-	{
-		printf("***Appointment Schedule – REJECTED ***\n\n");
+	{\
 		PrintRejected(&user[i]);
 	}
 	printf("   -End-\n");

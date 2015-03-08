@@ -268,18 +268,18 @@ void test4()
 	printf("======================\n");
 	printf("TEST 4:\n");
 	HandleInput("addStudy -alice 2015-08-04 13:00 3.0");
-	HandleInput("addStudy -bob 2015-08-04 13:00 3.0");
-	HandleInput("addStudy -charlie 2015-08-04 13:00 3.0");
+	HandleInput("addAssignment -bob 2015-08-04 13:00 3.0");
+	HandleInput("addGathering -charlie 2015-08-04 17:00 2.5");
 	HandleInput("addAssignment -alice 2015-08-04 14:00 3.0");
-	HandleInput("addAssignment -bob 2015-08-04 14:00 3.0");
-	HandleInput("addAssignment -charlie 2015-08-04 14:00 3.0");
+	HandleInput("addStudy -bob 2015-08-04 14:00 3.0");
+	HandleInput("addStudy -charlie 2015-08-04 14:00 3.0");
 	PrintAppointmentList(inputList);
 }
 void test5()
 {
 	printf("======================\n");
 	printf("TEST 5:\n");
-	HandleInput("addProject -alice 2015-08-04 13:00 3.0 bob");
+	HandleInput("addProject -alice 2015-08-04 17:00 2 bob");
 	HandleInput("addGathering -bob 2015-08-04 14:00 3.0 alice charlie");
 	PrintAppointmentList(inputList);
 }

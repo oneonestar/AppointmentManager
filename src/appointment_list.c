@@ -174,6 +174,8 @@ void PrintAppointment(const struct Appointment *item)
 		printf("%-9c ", 'N');
 	if(item->callee_id[0] == -1)
 		printf("-");
+	else
+		printf("%s ", user[item->caller_id].username);
 	for(int i=0; i<USER_NUMBER; i++)
 	{
 		if(item->callee_id[i]==-1)
@@ -195,8 +197,8 @@ void PrintAppointmentList(const struct AppointmentList *list)
 
 int IsConflict(const struct Appointment *a, const struct Appointment *b)
 {
-	return !(difftime(a->end, b->start)<0 || 	//a before b
-		difftime(a->start, b->end)>0); 	//a after b
+	return !(difftime(a->end, b->start)<=0 || 	//a before b
+		difftime(a->start, b->end)>=0); 	//a after b
 }
 
 struct AppointmentList* IsConflictInList(const struct AppointmentList *list, const struct Appointment *item)
