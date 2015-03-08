@@ -14,10 +14,23 @@ struct AppointmentList *inputList;
 
 void HandleInput(const char *line);
 void HandleSchedule(const char *algorithm);
+void inputLoop(FILE *stream);
 
 void HandleSchedule(const char *algorithm)
 {
-	printf("HandleingScheduling: ");
+	//TODO: remove items from list
+	for (int i=0; i<NumOfUser; i++)
+	{
+		user[i].accepted = CreateAppointmentList();
+		user[i].rejected = CreateAppointmentList();
+	}
+	if(!strcmp(algorithm, "-fcfs"))
+		Schedual_FCFS(inputList);
+	else if(!strcmp(algorithm, "-prio"))
+		Schedual_PRIO(inputList);
+	else if(!strcmp(algorithm, "-opti"))
+		return;
+	PrintAllUser();
 }
 
 void HandleInput(const char *line)
@@ -31,11 +44,11 @@ void HandleInput(const char *line)
 	char *pch;
 	
 	struct Appointment *item = CreateAppointment();
-	char *myLine = (char*)malloc(strlen(line));
+	char myLine[255];
 	strcpy(myLine, line);
 
 	//parse the command
-	pch = strtok(myLine, " ");
+	pch = strtok(myLine, " \n");
 	strcpy(command, pch);
 	if(!strcmp(command, "addStudy"))
 		item->type = STUDY;
@@ -46,14 +59,25 @@ void HandleInput(const char *line)
 	else if(!strcmp(command, "addGathering"))
 		item->type = GATHERING;
 	else if(!strcmp(command, "addBatch"))
-		return;	//TODO: call the batch handling function
+	{
+		pch = strtok(NULL, " \n");
+		char filename[255];
+		strcpy(filename, pch);
+		FILE *f = fopen(filename+1, "r");	//offset +1 to remove the '-'
+		if(!f)
+		{
+			fprintf(stderr, "Failed to open file %s.\n", filename);
+			exit(EXIT_FAILURE);
+		}
+		inputLoop(f);
+		return;
+	}
 	else if(!strcmp(command, "printSchd"))
 	{
-		pch = strtok(NULL, " ");
-		char *algorithmStr = (char *)malloc(sizeof(strlen(pch)));
+		pch = strtok(NULL, " \n");
+		char algorithmStr[30];
 		strcpy(algorithmStr, pch);
 		HandleSchedule(algorithmStr);
-		free(algorithmStr);
 		return;
 	}
 	else if(!strcmp(command, "endProgram"))
@@ -61,21 +85,26 @@ void HandleInput(const char *line)
 		printf("Received end program command.\n");
 		exit(EXIT_SUCCESS);
 	}
+	else
+	{
+		printf("Unknown command: %s", line);
+		return;
+	}
 
-	pch = strtok(NULL, " ");
+	pch = strtok(NULL, " \n");
 	strcpy(caller, pch+1);
 
-	pch = strtok(NULL, " ");
+	pch = strtok(NULL, " \n");
 	sscanf(pch, "%d-%d-%d", &year, &month, &day);
 	
-	pch = strtok(NULL, " ");
+	pch = strtok(NULL, " \n");
 	sscanf(pch, "%d:%d", &hour, &minutes);
 	
-	pch = strtok(NULL, " "); duration = atof(pch);
+	pch = strtok(NULL, " \n"); duration = atof(pch);
 
 	while(1)
 	{
-		pch = strtok(NULL, " ");
+		pch = strtok(NULL, " \n");
 		if(!pch)
 			break;
 		int id = GetUserID(pch);
@@ -117,7 +146,7 @@ void HandleInput(const char *line)
 	item->end = mktime(&timeinfo);
 
 	AddAppointment(inputList, item);
-	free(myLine);
+	printf("-> [Pending]\n");
 	/*
 	int _;
 	timeinfo.tm_hour = hour + (int)duration;
@@ -283,7 +312,35 @@ void testAll()
 	test5();
 	test6();
 	test7();
+	printf("======END OF DEBUG MESSAGE======\n");
+	printf("================================\n");
 }
+
+void inputLoop(FILE *stream)
+{
+	const int MAX_CHAR = 255;
+	char line[MAX_CHAR];
+	char *return_val;
+	while(1)
+	{
+		return_val = fgets(line, MAX_CHAR, stream);
+		if(!return_val)
+		{
+			if(feof(stream))
+			{
+				printf("Received EOF.\n");
+				return;
+			}
+			else
+			{
+				fprintf(stderr, "IO error, existing program.\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		HandleInput(line);
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc < 4 || argc > 11)
@@ -302,5 +359,6 @@ int main(int argc, char* argv[])
 	inputList = CreateAppointmentList();
 
 	testAll();
+	inputLoop(stdin);
 	return EXIT_SUCCESS;
 }
