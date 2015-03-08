@@ -7,14 +7,15 @@
 #include <time.h>
 
 #include "appointment_list.h"
+#include "scheduler.h"
 #include "user.h"
 
 struct AppointmentList *inputList;
 
 void HandleInput(const char *line);
-void HandleSchedule(const char *line);
+void HandleSchedule(const char *algorithm);
 
-void HandleSchedule(const char *line)
+void HandleSchedule(const char *algorithm)
 {
 	printf("HandleingScheduling: ");
 }
@@ -48,7 +49,11 @@ void HandleInput(const char *line)
 		return;	//TODO: call the batch handling function
 	else if(!strcmp(command, "printSchd"))
 	{
-		HandleSchedule(line);
+		pch = strtok(NULL, " ");
+		char *algorithmStr = (char *)malloc(sizeof(strlen(pch)));
+		strcpy(algorithmStr, pch);
+		HandleSchedule(algorithmStr);
+		free(algorithmStr);
 		return;
 	}
 	else if(!strcmp(command, "endProgram"))
@@ -241,6 +246,13 @@ void test5()
 	HandleInput("addGathering -bob 2015-08-04 14:00 3.0 alice charlie");
 	PrintAppointmentList(inputList);
 }
+void test6()
+{
+	printf("======================\n");
+	printf("TEST 6:\n");
+	Schedual_FCFS(inputList);
+	PrintAllUser();
+}
 int main(int argc, char* argv[])
 {
 	if (argc < 4 || argc > 11)
@@ -253,6 +265,8 @@ int main(int argc, char* argv[])
 	{
 		strcpy(user[i].username, argv[i+1]);
 		user[i].username[0] = toupper(user[i].username[0]);
+		user[i].accepted = CreateAppointmentList();
+		user[i].rejected = CreateAppointmentList();
 	}
 	inputList = CreateAppointmentList();
 
@@ -261,5 +275,6 @@ int main(int argc, char* argv[])
 	test3();
 	test4();
 	test5();
+	test6();
 	return EXIT_SUCCESS;
 }

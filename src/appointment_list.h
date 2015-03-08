@@ -75,12 +75,12 @@ void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointmen
  * @param[in] list The destination appointment list.
  * @param[in] newItem The item that needs to add into the list.
  */
-struct AppointmentList* ListConflict(const struct AppointmentList *list, const struct Appointment newItem);
+struct AppointmentList* IsConflictInList(const struct AppointmentList *list, const struct Appointment *item);
 
 /**
  * @brief Check whether if two appointments have time conflict.
  */
-int isConflict(const struct Appointment *a, const struct Appointment *b);
+int IsConflict(const struct Appointment *a, const struct Appointment *b);
 
 /**
  * @brief Remove an item from the list. Items should be unique inside the list.

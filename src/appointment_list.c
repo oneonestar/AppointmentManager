@@ -38,6 +38,7 @@ void AddAppointment(struct AppointmentList *list, const struct Appointment *newI
 {
 	struct Appointment *item = CreateAppointment();
 	*item = *newItem;
+	item->next = item->prev = 0;
 	if(!list->head)	//if the list is empty
 	{
 		list->head = item;
@@ -56,6 +57,7 @@ void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointmen
 {
 	struct Appointment *item = CreateAppointment();
 	*item = *newItem;
+	item->next = item->prev = 0;
 	struct Appointment *ptr = list->head;
 	//if the list is empty
 	if(!ptr)
@@ -149,8 +151,21 @@ void PrintAppointmentList(const struct AppointmentList *list)
 	}
 }
 
-int isConflict(const struct Appointment *a, const struct Appointment *b)
+int IsConflict(const struct Appointment *a, const struct Appointment *b)
 {
 	return !(difftime(a->end, b->start)<0 || 	//a before b
 		difftime(a->start, b->end)>0); 	//a after b
+}
+
+struct AppointmentList* IsConflictInList(const struct AppointmentList *list, const struct Appointment *item)
+{
+	struct AppointmentList *conflict_list = CreateAppointmentList();
+	struct Appointment *ptr = list->head;
+	while(ptr)
+	{
+		if(IsConflict(ptr, item))
+			AddAppointment(conflict_list, ptr);
+		ptr = ptr->next;
+	}
+	return conflict_list;
 }

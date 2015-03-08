@@ -40,4 +40,10 @@ int NumOfUser;
  */
 int GetUserID(const char *username);
 
+void PrintAccepted(const struct User *user);
+
+void PrintRejected(const struct User *user);
+
+void PrintAllUser();
+
 #endif
