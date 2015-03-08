@@ -16,7 +16,7 @@
  */
 enum AppointmentType
 {
-	STUDY = 0, ASSIGNMENT, PROJECT, GATHERING
+	ASSIGNMENT = 0, PROJECT, STUDY, GATHERING
 };
 
 /** For printing */
@@ -69,6 +69,20 @@ void AddAppointment(struct AppointmentList *list, const struct Appointment *newI
  */
 void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointment *newItem);
 
+/**
+ * @brief Insert a copy of the appointment into the end of the appointment list.
+ * @param[out] list The destination appointment list.
+ * @param[in] newItem The item that needs to add into the list.
+ */
+void AddAppointmentFromList(struct AppointmentList *dst_list, const struct AppointmentList *src_list);
+
+/**
+ * @brief Insert a copy of the appointment into the sorted appointment list.
+ *        Using the start time then end time as the sorting condition.
+ * @param[out] list The destination appointment list.
+ * @param[in] newItem The item that needs to add into the list.
+ */
+void AddAppointmentOrderedFromList(struct AppointmentList *dst_list, const struct AppointmentList *src_list);
 
 /**
  * @brief Check whether the the new appointment is conflict with the existing appointments that are already in the list.
@@ -86,9 +100,10 @@ int IsConflict(const struct Appointment *a, const struct Appointment *b);
  * @brief Remove an item from the list. Items should be unique inside the list.
  * Delete if the two item have the same start time and end time.
  */
-void RemoveItemFromList(const struct AppointmentList *list, const struct Appointment *item);
+void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item);
 
-void RemoveListFromList(const struct AppointmentList *list, const struct Appointment *item);
+void RemoveListFromList(struct AppointmentList *ori_list, const struct AppointmentList *del_list);
+
 /**
  * @brief Compare the start time and then end time of the appointment.
  *        Used to keep the ordered appointment list.
@@ -99,6 +114,16 @@ void RemoveListFromList(const struct AppointmentList *list, const struct Appoint
  * @retval >0 a is after b
  */
 int CompareAppointment(const struct Appointment *a, const struct Appointment *b);
+
+/**
+ * @brief Compare the appointment by it's priority.
+ * @param[in] a Appointment to be compared.
+ * @param[in] b Appointment to be compared.
+ * @retval <0 a is before b
+ * @retval 0 a is equal to b
+ * @retval >0 a is after b
+ */
+int CompareAppointmentPriority(const struct Appointment *a, const struct Appointment *b);
 
 /**
  * @brief Print out the appointment.

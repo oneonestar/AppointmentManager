@@ -94,6 +94,26 @@ void AddAppointmentOrdered(struct AppointmentList *list, const struct Appointmen
 	list->count++;
 }
 
+void AddAppointmentFromList(struct AppointmentList *dst_list, const struct AppointmentList *src_list)
+{
+	struct Appointment *newItem = src_list->head;
+	while(newItem)
+	{
+		AddAppointment(dst_list, newItem);
+		newItem = newItem->next;
+	}
+}
+
+void AddAppointmentOrderedFromList(struct AppointmentList *dst_list, const struct AppointmentList *src_list)
+{
+	struct Appointment *newItem = src_list->head;
+	while(newItem)
+	{
+		AddAppointmentOrdered(dst_list, newItem);
+		newItem = newItem->next;
+	}
+}
+
 int CompareAppointment(const struct Appointment *a, const struct Appointment *b)
 {
 	if(difftime(a->start, b->start)<0)
@@ -104,17 +124,39 @@ int CompareAppointment(const struct Appointment *a, const struct Appointment *b)
 		return 1;
 }
 
-void RemoveItemFromList(const struct AppointmentList *list, const struct Appointment *item)
+int CompareAppointmentPriority(const struct Appointment *a, const struct Appointment *b)
+{
+	return a->type - b->type;
+}
+
+void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item)
 {
 	struct Appointment *delItem = list->head;
 	while(delItem)
 	{
-		if(CompareAppointment(delItem, item))
+		if(!CompareAppointment(delItem, item))
 		{
-			item->prev->next = item->next;
-			item->next->prev = item->prev;
+			if(!delItem->prev)	//if prev is null, first item in list
+				list->head = delItem->next;
+			else
+				delItem->prev->next = delItem->next;
+			if(!delItem->next)	//if next is null, last item in list
+				list->tail = delItem->prev;
+			else
+				delItem->next->prev = delItem->prev;
+			list->count--;
 			return;
 		}
+		delItem = delItem->next;
+	}
+}
+
+void RemoveListFromList(struct AppointmentList *ori_list, const struct AppointmentList *del_list)
+{
+	struct Appointment *delItem = del_list->head;
+	while(delItem)
+	{
+		RemoveItemFromList(ori_list, delItem);
 		delItem = delItem->next;
 	}
 }

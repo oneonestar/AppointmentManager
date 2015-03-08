@@ -143,6 +143,12 @@ void test1()
 	a->start = timer;
 	a->end = timer;
 	PrintAppointment(a);	//<<<<<<Testing
+
+	struct Appointment *b = CreateAppointment();
+	b->type = GATHERING;
+	printf("Priority: %d\n", CompareAppointmentPriority(a,b));
+	printf("ASSIGNMENT : %d\n", ASSIGNMENT);
+	printf("GATHERING : %d\n", GATHERING);
 }
 
 void test2()
@@ -164,9 +170,11 @@ void test2()
 	a->caller_id = 0;
 	a->callee_id[0] = 1;
 	a->callee_id[1] = 2;
-	a->start = timer;
-	a->end = timer;
+	a->start = timer+18000;
+	a->end = timer+18000;
 	AddAppointment(list, a);	//<<<<<<Testing
+	PrintAppointmentList(list);	//<<<<<<Testing
+	RemoveItemFromList(list, a); //<<<<<<Testing
 	PrintAppointmentList(list);	//<<<<<<Testing
 }
 void test3()
@@ -253,6 +261,29 @@ void test6()
 	Schedual_FCFS(inputList);
 	PrintAllUser();
 }
+void test7()
+{
+	printf("======================\n");
+	printf("TEST 7:\n");
+	//reset user list
+	for (int i=0; i<NumOfUser; i++)
+	{
+		user[i].accepted = CreateAppointmentList();
+		user[i].rejected = CreateAppointmentList();
+	}
+	Schedual_PRIO(inputList);
+	PrintAllUser();
+}
+void testAll()
+{
+	test1();
+	test2();
+	test3();
+	test4();
+	test5();
+	test6();
+	test7();
+}
 int main(int argc, char* argv[])
 {
 	if (argc < 4 || argc > 11)
@@ -270,11 +301,6 @@ int main(int argc, char* argv[])
 	}
 	inputList = CreateAppointmentList();
 
-	test1();
-	test2();
-	test3();
-	test4();
-	test5();
-	test6();
+	testAll();
 	return EXIT_SUCCESS;
 }
