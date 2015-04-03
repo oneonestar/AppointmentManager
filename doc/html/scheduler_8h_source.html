@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('scheduler_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,29 +104,46 @@ $(document).ready(function(){initNavTree('scheduler_8h_source.html','');});
 <div class="title">scheduler.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="scheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SCHEDULER</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SCHEDULER</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">void</span> <a class="code" href="scheduler_8h.html#a904442b683ee1ff97a79442e3acbb94f">Schedual_FCFS</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *<a class="code" href="main_8c.html#a4edc0040d183711c075fdf288976cb73">inputList</a>);</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="scheduler_8h.html#ae2937dc2be968df16aa0fe34377dea11">Schedual_PRIO</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *<a class="code" href="main_8c.html#a4edc0040d183711c075fdf288976cb73">inputList</a>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="scheduler_8h.html#a9fc94483452b23a4c46b5c1898e72d11">Schedual_Opti</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *<a class="code" href="main_8c.html#a4edc0040d183711c075fdf288976cb73">inputList</a>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="scheduler_8h_html_ae2937dc2be968df16aa0fe34377dea11"><div class="ttname"><a href="scheduler_8h.html#ae2937dc2be968df16aa0fe34377dea11">Schedual_PRIO</a></div><div class="ttdeci">void Schedual_PRIO(const struct AppointmentList *inputList)</div><div class="ttdoc">Priority. The order is folloing the pre-defined priority. The result will be putted into the each use...</div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00123">scheduler.c:123</a></div></div>
-<div class="ttc" id="struct_appointment_list_html"><div class="ttname"><a href="struct_appointment_list.html">AppointmentList</a></div><div class="ttdoc">A double-linked list for appointment record. </div><div class="ttdef"><b>Definition:</b> <a href="appointment__list_8h_source.html#l00047">appointment_list.h:47</a></div></div>
-<div class="ttc" id="scheduler_8h_html_a9fc94483452b23a4c46b5c1898e72d11"><div class="ttname"><a href="scheduler_8h.html#a9fc94483452b23a4c46b5c1898e72d11">Schedual_Opti</a></div><div class="ttdeci">void Schedual_Opti(const struct AppointmentList *inputList)</div><div class="ttdoc">Optimized. Bonus part, reschedule those rejected appointments. The result will be putted into the eac...</div></div>
-<div class="ttc" id="scheduler_8h_html_a904442b683ee1ff97a79442e3acbb94f"><div class="ttname"><a href="scheduler_8h.html#a904442b683ee1ff97a79442e3acbb94f">Schedual_FCFS</a></div><div class="ttdeci">void Schedual_FCFS(const struct AppointmentList *inputList)</div><div class="ttdoc">First come first served. The order is folloing the input order. The result will be putted into the ea...</div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00103">scheduler.c:103</a></div></div>
-<div class="ttc" id="main_8c_html_a4edc0040d183711c075fdf288976cb73"><div class="ttname"><a href="main_8c.html#a4edc0040d183711c075fdf288976cb73">inputList</a></div><div class="ttdeci">struct AppointmentList * inputList</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00013">main.c:13</a></div></div>
+<a href="scheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef SCHEDULER</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define SCHEDULER</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="user_8h.html">user.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">struct </span>Summary</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">int</span> total_accepted;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span> total_rejected;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">int</span> accepted[<a class="code" href="user_8h.html#a29710a608b9d13cff84765a2a195b6ec">USER_NUMBER</a>];</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span> rejected[<a class="code" href="user_8h.html#a29710a608b9d13cff84765a2a195b6ec">USER_NUMBER</a>];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> empty_timeslot[<a class="code" href="user_8h.html#a29710a608b9d13cff84765a2a195b6ec">USER_NUMBER</a>];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    time_t start;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    time_t end;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">struct </span>Summary* <a class="code" href="scheduler_8h.html#ab1a6239f9cfb939239ea5a6327fc5396">Schedual_FCFS</a>(<span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *inputList);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">struct </span>Summary* <a class="code" href="scheduler_8h.html#ace53e33f078566371bac6500f263b9e4">Schedual_PRIO</a>(<span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *inputList);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">struct </span>Summary* <a class="code" href="scheduler_8h.html#a00e50377d32b3bee0e5d5982da684eb2">Schedual_OPTI</a>(<span class="keyword">struct</span> <a class="code" href="struct_appointment_list.html">AppointmentList</a> *inputList);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="scheduler_8h.html#aff1618f427d441142f2d7706441e8113">PrintSummary</a>(<span class="keyword">struct</span> Summary *summary);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="scheduler_8h_html_a00e50377d32b3bee0e5d5982da684eb2"><div class="ttname"><a href="scheduler_8h.html#a00e50377d32b3bee0e5d5982da684eb2">Schedual_OPTI</a></div><div class="ttdeci">struct Summary * Schedual_OPTI(struct AppointmentList *inputList)</div><div class="ttdoc">Optimized. Bonus part, reschedule those rejected appointments. The result will be putted into the eac...</div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00332">scheduler.c:332</a></div></div>
+<div class="ttc" id="struct_appointment_list_html"><div class="ttname"><a href="struct_appointment_list.html">AppointmentList</a></div><div class="ttdoc">A double-linked list for appointment record. </div><div class="ttdef"><b>Definition:</b> <a href="appointment__list_8h_source.html#l00066">appointment_list.h:66</a></div></div>
+<div class="ttc" id="user_8h_html"><div class="ttname"><a href="user_8h.html">user.h</a></div><div class="ttdoc">Handling each users. </div></div>
+<div class="ttc" id="scheduler_8h_html_aff1618f427d441142f2d7706441e8113"><div class="ttname"><a href="scheduler_8h.html#aff1618f427d441142f2d7706441e8113">PrintSummary</a></div><div class="ttdeci">void PrintSummary(struct Summary *summary)</div><div class="ttdoc">Print out the summary about the scheduling. </div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00404">scheduler.c:404</a></div></div>
+<div class="ttc" id="user_8h_html_a29710a608b9d13cff84765a2a195b6ec"><div class="ttname"><a href="user_8h.html#a29710a608b9d13cff84765a2a195b6ec">USER_NUMBER</a></div><div class="ttdeci">#define USER_NUMBER</div><div class="ttdef"><b>Definition:</b> <a href="user_8h_source.html#l00028">user.h:28</a></div></div>
+<div class="ttc" id="scheduler_8h_html_ace53e33f078566371bac6500f263b9e4"><div class="ttname"><a href="scheduler_8h.html#ace53e33f078566371bac6500f263b9e4">Schedual_PRIO</a></div><div class="ttdeci">struct Summary * Schedual_PRIO(struct AppointmentList *inputList)</div><div class="ttdoc">Priority. The order is folloing the pre-defined priority. The result will be putted into the each use...</div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00291">scheduler.c:291</a></div></div>
+<div class="ttc" id="scheduler_8h_html_ab1a6239f9cfb939239ea5a6327fc5396"><div class="ttname"><a href="scheduler_8h.html#ab1a6239f9cfb939239ea5a6327fc5396">Schedual_FCFS</a></div><div class="ttdeci">struct Summary * Schedual_FCFS(struct AppointmentList *inputList)</div><div class="ttdoc">First come first served. The order is folloing the input order. The result will be putted into the ea...</div><div class="ttdef"><b>Definition:</b> <a href="scheduler_8c_source.html#l00248">scheduler.c:248</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="scheduler_8h.html">scheduler.h</a></li>
-    <li class="footer">Generated on Thu Apr 2 2015 19:02:08 for Appointment Manager (AMR) by
+    <li class="footer">Generated on Sat Apr 4 2015 02:49:42 for Appointment Manager (AMR) by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

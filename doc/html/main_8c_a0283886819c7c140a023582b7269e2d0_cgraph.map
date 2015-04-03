@@ -1,9 +1,8 @@
 <map id="test2" name="test2">
-<area shape="rect" id="node2" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="313,35,448,61"/>
-<area shape="rect" id="node3" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="104,35,259,61"/>
-<area shape="rect" id="node4" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="122,85,241,112"/>
-<area shape="rect" id="node5" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="110,136,253,163"/>
-<area shape="rect" id="node7" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="107,187,255,213"/>
-<area shape="rect" id="node6" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="319,136,442,163"/>
-<area shape="rect" id="node8" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="307,187,455,213"/>
+<area shape="rect" id="node2" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="307,34,441,61"/>
+<area shape="rect" id="node3" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="104,34,259,61"/>
+<area shape="rect" id="node4" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="122,85,241,111"/>
+<area shape="rect" id="node5" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="110,135,253,162"/>
+<area shape="rect" id="node7" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="107,186,255,213"/>
+<area shape="rect" id="node6" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="313,135,435,162"/>
 </map>

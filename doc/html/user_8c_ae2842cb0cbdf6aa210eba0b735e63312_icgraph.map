@@ -1,9 +1,9 @@
 <map id="strcicmp" name="strcicmp">
-<area shape="rect" id="node2" href="$user_8h.html#af2f23f139dbacb2a0e94029784c22ccf" title="Return the user id that have the same username. " alt="" coords="125,81,211,108"/>
-<area shape="rect" id="node3" href="$main_8c.html#a78f207561c985e1bdec727e427244add" title="HandleInput" alt="" coords="259,81,351,108"/>
-<area shape="rect" id="node4" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="413,5,463,32"/>
-<area shape="rect" id="node7" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="413,56,463,83"/>
-<area shape="rect" id="node8" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="399,107,477,133"/>
-<area shape="rect" id="node5" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="525,56,584,83"/>
-<area shape="rect" id="node6" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="632,81,683,108"/>
+<area shape="rect" id="node2" href="$user_8h.html#af2f23f139dbacb2a0e94029784c22ccf" title="Return the user id that have the same username. " alt="" coords="125,132,211,159"/>
+<area shape="rect" id="node3" href="$main_8c.html#a78f207561c985e1bdec727e427244add" title="HandleInput" alt="" coords="259,107,351,133"/>
+<area shape="rect" id="node5" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="529,132,580,159"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="399,107,477,133"/>
+<area shape="rect" id="node6" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="413,56,463,83"/>
+<area shape="rect" id="node8" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="413,5,463,32"/>
+<area shape="rect" id="node7" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="525,31,584,57"/>
 </map>

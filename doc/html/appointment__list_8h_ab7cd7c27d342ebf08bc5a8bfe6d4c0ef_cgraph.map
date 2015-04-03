@@ -1,0 +1,6 @@
+<map id="ConflictInList" name="ConflictInList">
+<area shape="rect" id="node2" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="152,5,307,32"/>
+<area shape="rect" id="node3" href="$appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3" title="Check whether if two appointments have time conflict. " alt="" coords="190,56,269,83"/>
+<area shape="rect" id="node4" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="170,107,289,133"/>
+<area shape="rect" id="node5" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="355,107,489,133"/>
+</map>

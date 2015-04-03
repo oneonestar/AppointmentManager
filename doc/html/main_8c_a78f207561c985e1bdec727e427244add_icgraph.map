@@ -1,7 +1,7 @@
 <map id="HandleInput" name="HandleInput">
-<area shape="rect" id="node2" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="159,5,210,32"/>
-<area shape="rect" id="node5" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="159,56,210,83"/>
-<area shape="rect" id="node6" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="145,107,224,133"/>
-<area shape="rect" id="node3" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="272,56,331,83"/>
-<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="379,81,429,108"/>
+<area shape="rect" id="node2" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="145,5,224,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="159,56,210,83"/>
+<area shape="rect" id="node6" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="159,107,210,133"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="276,5,327,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="272,81,331,108"/>
 </map>

@@ -1,6 +1,6 @@
 var user_8h =
 [
-    [ "User", "struct_user.html", "struct_user" ],
+    [ "User", "struct_user.html", null ],
     [ "MAX_USERNAME", "user_8h.html#a2d9316e742860ef57fe46a27e67d5efe", null ],
     [ "USER_NUMBER", "user_8h.html#a29710a608b9d13cff84765a2a195b6ec", null ],
     [ "GetUserID", "user_8h.html#af2f23f139dbacb2a0e94029784c22ccf", null ],

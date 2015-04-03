@@ -1,7 +1,8 @@
 <map id="user.h" name="user.h">
-<area shape="rect" id="node2" href="$appointment__list_8h.html" title="appointment_list.h" alt="" coords="161,80,289,107"/>
+<area shape="rect" id="node2" href="$appointment__list_8h.html" title="appointment_list.h" alt="" coords="141,80,269,107"/>
 <area shape="rect" id="node3" href="$appointment__list_8c.html" title="appointment_list.c" alt="" coords="5,155,133,181"/>
-<area shape="rect" id="node4" href="$main_8c.html" title="main.c" alt="" coords="157,155,219,181"/>
-<area shape="rect" id="node5" href="$scheduler_8c.html" title="scheduler.c" alt="" coords="243,155,333,181"/>
-<area shape="rect" id="node6" href="$user_8c.html" title="user.c" alt="" coords="357,155,416,181"/>
+<area shape="rect" id="node4" href="$main_8c.html" title="main.c" alt="" coords="175,155,236,181"/>
+<area shape="rect" id="node5" href="$scheduler_8c.html" title="scheduler.c" alt="" coords="294,155,383,181"/>
+<area shape="rect" id="node6" href="$user_8c.html" title="user.c" alt="" coords="425,155,484,181"/>
+<area shape="rect" id="node7" href="$scheduler_8h.html" title="scheduler.h" alt="" coords="294,80,383,107"/>
 </map>

@@ -1,12 +1,13 @@
 <map id="AddAppointmentOrderedFromList" name="AddAppointmentOrderedFromList">
 <area shape="rect" id="node2" href="$scheduler_8c.html#a1c999fa71ea5308529b6e80cd9270982" title="AddToAllAcceptForced" alt="" coords="268,107,424,133"/>
-<area shape="rect" id="node3" href="$scheduler_8h.html#ae2937dc2be968df16aa0fe34377dea11" title="Priority. The order is folloing the pre&#45;defined priority. The result will be putted into the each use..." alt="" coords="472,107,588,133"/>
-<area shape="rect" id="node4" href="$main_8c.html#aaa622b97644b29ef66b985f40ea77e48" title="HandleSchedule" alt="" coords="636,68,753,95"/>
-<area shape="rect" id="node11" href="$main_8c.html#a96b9ae95c46e7154e28dabd85b639483" title="test7" alt="" coords="822,151,873,177"/>
-<area shape="rect" id="node5" href="$main_8c.html#a78f207561c985e1bdec727e427244add" title="HandleInput" alt="" coords="801,56,893,83"/>
-<area shape="rect" id="node6" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="955,56,1006,83"/>
-<area shape="rect" id="node9" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="955,107,1006,133"/>
-<area shape="rect" id="node10" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="941,5,1020,32"/>
-<area shape="rect" id="node7" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="1068,95,1127,121"/>
-<area shape="rect" id="node8" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="1175,57,1225,84"/>
+<area shape="rect" id="node3" href="$scheduler_8h.html#ace53e33f078566371bac6500f263b9e4" title="Priority. The order is folloing the pre&#45;defined priority. The result will be putted into the each use..." alt="" coords="472,107,588,133"/>
+<area shape="rect" id="node4" href="$main_8c.html#aaa622b97644b29ef66b985f40ea77e48" title="HandleSchedule" alt="" coords="799,56,916,83"/>
+<area shape="rect" id="node11" href="$main_8c.html#a96b9ae95c46e7154e28dabd85b639483" title="test7" alt="" coords="832,157,883,184"/>
+<area shape="rect" id="node12" href="$scheduler_8h.html#a00e50377d32b3bee0e5d5982da684eb2" title="Optimized. Bonus part, reschedule those rejected appointments. The result will be putted into the eac..." alt="" coords="636,107,751,133"/>
+<area shape="rect" id="node5" href="$main_8c.html#a78f207561c985e1bdec727e427244add" title="HandleInput" alt="" coords="964,56,1056,83"/>
+<area shape="rect" id="node6" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="1104,5,1183,32"/>
+<area shape="rect" id="node8" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="1118,56,1169,83"/>
+<area shape="rect" id="node10" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="1118,107,1169,133"/>
+<area shape="rect" id="node7" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="1235,5,1285,32"/>
+<area shape="rect" id="node9" href="$main_8c.html#aaf3144490c23fd419510cb1e0f341749" title="testAll" alt="" coords="1231,107,1289,133"/>
 </map>

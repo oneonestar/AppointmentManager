@@ -1,6 +1,6 @@
 <map id="PrintAllUser" name="PrintAllUser">
-<area shape="rect" id="node2" href="$user_8c.html#a1214e8672d5a6d823eb2934cf5a82d0b" title="PrintAccepted" alt="" coords="145,5,249,32"/>
-<area shape="rect" id="node5" href="$user_8c.html#afb40dc85cc1d4b23f9a1a95ef4abc6f5" title="PrintRejected" alt="" coords="147,56,248,83"/>
+<area shape="rect" id="node2" href="$user_8c.html#a1214e8672d5a6d823eb2934cf5a82d0b" title="Print the accepted list for user. " alt="" coords="145,5,249,32"/>
+<area shape="rect" id="node5" href="$user_8c.html#afb40dc85cc1d4b23f9a1a95ef4abc6f5" title="Print the rejected list for user. " alt="" coords="147,56,248,83"/>
 <area shape="rect" id="node3" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="297,31,440,57"/>
 <area shape="rect" id="node4" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="488,31,611,57"/>
 </map>

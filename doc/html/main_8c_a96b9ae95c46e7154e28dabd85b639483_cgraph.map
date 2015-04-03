@@ -1,22 +1,22 @@
 <map id="test7" name="test7">
 <area shape="rect" id="node2" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="739,5,894,32"/>
-<area shape="rect" id="node3" href="$scheduler_8c.html#ae2937dc2be968df16aa0fe34377dea11" title="Priority. The order is folloing the pre&#45;defined priority. The result will be putted into the each use..." alt="" coords="104,145,220,172"/>
-<area shape="rect" id="node17" href="$user_8c.html#a393641d36b97cdf5764c257c9c259734" title="PrintAllUser" alt="" coords="116,284,208,311"/>
-<area shape="rect" id="node4" href="$scheduler_8c.html#a4ec1286868c6b5e88cdb592ef166c1e2" title="IsAllAvailablePriority" alt="" coords="275,81,417,108"/>
-<area shape="rect" id="node10" href="$scheduler_8c.html#a1c999fa71ea5308529b6e80cd9270982" title="AddToAllAcceptForced" alt="" coords="268,145,424,172"/>
-<area shape="rect" id="node16" href="$scheduler_8c.html#a2a577108137093a19962fb10725c72db" title="AddToAllReject" alt="" coords="289,221,403,248"/>
-<area shape="rect" id="node5" href="$appointment__list_8c.html#ad14f17893a391dab10231b4fc24dcbf6" title="Check whether the the new appointment is conflict with the existing appointments that are already in ..." alt="" coords="524,81,635,108"/>
-<area shape="rect" id="node9" href="$appointment__list_8c.html#a0151a26f5b009b55519c7e495c8ecca5" title="Compare the appointment by it&#39;s priority. " alt="" coords="485,31,674,57"/>
+<area shape="rect" id="node3" href="$scheduler_8c.html#ace53e33f078566371bac6500f263b9e4" title="Priority. The order is folloing the pre&#45;defined priority. The result will be putted into the each use..." alt="" coords="104,164,220,191"/>
+<area shape="rect" id="node17" href="$user_8c.html#a393641d36b97cdf5764c257c9c259734" title="Print the accepted &amp; reject list for all users. " alt="" coords="116,303,208,329"/>
+<area shape="rect" id="node4" href="$scheduler_8c.html#a4ec1286868c6b5e88cdb592ef166c1e2" title="IsAllAvailablePriority" alt="" coords="275,100,417,127"/>
+<area shape="rect" id="node10" href="$scheduler_8c.html#a1c999fa71ea5308529b6e80cd9270982" title="AddToAllAcceptForced" alt="" coords="268,164,424,191"/>
+<area shape="rect" id="node16" href="$scheduler_8c.html#a2a577108137093a19962fb10725c72db" title="AddToAllReject" alt="" coords="289,240,403,267"/>
+<area shape="rect" id="node5" href="$appointment__list_8c.html#ab7cd7c27d342ebf08bc5a8bfe6d4c0ef" title="Check whether the the new appointment is conflict with the existing appointments that are already in ..." alt="" coords="530,100,629,127"/>
+<area shape="rect" id="node9" href="$appointment__list_8c.html#a0151a26f5b009b55519c7e495c8ecca5" title="Compare the appointment by it&#39;s priority. " alt="" coords="485,49,674,76"/>
 <area shape="rect" id="node6" href="$appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3" title="Check whether if two appointments have time conflict. " alt="" coords="777,81,856,108"/>
 <area shape="rect" id="node7" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="757,132,876,159"/>
-<area shape="rect" id="node8" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="953,157,1088,184"/>
-<area shape="rect" id="node11" href="$appointment__list_8c.html#af53797e1c5ab2600aecbcb799296b0f0" title="Remove a list of items from the list. Items should be unique inside the list. Delete if the two item ..." alt="" coords="508,233,651,260"/>
-<area shape="rect" id="node14" href="$appointment__list_8c.html#af47030d6bc395c4e7dd7076b57f888ad" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="735,183,899,209"/>
-<area shape="rect" id="node15" href="$appointment__list_8c.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="472,132,687,159"/>
-<area shape="rect" id="node12" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="743,233,891,260"/>
-<area shape="rect" id="node13" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="947,208,1095,235"/>
-<area shape="rect" id="node18" href="$user_8c.html#a1214e8672d5a6d823eb2934cf5a82d0b" title="PrintAccepted" alt="" coords="294,284,398,311"/>
-<area shape="rect" id="node21" href="$user_8c.html#afb40dc85cc1d4b23f9a1a95ef4abc6f5" title="PrintRejected" alt="" coords="295,335,397,361"/>
-<area shape="rect" id="node19" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="508,335,651,361"/>
-<area shape="rect" id="node20" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="755,335,878,361"/>
+<area shape="rect" id="node8" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="953,164,1088,191"/>
+<area shape="rect" id="node11" href="$appointment__list_8c.html#af53797e1c5ab2600aecbcb799296b0f0" title="Remove a list of items from the list. Items should be unique inside the list. Delete if the two item ..." alt="" coords="508,151,651,177"/>
+<area shape="rect" id="node13" href="$appointment__list_8c.html#af47030d6bc395c4e7dd7076b57f888ad" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="735,245,899,272"/>
+<area shape="rect" id="node15" href="$appointment__list_8c.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="472,252,687,279"/>
+<area shape="rect" id="node12" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="743,183,891,209"/>
+<area shape="rect" id="node14" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="947,245,1095,272"/>
+<area shape="rect" id="node18" href="$user_8c.html#a1214e8672d5a6d823eb2934cf5a82d0b" title="Print the accepted list for user. " alt="" coords="294,303,398,329"/>
+<area shape="rect" id="node21" href="$user_8c.html#afb40dc85cc1d4b23f9a1a95ef4abc6f5" title="Print the rejected list for user. " alt="" coords="295,353,397,380"/>
+<area shape="rect" id="node19" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="508,353,651,380"/>
+<area shape="rect" id="node20" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="755,353,878,380"/>
 </map>

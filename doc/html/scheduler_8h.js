@@ -1,6 +1,7 @@
 var scheduler_8h =
 [
-    [ "Schedual_FCFS", "scheduler_8h.html#a904442b683ee1ff97a79442e3acbb94f", null ],
-    [ "Schedual_Opti", "scheduler_8h.html#a9fc94483452b23a4c46b5c1898e72d11", null ],
-    [ "Schedual_PRIO", "scheduler_8h.html#ae2937dc2be968df16aa0fe34377dea11", null ]
+    [ "PrintSummary", "scheduler_8h.html#aff1618f427d441142f2d7706441e8113", null ],
+    [ "Schedual_FCFS", "scheduler_8h.html#ab1a6239f9cfb939239ea5a6327fc5396", null ],
+    [ "Schedual_OPTI", "scheduler_8h.html#a00e50377d32b3bee0e5d5982da684eb2", null ],
+    [ "Schedual_PRIO", "scheduler_8h.html#ace53e33f078566371bac6500f263b9e4", null ]
 ];

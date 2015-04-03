@@ -1,4 +1,3 @@
 <map id="RemoveListFromList" name="RemoveListFromList">
 <area shape="rect" id="node2" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="196,5,344,32"/>
-<area shape="rect" id="node3" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="392,5,540,32"/>
 </map>

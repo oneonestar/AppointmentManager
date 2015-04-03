@@ -1,7 +1,7 @@
 var annotated =
 [
-    [ "Appointment", "struct_appointment.html", "struct_appointment" ],
-    [ "AppointmentList", "struct_appointment_list.html", "struct_appointment_list" ],
+    [ "Appointment", "struct_appointment.html", null ],
+    [ "AppointmentList", "struct_appointment_list.html", null ],
     [ "AppointmentType", "struct_appointment_type.html", null ],
-    [ "User", "struct_user.html", "struct_user" ]
+    [ "User", "struct_user.html", null ]
 ];
