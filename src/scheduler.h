@@ -31,7 +31,7 @@ struct Summary* Schedual_PRIO(struct AppointmentList *inputList);
  * @brief Optimized. Bonus part, reschedule those rejected appointments.
  * The result will be putted into the each user's appointment lists (accept / reject).
  */
-struct Summary* Schedual_Opti(struct AppointmentList *inputList);
+struct Summary* Schedual_OPTI(struct AppointmentList *inputList);
 
 void PrintSummary(struct Summary *summary);
 

@@ -1,0 +1,9 @@
+addStudy -alice 2015-08-04 18:00 3.0
+addAssignment -bob 2015-08-04 18:00 3.0
+addGathering -charlie 2015-08-04 19:00 2.5
+addAssignment -alice 2015-08-04 20:00 3.0
+addStudy -bob 2015-08-04 20:00 3.0
+addStudy -charlie 2015-08-04 22:00 3.0
+addProject -alice 2015-08-04 17:00 2 bob
+addGathering -bob 2015-08-04 17:00 3.0 alice charlie
+printSchd -opti

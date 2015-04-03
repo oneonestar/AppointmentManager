@@ -205,6 +205,26 @@ static time_t GetLatestEndTime(struct AppointmentList *list)
 	return latest;
 }
 
+static struct AppointmentList* GetContinueTimeslotFromList(const struct AppointmentList *list, time_t duration)
+{
+	struct Appointment *ptr;
+	struct Appointment *item = list->head;
+	struct AppointmentList *ret_list = CreateAppointmentList();
+	int timeslot = duration / 60 / 30 - 1;	//how many half hour
+	while(item)
+	{
+		ptr = item;
+		for(int i=0; i<timeslot; i++)
+			ptr = ptr->next;
+		if(!ptr)
+			return ret_list;
+		if(difftime(ptr->end, item->start)==duration)
+			AddAppointmentOrdered(ret_list, item);
+		item = item->next;
+	}
+	return ret_list;
+}
+
 struct Summary* Schedual_FCFS(struct AppointmentList *inputList)
 {
 	struct Appointment *ptr = inputList->head;
@@ -241,6 +261,8 @@ struct Summary* Schedual_FCFS(struct AppointmentList *inputList)
 		summary->accepted[i] = user[i].accepted->count;
 		summary->rejected[i] = user[i].rejected->count;
 		summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
+
+		// PrintAppointmentList(GetContinueTimeslotFromList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end), 2*60*30));
 		// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
 	}
 	return summary;
@@ -287,30 +309,67 @@ struct Summary* Schedual_PRIO(struct AppointmentList *inputList)
 	return summary;
 }
 
-struct Summary* Schedual_Opti(struct AppointmentList *inputList)
+struct Summary* Schedual_OPTI(struct AppointmentList *inputList)
 {
-	//Summary
-	struct Summary *summary = (struct Summary *)malloc(sizeof(struct Summary));
-	// summary->start = GetEarliestStartTime(inputList);
-	// summary->end = GetLatestEndTime(inputList);
-	
-	// SetAppointmentAccepted(inputList);
-	// ptr = inputList->head;
-	// while(ptr)
-	// {
-	// 	if(ptr->is_accepted)
-	// 		summary->total_accepted++;
-	// 	else
-	// 		summary->total_rejected++;
-	// 	ptr = ptr->next;
-	// }
-	// for(int i=0; i<NumOfUser; i++)
-	// {
-	// 	summary->accepted[i] = user[i].accepted->count;
-	// 	summary->rejected[i] = user[i].rejected->count;
-	// 	summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
-	// 	// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
-	// }
+	struct Summary *summary = Schedual_PRIO(inputList);
+	time_t day = 60*60*24;
+
+	//For each user, try to reschedule their rejected jobs
+	for(int i=0; i<NumOfUser; i++)
+	{
+		struct Appointment *item = user[i].rejected->head;
+		NEXT_ITEM:
+		while(item)
+		{
+			time_t ori_start = item->start;
+			time_t ori_end = item->end;
+			time_t duration = difftime(item->end, item->start);
+			struct AppointmentList *list = GetEmptyTimeSlotInRange(user[i].accepted, item->start, item->start+3*day);
+			struct AppointmentList *c_list = GetContinueTimeslotFromList(list, duration);
+
+			struct Appointment *timeslot = c_list->head;
+			while(timeslot)
+			{
+				item->start = timeslot->start;
+				item->end = item->start + duration;
+
+				if(IsAllAvailable(item))
+				{
+					item->rescheduled = 1;
+					AddToAllAccept(item);
+					struct Appointment *temp = item;
+					item = item->next;
+					for(int j=0; j<NumOfUser; j++)
+						RemoveItemFromList(user[j].rejected, temp);
+					goto NEXT_ITEM;
+				}
+				timeslot = timeslot->next;
+			}
+			item = item->next;
+		}
+	}
+
+	//Re-calculate the summary
+	memset(summary, 0, sizeof(struct Summary));
+	summary->start = GetEarliestStartTime(inputList);
+	summary->end = GetLatestEndTime(inputList);
+	SetAppointmentAccepted(inputList);
+	struct Appointment *ptr = inputList->head;
+	while(ptr)
+	{
+		if(ptr->is_accepted)
+			summary->total_accepted++;
+		else
+			summary->total_rejected++;
+		ptr = ptr->next;
+	}
+	for(int i=0; i<NumOfUser; i++)
+	{
+		summary->accepted[i] = user[i].accepted->count;
+		summary->rejected[i] = user[i].rejected->count;
+		summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
+		// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
+	}
 	return summary;
 }
 
@@ -332,10 +391,10 @@ void PrintSummary(struct Summary *summary)
 	timeinfo2 = *localtime(&summary->end);
 	printf("Date end: %4d-%02d-%02d\n\n", timeinfo2.tm_year+1900, timeinfo2.tm_mon+1, timeinfo2.tm_mday);
 
-	printf("Total Number of Appointment Assigned: %d (%.1f%%)\n", summary->total_accepted, summary->total_accepted/total);
-	printf("Total Number of Appointment Rejected: %d (%.1f%%)\n", summary->total_rejected, summary->total_rejected/total);
+	printf("Total Number of Appointment Assigned: %d (%.1f%%)\n", summary->total_accepted, summary->total_accepted/total*100);
+	printf("Total Number of Appointment Rejected: %d (%.1f%%)\n", summary->total_rejected, summary->total_rejected/total*100);
 
-	days = rdn(timeinfo2.tm_year, timeinfo2.tm_mon+1, timeinfo2.tm_mday) - rdn(timeinfo.tm_year, timeinfo.tm_mon+1, timeinfo.tm_mday);
+	days = rdn(timeinfo2.tm_year, timeinfo2.tm_mon+1, timeinfo2.tm_mday) - rdn(timeinfo.tm_year, timeinfo.tm_mon+1, timeinfo.tm_mday) + 1;
 	printf("Utilization of Time Slot: (%d days)\n", days+1);
 	for(int i=0; i<NumOfUser; i++)
 	{

@@ -24,6 +24,23 @@ void inputLoop(FILE *stream);
 
 void HandleSchedule(const char *algorithm)
 {
+#ifdef NO_FORK
+	struct Summary *summary;
+	//TODO: remove items from list
+	for (int i=0; i<NumOfUser; i++)
+	{
+		user[i].accepted = CreateAppointmentList();
+		user[i].rejected = CreateAppointmentList();
+	}
+	if(!strcmp(algorithm, "-fcfs"))
+		summary = Schedual_FCFS(inputList);
+	else if(!strcmp(algorithm, "-prio"))
+		summary = Schedual_PRIO(inputList);
+	else if(!strcmp(algorithm, "-opti"))
+		summary = Schedual_OPTI(inputList);
+	PrintAllUser();
+	PrintSummary(summary);
+#else
 	struct Summary *summary;
 	int fd[2];
 	if (pipe(fd) < 0) {
@@ -49,7 +66,7 @@ void HandleSchedule(const char *algorithm)
 		else if(!strcmp(algorithm, "-prio"))
 			summary = Schedual_PRIO(inputList);
 		else if(!strcmp(algorithm, "-opti"))
-			return;
+			summary = Schedual_OPTI(inputList);
 		PrintAllUser();
 		if(write(fd[1], summary, sizeof(struct Summary)) <= 0)
 			printf("Oh dear, something went wrong with write()! %s\n", strerror(errno));
@@ -61,6 +78,7 @@ void HandleSchedule(const char *algorithm)
 			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
 	wait(NULL);
 	PrintSummary(summary);
+#endif
 }
 
 void HandleInput(const char *line)

@@ -185,6 +185,10 @@ void PrintAppointment(const struct Appointment *item)
 			break;
 		printf("%s ", user[item->callee_id[i]].username);
 	}
+	if(item->is_accepted)
+		printf("A");
+	else
+		printf("B");
 	printf("\n");
 }
 
