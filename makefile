@@ -33,7 +33,7 @@ remove: clean
 	@echo "Executable removed!"
 
 onefile:
-	awk 'FNR==1{print ""}1' $(SRCDIR)/user.h > amr.c
-	awk 'FNR==1{print ""}1' $(SRCDIR)/*.h >> amr.c
-	awk 'FNR==1{print ""}1' $(SRCDIR)/*.c >> amr.c
+	awk 'FNR==1{print ""}1' $(SRCDIR)/user.h > AMR.c
+	awk 'FNR==1{print ""}1' $(SRCDIR)/*.h >> AMR.c
+	awk 'FNR==1{print ""}1' $(SRCDIR)/*.c >> AMR.c
 	sed -i '/#include \".*/d' ./amr.c
