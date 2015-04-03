@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <errno.h>
 
 #include "appointment_list.h"
 #include "scheduler.h"
@@ -22,19 +25,41 @@ void inputLoop(FILE *stream);
 void HandleSchedule(const char *algorithm)
 {
 	struct Summary *summary;
-	//TODO: remove items from list
-	for (int i=0; i<NumOfUser; i++)
-	{
-		user[i].accepted = CreateAppointmentList();
-		user[i].rejected = CreateAppointmentList();
+	int fd[2];
+	if (pipe(fd) < 0) {
+		printf("Pipe creation error\n");
+		exit(EXIT_FAILURE);
 	}
-	if(!strcmp(algorithm, "-fcfs"))
-		summary = Schedual_FCFS(inputList);
-	else if(!strcmp(algorithm, "-prio"))
-		summary = Schedual_PRIO(inputList);
-	else if(!strcmp(algorithm, "-opti"))
-		return;
-	PrintAllUser();
+
+	int ret=fork();
+	if (ret < 0)
+	{
+		printf("error in fork!");
+		exit(EXIT_FAILURE);
+	}
+	else if (ret == 0) {	//Child
+		//TODO: remove items from list
+		for (int i=0; i<NumOfUser; i++)
+		{
+			user[i].accepted = CreateAppointmentList();
+			user[i].rejected = CreateAppointmentList();
+		}
+		if(!strcmp(algorithm, "-fcfs"))
+			summary = Schedual_FCFS(inputList);
+		else if(!strcmp(algorithm, "-prio"))
+			summary = Schedual_PRIO(inputList);
+		else if(!strcmp(algorithm, "-opti"))
+			return;
+		PrintAllUser();
+		if(write(fd[1], summary, sizeof(struct Summary)) <= 0)
+			printf("Oh dear, something went wrong with write()! %s\n", strerror(errno));
+		_exit(EXIT_SUCCESS);
+	}
+
+	summary = (struct Summary *)malloc(sizeof(struct Summary));
+	if(read(fd[0], summary, sizeof(struct Summary)) <= 0)
+			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
+	wait(NULL);
 	PrintSummary(summary);
 }
 
