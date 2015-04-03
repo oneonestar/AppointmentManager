@@ -343,6 +343,8 @@ struct Summary* Schedual_OPTI(struct AppointmentList *inputList)
 						RemoveItemFromList(user[j].rejected, temp);
 					goto NEXT_ITEM;
 				}
+				item->start = ori_start;
+				item->end = ori_end;
 				timeslot = timeslot->next;
 			}
 			item = item->next;

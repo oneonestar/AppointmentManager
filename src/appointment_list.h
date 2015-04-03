@@ -20,10 +20,6 @@ enum AppointmentType
 	ASSIGNMENT = 0, PROJECT, STUDY, GATHERING
 };
 
-/** For printing */
-static const char *AppointmentTypeStr[] = {[STUDY] = "Study", [ASSIGNMENT] = "Assignment",
-	[PROJECT] = "Project", [GATHERING] = "Gathering"};
-
 /**
  * @struct Appointment
  * @brief Store a appointment record.
