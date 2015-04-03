@@ -4,7 +4,7 @@
 /** For printing */
 const char *AppointmentTypeStr[] = {[STUDY] = "Study", [ASSIGNMENT] = "Assignment",
 	[PROJECT] = "Project", [GATHERING] = "Gathering"};
-	
+
 /***************************************************
  * Implementation
  ***************************************************/

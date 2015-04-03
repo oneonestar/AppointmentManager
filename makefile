@@ -29,3 +29,9 @@ clean:
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGET)
 	@echo "Executable removed!"
+
+onefile:
+	awk 'FNR==1{print ""}1' $(SRCDIR)/user.h > amr.c
+	awk 'FNR==1{print ""}1' $(SRCDIR)/*.h >> amr.c
+	awk 'FNR==1{print ""}1' $(SRCDIR)/*.c >> amr.c
+	sed -i '/#include \".*/d' ./amr.c
