@@ -24,8 +24,14 @@ void inputLoop(FILE *stream);
 
 void HandleSchedule(const char *algorithm)
 {
+	if(inputList->count == 0)
+	{
+		printf("Empty timetable.\n");
+		return;
+	}
+
 #ifdef NO_FORK
-	struct Summary *summary;
+	struct Summary *summary = NULL;
 	//TODO: remove items from list
 	for (int i=0; i<NumOfUser; i++)
 	{
@@ -38,6 +44,11 @@ void HandleSchedule(const char *algorithm)
 		summary = Schedual_PRIO(inputList);
 	else if(!strcmp(algorithm, "-opti"))
 		summary = Schedual_OPTI(inputList);
+	else
+	{
+		printf("Unknown scheduler.\n");
+		return;
+	}
 	PrintAllUser();
 	PrintSummary(summary);
 #else
@@ -67,14 +78,19 @@ void HandleSchedule(const char *algorithm)
 			summary = Schedual_PRIO(inputList);
 		else if(!strcmp(algorithm, "-opti"))
 			summary = Schedual_OPTI(inputList);
+		else
+		{
+			printf("Unknown scheduler.\n");
+			return;
+		}
 		PrintAllUser();
-		if(write(fd[1], summary, sizeof(struct Summary)) <= 0)
+		if(write(fd[1], summary, sizeof(struct Summary)) < 0)
 			printf("Oh dear, something went wrong with write()! %s\n", strerror(errno));
 		_exit(EXIT_SUCCESS);
 	}
 
 	summary = (struct Summary *)malloc(sizeof(struct Summary));
-	if(read(fd[0], summary, sizeof(struct Summary)) <= 0)
+	if(read(fd[0], summary, sizeof(struct Summary)) < 0)
 			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
 	wait(NULL);
 	PrintSummary(summary);
@@ -117,7 +133,8 @@ void HandleInput(const char *line)
 		if(!f)
 		{
 			fprintf(stderr, "Failed to open file %s.\n", filename);
-			exit(EXIT_FAILURE);
+			return;
+			// exit(EXIT_FAILURE);
 		}
 		inputLoop(f);
 		return;
@@ -209,6 +226,7 @@ void inputLoop(FILE *stream)
 	char *return_val;
 	while(1)
 	{
+		printf("Please enter appointment:\n");
 		return_val = fgets(line, MAX_CHAR, stream);
 		if(!return_val)
 		{
@@ -220,7 +238,8 @@ void inputLoop(FILE *stream)
 			else
 			{
 				fprintf(stderr, "IO error, existing program.\n");
-				exit(EXIT_FAILURE);
+				return;
+				// exit(EXIT_FAILURE);
 			}
 		}
 		HandleInput(line);
@@ -399,6 +418,11 @@ int main(int argc, char* argv[])
 	//Initialize each user in struct user[];
 	for (int i=0; i<NumOfUser; i++)
 	{
+		if(GetUserID(argv[i+1]) != -1)
+		{
+			printf("Duplicate names of users!\n");
+			exit(EXIT_FAILURE);
+		}
 		strcpy(user[i].username, argv[i+1]);
 		user[i].username[0] = toupper(user[i].username[0]);
 		user[i].accepted = CreateAppointmentList();
@@ -407,6 +431,7 @@ int main(int argc, char* argv[])
 	inputList = CreateAppointmentList();
 
 	//testAll();
+	printf("~~WELCOME TO AMR~~\n");
 	inputLoop(stdin);
 	return EXIT_SUCCESS;
 }

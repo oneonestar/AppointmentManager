@@ -1,6 +1,7 @@
 TARGET = AMR
 CC = gcc -std=c99 -c
-CFLAGS = -Wall -I.
+override CFLAGS += -Wall
+#CFLAGS = $(CFLAGS) -Wall -I.
 LINKER   = gcc -o
 
 SRCDIR   = src
@@ -23,6 +24,7 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 .PHONEY: clean
 clean:
 	@$(rm) $(OBJECTS)
+	@$(rm) amr.c
 	@echo "Cleanup complete!"
 
 .PHONEY: remove
