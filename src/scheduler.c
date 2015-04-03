@@ -221,6 +221,46 @@ struct Summary* Schedual_FCFS(struct AppointmentList *inputList)
 		ptr = ptr->next;
 	}
 
+	//Summary
+	struct Summary *summary = (struct Summary *)malloc(sizeof(struct Summary));
+	summary->start = GetEarliestStartTime(inputList);
+	summary->end = GetLatestEndTime(inputList);
+	
+	SetAppointmentAccepted(inputList);
+	ptr = inputList->head;
+	while(ptr)
+	{
+		if(ptr->is_accepted)
+			summary->total_accepted++;
+		else
+			summary->total_rejected++;
+		ptr = ptr->next;
+	}
+	for(int i=0; i<NumOfUser; i++)
+	{
+		summary->accepted[i] = user[i].accepted->count;
+		summary->rejected[i] = user[i].rejected->count;
+		summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
+		// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
+	}
+	return summary;
+}
+
+struct Summary* Schedual_PRIO(struct AppointmentList *inputList)
+{
+	struct Appointment *ptr = inputList->head;
+	while(ptr)
+	{
+		if(IsAllAvailablePriority(ptr))
+		{
+			AddToAllAcceptForced(ptr);
+		}
+		else
+		{
+			AddToAllReject(ptr);
+		}
+		ptr = ptr->next;
+	}
 
 	//Summary
 	struct Summary *summary = (struct Summary *)malloc(sizeof(struct Summary));
@@ -244,33 +284,34 @@ struct Summary* Schedual_FCFS(struct AppointmentList *inputList)
 		summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
 		// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
 	}
-	
-
-	// PrintAppointmentList(GetEmptyTimeSlotInRange(user[0].accepted, summary->start, summary->end));
-
 	return summary;
 }
 
-void Schedual_PRIO(struct AppointmentList *inputList)
+struct Summary* Schedual_Opti(struct AppointmentList *inputList)
 {
-	struct Appointment *ptr = inputList->head;
-	while(ptr)
-	{
-		if(IsAllAvailablePriority(ptr))
-		{
-			AddToAllAcceptForced(ptr);
-		}
-		else
-		{
-			AddToAllReject(ptr);
-		}
-		ptr = ptr->next;
-	}
-}
-
-void Schedual_Opti(struct AppointmentList *inputList)
-{
+	//Summary
+	struct Summary *summary = (struct Summary *)malloc(sizeof(struct Summary));
+	// summary->start = GetEarliestStartTime(inputList);
+	// summary->end = GetLatestEndTime(inputList);
 	
+	// SetAppointmentAccepted(inputList);
+	// ptr = inputList->head;
+	// while(ptr)
+	// {
+	// 	if(ptr->is_accepted)
+	// 		summary->total_accepted++;
+	// 	else
+	// 		summary->total_rejected++;
+	// 	ptr = ptr->next;
+	// }
+	// for(int i=0; i<NumOfUser; i++)
+	// {
+	// 	summary->accepted[i] = user[i].accepted->count;
+	// 	summary->rejected[i] = user[i].rejected->count;
+	// 	summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end)->count;
+	// 	// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));
+	// }
+	return summary;
 }
 
 static int rdn(int y, int m, int d) {

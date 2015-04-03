@@ -31,7 +31,7 @@ void HandleSchedule(const char *algorithm)
 	if(!strcmp(algorithm, "-fcfs"))
 		summary = Schedual_FCFS(inputList);
 	else if(!strcmp(algorithm, "-prio"))
-		Schedual_PRIO(inputList);
+		summary = Schedual_PRIO(inputList);
 	else if(!strcmp(algorithm, "-opti"))
 		return;
 	PrintAllUser();
