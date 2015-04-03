@@ -5,17 +5,25 @@ An appointment management software that have the calendar and scheduling functio
 Build
 -----
 To compile the program.
- make
+```
+make
+```
 The executable program is located in bin/.
 
 To clean up the object files.
- make clean
+```
+make clean
+```
 
 To clean up the object files and the executable file.
- make remove
+```
+make remove
+```
 
 To join the source files into one AMR.c file
- make onefile
+```
+make onefile
+```
 
 Documentation
 -------------
