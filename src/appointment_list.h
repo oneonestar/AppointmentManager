@@ -36,6 +36,7 @@ struct Appointment
 	int callee_id[10];
 	time_t start;
 	time_t end;
+	int is_accepted;
 	int rescheduled;
 	struct Appointment *prev;
 	struct Appointment *next;
@@ -107,6 +108,11 @@ struct AppointmentList* ConflictInList(const struct AppointmentList *list, const
 int IsConflict(const struct Appointment *a, const struct Appointment *b);
 
 /**
+ * @brief Check whether if the appointment item have conflict with the list.
+ */
+int IsConflictInList(const struct AppointmentList *list, const struct Appointment *item);
+
+/**
  * @brief Remove an item from the list. Items should be unique inside the list.
  * Delete if the two item have the same id.
  */
@@ -150,5 +156,7 @@ void PrintAppointment(const struct Appointment *item);
  * @param list Appointment list to be printed.
  */
 void PrintAppointmentList(const struct AppointmentList *list);
+
+struct Appointment* GetAppointmentById(const struct AppointmentList *list, int id);
 
 #endif

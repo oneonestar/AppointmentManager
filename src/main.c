@@ -21,6 +21,7 @@ void inputLoop(FILE *stream);
 
 void HandleSchedule(const char *algorithm)
 {
+	struct Summary *summary;
 	//TODO: remove items from list
 	for (int i=0; i<NumOfUser; i++)
 	{
@@ -28,12 +29,13 @@ void HandleSchedule(const char *algorithm)
 		user[i].rejected = CreateAppointmentList();
 	}
 	if(!strcmp(algorithm, "-fcfs"))
-		Schedual_FCFS(inputList);
+		summary = Schedual_FCFS(inputList);
 	else if(!strcmp(algorithm, "-prio"))
 		Schedual_PRIO(inputList);
 	else if(!strcmp(algorithm, "-opti"))
 		return;
 	PrintAllUser();
+	PrintSummary(summary);
 }
 
 void HandleInput(const char *line)
@@ -361,7 +363,7 @@ int main(int argc, char* argv[])
 	}
 	inputList = CreateAppointmentList();
 
-	testAll();
+	//testAll();
 	inputLoop(stdin);
 	return EXIT_SUCCESS;
 }
