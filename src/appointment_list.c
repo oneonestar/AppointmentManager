@@ -28,6 +28,7 @@ struct Appointment* CreateAppointment()
 	}
 	for(int i=0; i<USER_NUMBER; i++)
 		item->callee_id[i] = -1;
+	item->id = -1;
 	item->rescheduled = 0;
 	item->prev = NULL;
 	item->next = NULL;
@@ -134,7 +135,7 @@ void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *
 	struct Appointment *delItem = list->head;
 	while(delItem)
 	{
-		if(!CompareAppointment(delItem, item))
+		if(delItem->id == item->id)
 		{
 			if(!delItem->prev)	//if prev is null, first item in list
 				list->head = delItem->next;
@@ -166,6 +167,7 @@ void PrintAppointment(const struct Appointment *item)
 	struct tm tm_start, tm_end;
 	memcpy(&tm_start, localtime (&item->start), sizeof(struct tm));
 	memcpy(&tm_end, localtime (&item->end), sizeof(struct tm));
+	printf("%d ", item->id);
 	printf("%4d   %02d:%02d   %02d:%02d   %-12s ", tm_start.tm_year+1900, tm_start.tm_hour,
 	 tm_start.tm_min, tm_end.tm_hour, tm_end.tm_min, AppointmentTypeStr[item->type]);
 	if(item->rescheduled)
@@ -201,8 +203,10 @@ int IsConflict(const struct Appointment *a, const struct Appointment *b)
 		difftime(a->start, b->end)>=0); 	//a after b
 }
 
-struct AppointmentList* IsConflictInList(const struct AppointmentList *list, const struct Appointment *item)
+struct AppointmentList* ConflictInList(const struct AppointmentList *list, const struct Appointment *item)
 {
+	if(!list || !item)
+		return NULL;
 	struct AppointmentList *conflict_list = CreateAppointmentList();
 	struct Appointment *ptr = list->head;
 	while(ptr)

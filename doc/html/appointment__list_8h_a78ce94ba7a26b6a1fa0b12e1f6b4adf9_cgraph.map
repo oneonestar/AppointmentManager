@@ -1,0 +1,5 @@
+<map id="AddAppointmentOrderedFromList" name="AddAppointmentOrderedFromList">
+<area shape="rect" id="node2" href="$appointment__list_8c.html#af47030d6bc395c4e7dd7076b57f888ad" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="268,31,432,57"/>
+<area shape="rect" id="node3" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="487,5,621,32"/>
+<area shape="rect" id="node4" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="480,56,628,83"/>
+</map>

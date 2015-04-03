@@ -1,0 +1,12 @@
+<map id="AddToAllAcceptForced" name="AddToAllAcceptForced">
+<area shape="rect" id="node2" href="$appointment__list_8c.html#ad14f17893a391dab10231b4fc24dcbf6" title="Check whether the the new appointment is conflict with the existing appointments that are already in ..." alt="" coords="261,56,372,83"/>
+<area shape="rect" id="node7" href="$appointment__list_8c.html#af53797e1c5ab2600aecbcb799296b0f0" title="Remove a list of items from the list. Items should be unique inside the list. Delete if the two item ..." alt="" coords="245,208,388,235"/>
+<area shape="rect" id="node10" href="$appointment__list_8c.html#af47030d6bc395c4e7dd7076b57f888ad" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="472,157,636,184"/>
+<area shape="rect" id="node11" href="$appointment__list_8c.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="209,157,424,184"/>
+<area shape="rect" id="node3" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="477,107,631,133"/>
+<area shape="rect" id="node4" href="$appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3" title="Check whether if two appointments have time conflict. " alt="" coords="515,5,593,32"/>
+<area shape="rect" id="node5" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="495,56,613,83"/>
+<area shape="rect" id="node6" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="691,132,825,159"/>
+<area shape="rect" id="node8" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="480,208,628,235"/>
+<area shape="rect" id="node9" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="684,183,832,209"/>
+</map>

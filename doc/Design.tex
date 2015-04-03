@@ -1,15 +1,23 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[12pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{xcolor}
 
-\author{Star Poon}
-\title{COMP2432 Group Project Design Documentation}
+\usepackage%
+[%
+left=2cm,% left margin
+right=2cm,% right margin
+top=3cm, % top margin
+bottom=3cm,% bottom margin
+a3paper% other options: a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6paper, and many more.
+]{geometry}
 
 \hypersetup{
     colorlinks,
@@ -17,9 +25,13 @@
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
 }
+\renewcommand{\And}{\textbf{and}\,}
 
+\author{Star Poon}
+\title{COMP2432 Group Project Design Documentation}
 \begin{document}
 \maketitle
+\chapter{Design and Implementation}
 \section{Data Structure}
 \subsection{struct Appointment}
 The starting time of the appointment is stored in the type \textit{time\_t} which is defined in the standard C library \textless time.h\textgreater. This library provides some time manipulation and conversion functions that are useful in the system design.
@@ -35,7 +47,7 @@ time_t start
 time_t end
 \end{lstlisting}
 
-During the insertion, we need to check whether there are collisions between the existing appointments and the new appointment. We need to determinate if the new appointment is in between the start time and the end time of the existing appointments. It is more convenient to store the ending time instead of the duration so that we can simply use \textit{difftime()}. If we stored the duration instead of the time, we need to do more calculation each time we insert a new appointment. For more details about the conflict checking, please referee to \ref{Algorithm:conflict}.
+During the insertion, we need to check whether there are conflicts between the existing appointments and the new appointment. We need to determinate if the new appointment is in between the start time and the end time of the existing appointments. It is more convenient to store the ending time instead of the duration so that we can simply use \textit{difftime()}. If we stored the duration instead of the time, we need to do more calculation each time we insert a new appointment. For more details about the conflict checking, please referee to \autoref{Algorithm:conflict}.
 
 \subsection{struct AppointmentList}
 We need to store all the appointments that are following the input order. Since the amount of input is unknown, we need to use the dynamic memory allocation to store the data. Considering most of the access are in linear order, \textit{hashtable} is not useful in this situation. We have two choices here, either using the \textit{array} or \textit{linklist}.
@@ -54,9 +66,40 @@ For the linklist:
 \item Accessing time: \textbf{Slow} \\ We need to go through the pointers in order to jump to next item.
 \end{itemize}
 
-Since there are a lot of the insertions, linklist performs better in this dimension. We need to insert item at the middle when we doing the scheduling. Although the access of linklist is slower, the gain in insertion should overcome this problem.
-\section{Algorithm}
+Since there are a lot of the insertions, linklist performs better in this dimension. We need to insert item at the middle when we doing the scheduling. Although the access of linklist is slower, the gain in insertion should be able to overcome the loss.
+\subsection{struct User}
+We will store the username and a list of accepted and rejected appointments for each user. We will copy the appointment item from the original input list into each users individual list. 
+\begin{lstlisting}
+char username[MAX_USERNAME];
+struct AppointmentList *accepted;
+struct AppointmentList *rejected;
+\end{lstlisting}
+\section{Common Algorithm}
 \subsection{Check appointment conflict}
 \label{Algorithm:conflict}
-Each time a new appointment is added, we need to check if there is a conflict between the existing and the new appointment.
+Each time a new appointment is added, we need to check if there is a conflict between the existing appointments and the new appointment. Assuming we are now checking is there are any conflict between $Item_A$ and $Item_B$. There are two cases that the two items are \textit{not} conflict \autoref{Psudo:conflict}.
+\begin{algorithm}
+\caption{Check conflict between two appointment item}\label{Psudo:conflict}
+\begin{algorithmic}
+\If {$Item_A.Start \leq Item_B.Start$ \And $Item_A.End \leq Item_B.Start$}
+\State $Item_A$ happened before $Item_B$
+\ElsIf {$Item_A.Start \geq Item_B.End$ \And $Item_A.End \geq Item_B.End$}
+\State $Item_A$ happened after $Item_B$
+\Else
+\State Conflict happen
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+\section{Scheduler}
+\subsection{First come first served (FCFS)}
+This scheduling algorithm will allocate the timeslot to the first appointment. The late requests will be rejected.
+\begin{algorithm}
+\caption{First come first served (FCFS)}\label{Psudo:conflict}
+\begin{algorithmic}
+\If {$Item_A.Start \leq Item_B.Start$ \And $Item_A.End \leq Item_B.Start$}
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+\subsection{Priority}
+\subsection{Optimal}
 \end{document}

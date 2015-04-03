@@ -10,6 +10,7 @@
 #include <time.h>
 
 #include "user.h"
+
 /** 
  * @struct AppointmentType
  * @brief Store all the appointment type.
@@ -23,9 +24,14 @@ enum AppointmentType
 static const char *AppointmentTypeStr[] = {[STUDY] = "Study", [ASSIGNMENT] = "Assignment",
 	[PROJECT] = "Project", [GATHERING] = "Gathering"};
 
+/**
+ * @struct Appointment
+ * @brief Store a appointment record.
+ */
 struct Appointment
 {
 	enum AppointmentType type;
+	int id;
 	int caller_id;
 	int callee_id[10];
 	time_t start;
@@ -33,8 +39,12 @@ struct Appointment
 	int rescheduled;
 	struct Appointment *prev;
 	struct Appointment *next;
-};	
+};
 
+/**
+ * @struct AppointmentList
+ * @brief A double-linked list for appointment record.
+ */
 struct AppointmentList
 {
 	int count;
@@ -89,7 +99,7 @@ void AddAppointmentOrderedFromList(struct AppointmentList *dst_list, const struc
  * @param[in] list The destination appointment list.
  * @param[in] newItem The item that needs to add into the list.
  */
-struct AppointmentList* IsConflictInList(const struct AppointmentList *list, const struct Appointment *item);
+struct AppointmentList* ConflictInList(const struct AppointmentList *list, const struct Appointment *item);
 
 /**
  * @brief Check whether if two appointments have time conflict.
@@ -98,10 +108,14 @@ int IsConflict(const struct Appointment *a, const struct Appointment *b);
 
 /**
  * @brief Remove an item from the list. Items should be unique inside the list.
- * Delete if the two item have the same start time and end time.
+ * Delete if the two item have the same id.
  */
 void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item);
 
+/**
+ * @brief Remove a list of items from the list. Items should be unique inside the list.
+ * Delete if the two item have the same id.
+ */
 void RemoveListFromList(struct AppointmentList *ori_list, const struct AppointmentList *del_list);
 
 /**

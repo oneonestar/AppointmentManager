@@ -1,0 +1,37 @@
+<map id="testAll" name="testAll">
+<area shape="rect" id="node2" href="$main_8c.html#a1440a7779ac56f47a3f355ce4a8c7da0" title="test1" alt="" coords="735,22,786,49"/>
+<area shape="rect" id="node6" href="$main_8c.html#a0283886819c7c140a023582b7269e2d0" title="test2" alt="" coords="735,428,786,454"/>
+<area shape="rect" id="node12" href="$main_8c.html#a6d0455dd5c30adda100e95f0423c786e" title="test3" alt="" coords="735,630,786,657"/>
+<area shape="rect" id="node14" href="$main_8c.html#a327d8cef466a7560ead5eb3995c0cbae" title="test4" alt="" coords="112,313,163,340"/>
+<area shape="rect" id="node34" href="$main_8c.html#a8e1be3038bbc558f32a409f076126c33" title="test5" alt="" coords="112,364,163,390"/>
+<area shape="rect" id="node35" href="$main_8c.html#a9725331980ffa46dc478f6728c4e57ce" title="test6" alt="" coords="384,478,435,505"/>
+<area shape="rect" id="node36" href="$main_8c.html#a96b9ae95c46e7154e28dabd85b639483" title="test7" alt="" coords="384,681,435,708"/>
+<area shape="rect" id="node3" href="$appointment__list_8c.html#a2b5971373f06fddb3b3a805eed6fbf32" title="Create a appointment and init the value. " alt="" coords="1368,314,1503,341"/>
+<area shape="rect" id="node4" href="$appointment__list_8c.html#acf5ed6bf8d242fefcd70429ddfe8a2c9" title="Print out the appointment. " alt="" coords="1170,98,1293,125"/>
+<area shape="rect" id="node5" href="$appointment__list_8c.html#a0151a26f5b009b55519c7e495c8ecca5" title="Compare the appointment by it&#39;s priority. " alt="" coords="899,124,1089,150"/>
+<area shape="rect" id="node7" href="$appointment__list_8c.html#a11707d2a6167706c5321e338f38dc2c0" title="Create a appointment list and init the value. " alt="" coords="1154,529,1309,556"/>
+<area shape="rect" id="node8" href="$appointment__list_8c.html#a635c283773bcc48d69358673c08a8b56" title="Insert a copy of the appointment into the end of the appointment list. " alt="" coords="1172,352,1291,378"/>
+<area shape="rect" id="node9" href="$appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7" title="Print out the appointment list. " alt="" coords="923,225,1065,252"/>
+<area shape="rect" id="node10" href="$appointment__list_8c.html#a4b5703eec380555a637402b7eb261144" title="Remove an item from the list. Items should be unique inside the list. Delete if the two item have the..." alt="" coords="1157,833,1305,860"/>
+<area shape="rect" id="node11" href="$appointment__list_8c.html#ae858f56fdbeffe1fac3760ada442eef1" title="Compare the start time and then end time of the appointment. Used to keep the ordered appointment lis..." alt="" coords="1361,808,1509,834"/>
+<area shape="rect" id="node13" href="$appointment__list_8c.html#af47030d6bc395c4e7dd7076b57f888ad" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="1149,782,1313,809"/>
+<area shape="rect" id="node15" href="$main_8c.html#a78f207561c985e1bdec727e427244add" title="HandleInput" alt="" coords="211,338,303,365"/>
+<area shape="rect" id="node16" href="$main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a" title="inputLoop" alt="" coords="370,377,449,404"/>
+<area shape="rect" id="node17" href="$main_8c.html#aaa622b97644b29ef66b985f40ea77e48" title="HandleSchedule" alt="" coords="351,529,468,556"/>
+<area shape="rect" id="node32" href="$user_8c.html#af2f23f139dbacb2a0e94029784c22ccf" title="Return the user id that have the same username. " alt="" coords="367,174,452,201"/>
+<area shape="rect" id="node18" href="$scheduler_8c.html#a904442b683ee1ff97a79442e3acbb94f" title="First come first served. The order is folloing the input order. The result will be putted into the ea..." alt="" coords="516,580,635,606"/>
+<area shape="rect" id="node24" href="$scheduler_8c.html#ae2937dc2be968df16aa0fe34377dea11" title="Priority. The order is folloing the pre&#45;defined priority. The result will be putted into the each use..." alt="" coords="517,681,633,708"/>
+<area shape="rect" id="node29" href="$user_8c.html#a393641d36b97cdf5764c257c9c259734" title="PrintAllUser" alt="" coords="529,478,621,505"/>
+<area shape="rect" id="node19" href="$scheduler_8c.html#ac507dfc313f857dcdb79155700120d16" title="IsAllAvailable" alt="" coords="710,580,811,606"/>
+<area shape="rect" id="node22" href="$scheduler_8c.html#a08bbf44ef1b6d77c25693f0b843414cb" title="AddToAllAccept" alt="" coords="936,732,1052,758"/>
+<area shape="rect" id="node23" href="$scheduler_8c.html#a2a577108137093a19962fb10725c72db" title="AddToAllReject" alt="" coords="704,732,817,758"/>
+<area shape="rect" id="node20" href="$appointment__list_8c.html#ad14f17893a391dab10231b4fc24dcbf6" title="Check whether the the new appointment is conflict with the existing appointments that are already in ..." alt="" coords="939,428,1049,454"/>
+<area shape="rect" id="node21" href="$appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3" title="Check whether if two appointments have time conflict. " alt="" coords="1192,428,1271,454"/>
+<area shape="rect" id="node25" href="$scheduler_8c.html#a4ec1286868c6b5e88cdb592ef166c1e2" title="IsAllAvailablePriority" alt="" coords="689,377,832,404"/>
+<area shape="rect" id="node26" href="$scheduler_8c.html#a1c999fa71ea5308529b6e80cd9270982" title="AddToAllAcceptForced" alt="" coords="683,934,839,961"/>
+<area shape="rect" id="node27" href="$appointment__list_8c.html#af53797e1c5ab2600aecbcb799296b0f0" title="Remove a list of items from the list. Items should be unique inside the list. Delete if the two item ..." alt="" coords="923,1036,1065,1062"/>
+<area shape="rect" id="node28" href="$appointment__list_8c.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9" title="Insert a copy of the appointment into the sorted appointment list. Using the start time then end time..." alt="" coords="887,934,1101,961"/>
+<area shape="rect" id="node30" href="$user_8c.html#a1214e8672d5a6d823eb2934cf5a82d0b" title="PrintAccepted" alt="" coords="709,276,813,302"/>
+<area shape="rect" id="node31" href="$user_8c.html#afb40dc85cc1d4b23f9a1a95ef4abc6f5" title="PrintRejected" alt="" coords="710,225,811,252"/>
+<area shape="rect" id="node33" href="$user_8c.html#ae2842cb0cbdf6aa210eba0b735e63312" title="strcicmp" alt="" coords="539,174,611,201"/>
+</map>

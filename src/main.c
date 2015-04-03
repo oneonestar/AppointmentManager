@@ -10,6 +10,9 @@
 #include "scheduler.h"
 #include "user.h"
 
+extern int NumOfUser;
+extern struct User user[USER_NUMBER];
+
 struct AppointmentList *inputList;
 
 void HandleInput(const char *line);
@@ -49,6 +52,8 @@ void HandleInput(const char *line)
 
 	//parse the command
 	pch = strtok(myLine, " \n");
+	if(!pch)
+		goto UNKNOWN;	//eg. strtok("\n", " \n") will return null from strtok, goto unknown command
 	strcpy(command, pch);
 	if(!strcmp(command, "addStudy"))
 		item->type = STUDY;
@@ -87,6 +92,7 @@ void HandleInput(const char *line)
 	}
 	else
 	{
+		UNKNOWN:
 		printf("Unknown command: %s", line);
 		return;
 	}
@@ -145,14 +151,35 @@ void HandleInput(const char *line)
 		timeinfo.tm_min = 30;
 	item->end = mktime(&timeinfo);
 
+	item->id = inputList->count;
 	AddAppointment(inputList, item);
 	printf("-> [Pending]\n");
-	/*
-	int _;
-	timeinfo.tm_hour = hour + (int)duration;
-	timeinfo.tm_min = minutes + modf(duration, &_)*60;
-	item->end = mktime(&timeinfo);
-	*/
+}
+
+
+void inputLoop(FILE *stream)
+{
+	const int MAX_CHAR = 255;
+	char line[MAX_CHAR];
+	char *return_val;
+	while(1)
+	{
+		return_val = fgets(line, MAX_CHAR, stream);
+		if(!return_val)
+		{
+			if(feof(stream))
+			{
+				printf("Received EOF.\n");
+				return;
+			}
+			else
+			{
+				fprintf(stderr, "IO error, existing program.\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		HandleInput(line);
+	}
 }
 
 /***************************************************
@@ -316,31 +343,6 @@ void testAll()
 	printf("================================\n");
 }
 
-void inputLoop(FILE *stream)
-{
-	const int MAX_CHAR = 255;
-	char line[MAX_CHAR];
-	char *return_val;
-	while(1)
-	{
-		return_val = fgets(line, MAX_CHAR, stream);
-		if(!return_val)
-		{
-			if(feof(stream))
-			{
-				printf("Received EOF.\n");
-				return;
-			}
-			else
-			{
-				fprintf(stderr, "IO error, existing program.\n");
-				exit(EXIT_FAILURE);
-			}
-		}
-		HandleInput(line);
-	}
-}
-
 int main(int argc, char* argv[])
 {
 	if (argc < 4 || argc > 11)
@@ -349,6 +351,7 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 	NumOfUser = argc - 1;
+	//Initialize each user in struct user[];
 	for (int i=0; i<NumOfUser; i++)
 	{
 		strcpy(user[i].username, argv[i+1]);

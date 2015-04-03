@@ -1,5 +1,5 @@
 <map id="User" name="User">
-<area shape="rect" id="node2" href="$struct_appointment_list.html" title="AppointmentList" alt="" coords="9,199,125,225"/>
-<area shape="rect" id="node3" href="$struct_appointment.html" title="Appointment" alt="" coords="20,95,115,121"/>
+<area shape="rect" id="node2" href="$struct_appointment_list.html" title="A double&#45;linked list for appointment record. " alt="" coords="9,201,125,228"/>
+<area shape="rect" id="node3" href="$struct_appointment.html" title="Store a appointment record. " alt="" coords="20,96,115,123"/>
 <area shape="rect" id="node4" href="$struct_appointment_type.html" title="Store all the appointment type. " alt="" coords="5,5,129,32"/>
 </map>

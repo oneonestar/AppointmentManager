@@ -107,6 +107,11 @@ $(document).ready(function(){initNavTree('struct_appointment.html','');});
 <div class="title">Appointment Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Store a appointment record.  
+ <a href="struct_appointment.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Appointment:</div>
 <div class="dyncontent">
@@ -127,12 +132,17 @@ Data Fields</h2></td></tr>
 <tr class="separator:ada310e7f72b38fadd4b24d80ed3438ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13455ba845bf5d4dba37be491bc6a036"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_appointment.html#a13455ba845bf5d4dba37be491bc6a036">end</a></td></tr>
 <tr class="separator:a13455ba845bf5d4dba37be491bc6a036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d53dc414f2d787dc031b868da72e703"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_appointment.html#a7d53dc414f2d787dc031b868da72e703">rescheduled</a></td></tr>
+<tr class="separator:a7d53dc414f2d787dc031b868da72e703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76cac42b207c5cf8c9175afad72b7bd2"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_appointment.html">Appointment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_appointment.html#a76cac42b207c5cf8c9175afad72b7bd2">prev</a></td></tr>
+<tr class="separator:a76cac42b207c5cf8c9175afad72b7bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0b65c736183dbc90fdeb836add2a10"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_appointment.html">Appointment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_appointment.html#a7a0b65c736183dbc90fdeb836add2a10">next</a></td></tr>
 <tr class="separator:a7a0b65c736183dbc90fdeb836add2a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="main_8c_source.html#l00038">38</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<div class="textblock"><p>Store a appointment record. </p>
+
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00031">31</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a class="anchor" id="a1c758224d618992d6bcda246e68384c3"></a>
 <div class="memitem">
@@ -144,7 +154,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00042">42</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00035">35</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
@@ -158,7 +168,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00041">41</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00034">34</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
@@ -172,7 +182,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00044">44</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00037">37</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
@@ -186,7 +196,35 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00045">45</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00040">40</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a76cac42b207c5cf8c9175afad72b7bd2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_appointment.html">Appointment</a>* prev</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00039">39</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7d53dc414f2d787dc031b868da72e703"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rescheduled</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00038">38</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
@@ -200,7 +238,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00043">43</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00036">36</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
@@ -214,12 +252,12 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8c_source.html#l00040">40</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p>Definition at line <a class="el" href="appointment__list_8h_source.html#l00033">33</a> of file <a class="el" href="appointment__list_8h_source.html">appointment_list.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="main_8c_source.html">main.c</a></li>
+<li><a class="el" href="appointment__list_8h_source.html">appointment_list.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -227,7 +265,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_appointment.html">Appointment</a></li>
-    <li class="footer">Generated on Fri Mar 6 2015 10:54:14 for Appointment Manager (AMR) by
+    <li class="footer">Generated on Thu Apr 2 2015 19:02:09 for Appointment Manager (AMR) by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

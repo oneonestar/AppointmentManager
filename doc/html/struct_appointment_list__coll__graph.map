@@ -1,4 +1,4 @@
 <map id="AppointmentList" name="AppointmentList">
-<area shape="rect" id="node2" href="$struct_appointment.html" title="Appointment" alt="" coords="20,95,115,121"/>
+<area shape="rect" id="node2" href="$struct_appointment.html" title="Store a appointment record. " alt="" coords="20,96,115,123"/>
 <area shape="rect" id="node3" href="$struct_appointment_type.html" title="Store all the appointment type. " alt="" coords="5,5,129,32"/>
 </map>

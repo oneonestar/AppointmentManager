@@ -7,9 +7,11 @@
 
 int IsAllAvailable(const struct Appointment *item)
 {
+	if(!item)
+		return 0;
 	struct AppointmentList *temp_list;
 	//check caller timetable
-	temp_list = IsConflictInList(user[item->caller_id].accepted, item);
+	temp_list = ConflictInList(user[item->caller_id].accepted, item);
 	if(temp_list->count)
 		return 0;
 	//check callees timetable
@@ -17,7 +19,7 @@ int IsAllAvailable(const struct Appointment *item)
 	{
 		if(item->callee_id[i]==-1)
 			break;
-		temp_list = IsConflictInList(user[item->callee_id[i]].accepted, item);
+		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
 		if(temp_list->count)
 			return 0;
 	}
@@ -29,7 +31,7 @@ int IsAllAvailablePriority(const struct Appointment *item)
 	struct AppointmentList *temp_list;
 	struct Appointment *ptr;
 	//check caller timetable
-	temp_list = IsConflictInList(user[item->caller_id].accepted, item);
+	temp_list = ConflictInList(user[item->caller_id].accepted, item);
 	ptr = temp_list->head;
 	while(ptr)
 	{
@@ -43,7 +45,7 @@ int IsAllAvailablePriority(const struct Appointment *item)
 		if(item->callee_id[i]==-1)
 			break;
 		//TODO: may need refactoring
-		temp_list = IsConflictInList(user[item->callee_id[i]].accepted, item);
+		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
 		ptr = temp_list->head;
 		while(ptr)
 		{
@@ -71,7 +73,7 @@ void AddToAllAcceptForced(const struct Appointment *item)
 	struct AppointmentList *temp_list;
 	//caller
 	//delete old appointments from accepted list
-	temp_list = IsConflictInList(user[item->caller_id].accepted, item);
+	temp_list = ConflictInList(user[item->caller_id].accepted, item);
 	RemoveListFromList(user[item->caller_id].accepted, temp_list);
 	//add to accept and reject lsit
 	AddAppointmentOrdered(user[item->caller_id].accepted, item);
@@ -81,7 +83,7 @@ void AddToAllAcceptForced(const struct Appointment *item)
 		if(item->callee_id[i]==-1)
 			break;
 		//delete old appointments from accepted list
-		temp_list = IsConflictInList(user[item->callee_id[i]].accepted, item);
+		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
 		RemoveListFromList(user[item->callee_id[i]].accepted, temp_list);
 		//add to accept and reject lsit
 		AddAppointmentOrdered(user[item->callee_id[i]].accepted, item);
@@ -135,4 +137,9 @@ void Schedual_PRIO(const struct AppointmentList *inputList)
 		}
 		ptr = ptr->next;
 	}
+}
+
+void Schedual_Opti(const struct AppointmentList *inputList)
+{
+	
 }
