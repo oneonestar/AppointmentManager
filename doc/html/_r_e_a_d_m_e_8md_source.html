@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Appointment Manager (AMR): File List</title>
+<title>Appointment Manager (AMR): README.md Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li class="current"><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
       <li><a href="globals.html"><span>Globals</span></a></li>
     </ul>
   </div>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('files.html','');});
+$(document).ready(function(){initNavTree('_r_e_a_d_m_e_8md.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -101,25 +101,50 @@ $(document).ready(function(){initNavTree('files.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">File List</div>  </div>
+<div class="title">README.md</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all files with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="appointment__list_8c_source.html"><span class="icondoc"></span></a><a class="el" href="appointment__list_8c.html" target="_self">appointment_list.c</a></td><td class="desc">Handling the appointments and appointment list </td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="appointment__list_8h_source.html"><span class="icondoc"></span></a><a class="el" href="appointment__list_8h.html" target="_self">appointment_list.h</a></td><td class="desc">Handling the appointments and appointment list </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="main_8c_source.html"><span class="icondoc"></span></a><a class="el" href="main_8c.html" target="_self">main.c</a></td><td class="desc"><a class="el" href="struct_appointment.html" title="Store a appointment record. ">Appointment</a> Manager (AMR) main program. Also the input handling </td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="scheduler_8c_source.html"><span class="icondoc"></span></a><a class="el" href="scheduler_8c.html" target="_self">scheduler.c</a></td><td class="desc">Secheduling algorithms </td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="scheduler_8h_source.html"><span class="icondoc"></span></a><a class="el" href="scheduler_8h.html" target="_self">scheduler.h</a></td><td class="desc">Secheduling algorithms </td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="user_8c_source.html"><span class="icondoc"></span></a><a class="el" href="user_8c.html" target="_self">user.c</a></td><td class="desc">Handling each users </td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="user_8h_source.html"><span class="icondoc"></span></a><a class="el" href="user_8h.html" target="_self">user.h</a></td><td class="desc">Handling each users </td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<a href="_r_e_a_d_m_e_8md.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;Appointment Manager (AMR)</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;=========================</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;An appointment management software that have the calendar and scheduling function.</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;Build</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;-----</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;To compile the program.</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;```</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;make</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;```</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;The executable program is located in bin/.</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;To clean up the object files.</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;```</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;make clean</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;```</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;To clean up the object files and the executable file.</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;```</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;make remove</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;```</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;To join the source files into one AMR.c file</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;```</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;make onefile</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;```</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;Documentation</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;-------------</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;doc/latex/dox.pdf</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;File structure</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;--------------</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;-bin/</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;-src/ .... source and header files</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="_r_e_a_d_m_e_8md.html">README.md</a></li>
     <li class="footer">Generated on Sat Apr 4 2015 03:30:28 for Appointment Manager (AMR) by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>

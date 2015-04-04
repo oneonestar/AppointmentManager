@@ -36,4 +36,4 @@ onefile:
 	awk 'FNR==1{print ""}1' $(SRCDIR)/user.h > AMR.c
 	awk 'FNR==1{print ""}1' $(SRCDIR)/*.h >> AMR.c
 	awk 'FNR==1{print ""}1' $(SRCDIR)/*.c >> AMR.c
-	sed -i '/#include \".*/d' ./amr.c
+	sed -i '/#include \".*/d' ./AMR.c

@@ -1,7 +1,13 @@
 var appointment__list_8h =
 [
-    [ "Appointment", "struct_appointment.html", null ],
-    [ "AppointmentList", "struct_appointment_list.html", null ],
+    [ "Appointment", "struct_appointment.html", "struct_appointment" ],
+    [ "AppointmentList", "struct_appointment_list.html", "struct_appointment_list" ],
+    [ "AppointmentType", "appointment__list_8h.html#acfb6062e4a7e3bd66df4b733bbb3aa3d", [
+      [ "ASSIGNMENT", "appointment__list_8h.html#acfb6062e4a7e3bd66df4b733bbb3aa3da2967ccae03791ac3d69b2b731e479ec2", null ],
+      [ "PROJECT", "appointment__list_8h.html#acfb6062e4a7e3bd66df4b733bbb3aa3da27d5e6e2e38089805b568b424d86587d", null ],
+      [ "STUDY", "appointment__list_8h.html#acfb6062e4a7e3bd66df4b733bbb3aa3da60af5caabc77f4e666e2f72e5a60d60b", null ],
+      [ "GATHERING", "appointment__list_8h.html#acfb6062e4a7e3bd66df4b733bbb3aa3da102729940b5b7f73f83d1bd6b0ec52f5", null ]
+    ] ],
     [ "AddAppointment", "appointment__list_8h.html#a635c283773bcc48d69358673c08a8b56", null ],
     [ "AddAppointmentFromList", "appointment__list_8h.html#a7918ffa2e84a94a567571ab9f412b10f", null ],
     [ "AddAppointmentOrdered", "appointment__list_8h.html#af47030d6bc395c4e7dd7076b57f888ad", null ],
