@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!Doxyfile
 !Design.tex
 !Design.pdf
 !html/
