@@ -177,7 +177,7 @@ void HandleInput(const char *line)
 	else
 	{
 		UNKNOWN:
-		printf("Unknown command: %s", line);
+		printf("Unknown command: %s\n", line);
 		return;
 	}
 
@@ -252,10 +252,18 @@ void inputLoop(FILE *stream)
 		return_val = fgets(line, MAX_CHAR, stream);
 		if(!return_val)
 		{
+			// sleep(10);
 			if(feof(stream))
 			{
 				printf("Received EOF.\n");
-				return;
+				clearerr(stdin);
+				//Allow ./AMR a b < input.txt, continue to read user input after EOF from stdin.
+				//WARNING: not portable, only works in linux!
+				if (!freopen("/dev/tty", "rw", stdin)) {
+					perror("freopen");
+					exit(EXIT_FAILURE);
+				}
+				continue;
 			}
 			else
 			{
