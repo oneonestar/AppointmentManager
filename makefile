@@ -1,4 +1,4 @@
-TARGET = AMR
+TARGET = amr
 CC = gcc -std=c99 -c
 override CFLAGS += -Wall
 #CFLAGS = $(CFLAGS) -Wall -I.

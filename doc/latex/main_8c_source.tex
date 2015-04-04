@@ -160,7 +160,7 @@
 00177     \textcolor{keywordflow}{else}
 00178     \{
 00179         UNKNOWN:
-00180         printf(\textcolor{stringliteral}{"Unknown command: %s"}, line);
+00180         printf(\textcolor{stringliteral}{"Unknown command: %s\(\backslash\)n"}, line);
 00181         \textcolor{keywordflow}{return};
 00182     \}
 00183 
@@ -235,47 +235,55 @@
 00252         return\_val = fgets(line, MAX\_CHAR, stream);
 00253         \textcolor{keywordflow}{if}(!return\_val)
 00254         \{
-00255             \textcolor{keywordflow}{if}(feof(stream))
-00256             \{
-00257                 printf(\textcolor{stringliteral}{"Received EOF.\(\backslash\)n"});
-00258                 \textcolor{keywordflow}{return};
-00259             \}
-00260             \textcolor{keywordflow}{else}
-00261             \{
-00262                 fprintf(stderr, \textcolor{stringliteral}{"IO error, existing program.\(\backslash\)n"});
-00263                 \textcolor{keywordflow}{return};
-00264                 \textcolor{comment}{// exit(EXIT\_FAILURE);}
-00265             \}
-00266         \}
-00267         HandleInput(line);
-00268     \}
-00269 \}
-00270 
-00271 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
-00272 \{
-00273     \textcolor{keywordflow}{if} (argc < 4 || argc > 11)
-00274     \{
-00275         fprintf(stderr, \textcolor{stringliteral}{"Error: The number of users should between 3 and 10.\(\backslash\)n"});
-00276         \textcolor{keywordflow}{return} EXIT\_FAILURE;
-00277     \}
-00278     NumOfUser = argc - 1;
-00279     \textcolor{comment}{//Initialize each user in struct user[];}
-00280     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00281     \{
-00282         \textcolor{keywordflow}{if}(GetUserID(argv[i+1]) != -1)
-00283         \{
-00284             printf(\textcolor{stringliteral}{"Duplicate names of users!\(\backslash\)n"});
-00285             exit(EXIT\_FAILURE);
-00286         \}
-00287         strcpy(user[i].username, argv[i+1]);
-00288         user[i].username[0] = toupper(user[i].username[0]);
-00289         user[i].accepted = CreateAppointmentList();
-00290         user[i].rejected = CreateAppointmentList();
-00291     \}
-00292     inputList = CreateAppointmentList();
-00293 
-00294     printf(\textcolor{stringliteral}{"~~WELCOME TO AMR~~\(\backslash\)n"});
-00295     inputLoop(stdin);
-00296     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
-00297 \}
+00255             \textcolor{comment}{// sleep(10);}
+00256             \textcolor{keywordflow}{if}(feof(stream))
+00257             \{
+00258                 printf(\textcolor{stringliteral}{"Received EOF.\(\backslash\)n"});
+00259                 clearerr(stdin);
+00260                 \textcolor{comment}{//Allow ./AMR a b < input.txt, continue to read user input after EOF from stdin.}
+00261                 \textcolor{comment}{//WARNING: not portable, only works in linux!}
+00262                 \textcolor{keywordflow}{if} (!freopen(\textcolor{stringliteral}{"/dev/tty"}, \textcolor{stringliteral}{"rw"}, stdin)) \{
+00263                     perror(\textcolor{stringliteral}{"freopen"});
+00264                     exit(EXIT\_FAILURE);
+00265                 \}
+00266                 \textcolor{keywordflow}{continue};
+00267             \}
+00268             \textcolor{keywordflow}{else}
+00269             \{
+00270                 fprintf(stderr, \textcolor{stringliteral}{"IO error, existing program.\(\backslash\)n"});
+00271                 \textcolor{keywordflow}{return};
+00272                 \textcolor{comment}{// exit(EXIT\_FAILURE);}
+00273             \}
+00274         \}
+00275         HandleInput(line);
+00276     \}
+00277 \}
+00278 
+00279 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+00280 \{
+00281     \textcolor{keywordflow}{if} (argc < 4 || argc > 11)
+00282     \{
+00283         fprintf(stderr, \textcolor{stringliteral}{"Error: The number of users should between 3 and 10.\(\backslash\)n"});
+00284         \textcolor{keywordflow}{return} EXIT\_FAILURE;
+00285     \}
+00286     NumOfUser = argc - 1;
+00287     \textcolor{comment}{//Initialize each user in struct user[];}
+00288     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00289     \{
+00290         \textcolor{keywordflow}{if}(GetUserID(argv[i+1]) != -1)
+00291         \{
+00292             printf(\textcolor{stringliteral}{"Duplicate names of users!\(\backslash\)n"});
+00293             exit(EXIT\_FAILURE);
+00294         \}
+00295         strcpy(user[i].username, argv[i+1]);
+00296         user[i].username[0] = toupper(user[i].username[0]);
+00297         user[i].accepted = CreateAppointmentList();
+00298         user[i].rejected = CreateAppointmentList();
+00299     \}
+00300     inputList = CreateAppointmentList();
+00301 
+00302     printf(\textcolor{stringliteral}{"~~WELCOME TO AMR~~\(\backslash\)n"});
+00303     inputLoop(stdin);
+00304     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
+00305 \}
 \end{DoxyCode}

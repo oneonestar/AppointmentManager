@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Debian) (preloaded format=pdflatex 2015.2.26)  4 APR 2015 03:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/Debian) (preloaded format=pdflatex 2015.4.4)  4 APR 2015 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **refman
 (./refman.tex
 LaTeX2e <2014/05/01>
-Babel <3.9k> and hyphenation patterns for 4 languages loaded.
+Babel <3.9k> and hyphenation patterns for 79 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/bk10.clo
@@ -1162,7 +1162,7 @@ Underfull \hbox (badness 10000) detected at line 38
 [][][]
  []
 
-
+[32]
 Underfull \hbox (badness 10000) detected at line 41
 [][][]
  []
@@ -1172,16 +1172,16 @@ Underfull \hbox (badness 10000) detected at line 44
 [][][]
  []
 
-[32] [33]) (./scheduler_8c_source.tex [34]
+[33]) (./scheduler_8c_source.tex [34]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [35]
 Overfull \hbox (19.35555pt too wide) in paragraph at lines 158--158
 []\T1/pcr/m/n/7 00174 []static[] []struct []AppointmentList* GetEmptyTimeSlotIn
 Range([]struct[] AppointmentList *userList, time_t start_date,[] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [35]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [36]
@@ -1193,10 +1193,11 @@ Overfull \hbox (15.15555pt too wide) in paragraph at lines 412--412
 einfo2.tm_mday) - rdn(timeinfo.tm_year, timeinfo.[] 
  []
 
-) (./scheduler_8h.tex
-Underfull \vbox (badness 1472) has occurred while \output is active []
 
- [38]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38])
+(./scheduler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
@@ -1216,12 +1217,12 @@ Underfull \hbox (badness 10000) detected at line 37
 [][][]
  []
 
-[39]) (./scheduler_8h_source.tex) (./user_8c.tex
+[39]) (./scheduler_8h_source.tex [40]) (./user_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
 
-[40]
+
 Underfull \hbox (badness 10000) detected at line 31
 [][][]
  []
@@ -1256,14 +1257,14 @@ Underfull \hbox (badness 10000) detected at line 49
 [][][]
  []
 
-
+[44]
 Underfull \hbox (badness 10000) detected at line 93
 [][][]
  []
 
-[44]) (./user_8h_source.tex) [45] (./refman.ind [46
+) (./user_8h_source.tex [45]) [46] (./refman.ind [47
 
-] [47] [48
+] [48] [49
 
 ]) (./refman.aux)
 
@@ -1271,13 +1272,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5893 strings out of 494978
- 81222 string characters out of 6180203
- 158350 words of memory out of 5000000
- 8858 multiletter control sequences out of 15000+600000
+ 5893 strings out of 493104
+ 81222 string characters out of 6136933
+ 163005 words of memory out of 5000000
+ 9101 multiletter control sequences out of 15000+600000
  88298 words of font info for 114 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 48i,18n,43p,1475b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 1141 hyphenation exceptions out of 8191
+ 48i,17n,43p,1475b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
@@ -1287,10 +1288,10 @@ urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
 b></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8ac.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (56 pages, 173340 bytes).
+Output written on refman.pdf (57 pages, 174257 bytes).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 154 compressed objects within 2 object streams
+ 226 PDF objects out of 1000 (max. 8388607)
+ 156 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

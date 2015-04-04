@@ -198,10 +198,20 @@ void HandleInput(const char *line)
 		if(!pch)
 			break;
 		int id = GetUserID(pch);
+		if(id==-1)
+		{
+			printf("->[Rejected: Unknown callee %s]\n", pch);
+			return;
+		}
 		item->callee_id[callee_count++] = id;
 	}
 
 	item->caller_id = GetUserID(caller);
+	if(item->caller_id==-1)
+	{
+		printf("->[Rejected: Unknown caller %s]\n", caller);
+		return;
+	}
 	//time
 	struct tm timeinfo, timeinfo_tmp;
 	memset(&timeinfo, 0, sizeof(timeinfo));

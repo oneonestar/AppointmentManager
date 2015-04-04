@@ -123,7 +123,7 @@
     \subitem {appointment\+\_\+list.\+c}, 16
     \subitem {appointment\+\_\+list.\+h}, 24
   \item {Get\+User\+I\+D}
-    \subitem {user.\+c}, 41
+    \subitem {user.\+c}, 42
     \subitem {user.\+h}, 44
 
   \indexspace
@@ -187,7 +187,7 @@
     \subitem {Appointment}, 8
   \item {Print\+Accepted}
     \subitem {user.\+c}, 42
-    \subitem {user.\+h}, 44
+    \subitem {user.\+h}, 45
   \item {Print\+All\+User}
     \subitem {user.\+c}, 42
     \subitem {user.\+h}, 45
@@ -230,7 +230,7 @@
     \subitem {scheduler.\+c}, 33
     \subitem {scheduler.\+h}, 40
   \item {Schedual\+\_\+\+P\+R\+I\+O}
-    \subitem {scheduler.\+c}, 33
+    \subitem {scheduler.\+c}, 34
     \subitem {scheduler.\+h}, 40
   \item {scheduler.\+c}, 32, 34
     \subitem {Add\+To\+All\+Accept}, 33
@@ -241,7 +241,7 @@
     \subitem {Print\+Summary}, 33
     \subitem {Schedual\+\_\+\+F\+C\+F\+S}, 33
     \subitem {Schedual\+\_\+\+O\+P\+T\+I}, 33
-    \subitem {Schedual\+\_\+\+P\+R\+I\+O}, 33
+    \subitem {Schedual\+\_\+\+P\+R\+I\+O}, 34
   \item {scheduler.\+h}, 39, 40
     \subitem {Print\+Summary}, 40
     \subitem {Schedual\+\_\+\+F\+C\+F\+S}, 40
@@ -283,8 +283,8 @@
   \item {user}
     \subitem {main.\+c}, 28
     \subitem {user.\+h}, 45
-  \item {user.\+c}, 40, 42
-    \subitem {Get\+User\+I\+D}, 41
+  \item {user.\+c}, 41, 42
+    \subitem {Get\+User\+I\+D}, 42
     \subitem {Print\+Accepted}, 42
     \subitem {Print\+All\+User}, 42
     \subitem {Print\+Rejected}, 42
@@ -293,7 +293,7 @@
     \subitem {Get\+User\+I\+D}, 44
     \subitem {M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}, 44
     \subitem {Num\+Of\+User}, 45
-    \subitem {Print\+Accepted}, 44
+    \subitem {Print\+Accepted}, 45
     \subitem {Print\+All\+User}, 45
     \subitem {Print\+Rejected}, 45
     \subitem {U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}, 44
