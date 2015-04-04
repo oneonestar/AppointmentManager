@@ -1,0 +1,87 @@
+\section{appointment\+\_\+list.\+h}
+\label{appointment__list_8h_source}\index{appointment\+\_\+list.\+h@{appointment\+\_\+list.\+h}}
+
+\begin{DoxyCode}
+00001 
+00022 \textcolor{preprocessor}{#ifndef APPOINTMENT\_LIST}
+00023 \textcolor{preprocessor}{#define APPOINTMENT\_LIST}
+00024 
+00025 \textcolor{preprocessor}{#include <ctype.h>}
+00026 \textcolor{preprocessor}{#include <math.h>}
+00027 \textcolor{preprocessor}{#include <signal.h>}
+00028 \textcolor{preprocessor}{#include <stdio.h>}
+00029 \textcolor{preprocessor}{#include <stdlib.h>}
+00030 \textcolor{preprocessor}{#include <string.h>}
+00031 \textcolor{preprocessor}{#include <time.h>}
+00032 
+00033 \textcolor{preprocessor}{#include "user.h"}
+00034 
+00039 \textcolor{keyword}{enum} AppointmentType
+00040 \{
+00041     ASSIGNMENT = 0, PROJECT, STUDY, GATHERING
+00042 \};
+00043 
+00048 \textcolor{keyword}{struct }Appointment
+00049 \{
+00050     \textcolor{keyword}{enum} AppointmentType type;
+00051     \textcolor{keywordtype}{int} id;
+00052     \textcolor{keywordtype}{int} caller_id;
+00053     \textcolor{keywordtype}{int} callee_id[10];
+00054     time\_t start;
+00055     time\_t end;
+00056     \textcolor{keywordtype}{int} is_accepted;
+00057     \textcolor{keywordtype}{int} rescheduled;
+00058     \textcolor{keyword}{struct }Appointment *prev;
+00059     \textcolor{keyword}{struct }Appointment *next;
+00060 \};
+00061 
+00066 \textcolor{keyword}{struct }AppointmentList
+00067 \{
+00068     \textcolor{keywordtype}{int} count;
+00069     \textcolor{keyword}{struct }Appointment *head;
+00070     \textcolor{keyword}{struct }Appointment *tail;
+00071 \};
+00072 
+00073 
+00077 \textcolor{keyword}{struct }Appointment* CreateAppointment();
+00078 
+00082 \textcolor{keyword}{struct }AppointmentList* CreateAppointmentList();
+00083 
+00084 
+00090 \textcolor{keywordtype}{void} AddAppointment(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *newItem);
+00091 
+00098 \textcolor{keywordtype}{void} AddAppointmentOrdered(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *newItem);
+00099 
+00105 \textcolor{keywordtype}{void} AddAppointmentFromList(\textcolor{keyword}{struct} AppointmentList *dst\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *src\_list);
+00106 
+00113 \textcolor{keywordtype}{void} AddAppointmentOrderedFromList(\textcolor{keyword}{struct} AppointmentList *dst\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *src\_list);
+00114 
+00120 \textcolor{keyword}{struct }AppointmentList* ConflictInList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *item);
+00121 
+00125 \textcolor{keywordtype}{int} IsConflict(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *b);
+00126 
+00130 \textcolor{keywordtype}{int} IsConflictInList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *item);
+00131 
+00136 \textcolor{keywordtype}{void} RemoveItemFromList(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item);
+00137 
+00142 \textcolor{keywordtype}{void} RemoveListFromList(\textcolor{keyword}{struct} AppointmentList *ori\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *del\_list);
+00143 
+00153 \textcolor{keywordtype}{int} CompareAppointment(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *b);
+00154 
+00163 \textcolor{keywordtype}{int} CompareAppointmentPriority(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *b);
+00164 
+00169 \textcolor{keywordtype}{void} PrintAppointment(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item);
+00170 
+00175 \textcolor{keywordtype}{void} PrintAppointmentList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list);
+00176 
+00180 \textcolor{keyword}{struct }Appointment* GetAppointmentById(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id});
+00181 
+00182 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

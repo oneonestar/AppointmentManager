@@ -1,0 +1,31 @@
+\section{scheduler.\+h}
+\label{scheduler_8h_source}\index{scheduler.\+h@{scheduler.\+h}}
+
+\begin{DoxyCode}
+00001 
+00022 \textcolor{preprocessor}{#ifndef SCHEDULER}
+00023 \textcolor{preprocessor}{#define SCHEDULER}
+00024 
+00025 \textcolor{preprocessor}{#include "user.h"}
+00026 \textcolor{preprocessor}{#include <time.h>}
+00027 
+00028 \textcolor{keyword}{struct }Summary
+00029 \{
+00030     \textcolor{keywordtype}{int} total_accepted;
+00031     \textcolor{keywordtype}{int} total_rejected;
+00032     \textcolor{keywordtype}{int} accepted[USER_NUMBER];
+00033     \textcolor{keywordtype}{int} rejected[USER_NUMBER];
+00034     \textcolor{keywordtype}{int} empty_timeslot[USER_NUMBER];
+00035     time\_t start;
+00036     time\_t end;
+00037 \};
+00042 \textcolor{keyword}{struct }Summary* Schedual_FCFS(\textcolor{keyword}{struct} AppointmentList *inputList);
+00043 
+00048 \textcolor{keyword}{struct }Summary* Schedual_PRIO(\textcolor{keyword}{struct} AppointmentList *inputList);
+00049 
+00054 \textcolor{keyword}{struct }Summary* Schedual_OPTI(\textcolor{keyword}{struct} AppointmentList *inputList);
+00055 
+00059 \textcolor{keywordtype}{void} PrintSummary(\textcolor{keyword}{struct} Summary *summary);
+00060 
+00061 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

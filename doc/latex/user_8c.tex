@@ -1,0 +1,127 @@
+\section{user.\+c File Reference}
+\label{user_8c}\index{user.\+c@{user.\+c}}
+
+
+Handling each users.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$ctype.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}appointment\+\_\+list.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf strcicmp} (char const $\ast$a, char const $\ast$b)
+\item 
+int {\bf Get\+User\+I\+D} (const char $\ast$username)
+\begin{DoxyCompactList}\small\item\em Return the user id that have the same username. \end{DoxyCompactList}\item 
+void {\bf Print\+Accepted} (const struct {\bf User} $\ast${\bf user})
+\begin{DoxyCompactList}\small\item\em Print the accepted list for user. \end{DoxyCompactList}\item 
+void {\bf Print\+Rejected} (const struct {\bf User} $\ast${\bf user})
+\begin{DoxyCompactList}\small\item\em Print the rejected list for user. \end{DoxyCompactList}\item 
+void {\bf Print\+All\+User} ()
+\begin{DoxyCompactList}\small\item\em Print the accepted \& reject list for all users. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handling each users. 
+
+\begin{DoxyAuthor}{Author}
+oneonestar {\tt oneonestar@gmail.\+com} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+2015
+\end{DoxyCopyright}
+\subsection{L\+I\+C\+E\+N\+S\+E}\label{user_8h_LICENSE}
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details. You should have received a copy of the G\+N\+U General Public License along with this program. If not, see {\tt http\+://www.\+gnu.\+org/licenses/}. 
+
+Definition in file {\bf user.\+c}.
+
+
+
+\subsection{Function Documentation}
+\index{user.\+c@{user.\+c}!Get\+User\+I\+D@{Get\+User\+I\+D}}
+\index{Get\+User\+I\+D@{Get\+User\+I\+D}!user.\+c@{user.\+c}}
+\subsubsection[{Get\+User\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Get\+User\+I\+D (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{username}
+\end{DoxyParamCaption}
+)}\label{user_8c_af2f23f139dbacb2a0e94029784c22ccf}
+
+
+Return the user id that have the same username. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & The username that are used to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The user id that have the same username. Return -\/1 if user is not found. 
+\end{DoxyReturn}
+
+
+Definition at line {\bf 38} of file {\bf user.\+c}.
+
+\index{user.\+c@{user.\+c}!Print\+Accepted@{Print\+Accepted}}
+\index{Print\+Accepted@{Print\+Accepted}!user.\+c@{user.\+c}}
+\subsubsection[{Print\+Accepted}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Accepted (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}\label{user_8c_a1214e8672d5a6d823eb2934cf5a82d0b}
+
+
+Print the accepted list for user. 
+
+
+
+Definition at line {\bf 48} of file {\bf user.\+c}.
+
+\index{user.\+c@{user.\+c}!Print\+All\+User@{Print\+All\+User}}
+\index{Print\+All\+User@{Print\+All\+User}!user.\+c@{user.\+c}}
+\subsubsection[{Print\+All\+User}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+All\+User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{user_8c_a393641d36b97cdf5764c257c9c259734}
+
+
+Print the accepted \& reject list for all users. 
+
+
+
+Definition at line {\bf 63} of file {\bf user.\+c}.
+
+\index{user.\+c@{user.\+c}!Print\+Rejected@{Print\+Rejected}}
+\index{Print\+Rejected@{Print\+Rejected}!user.\+c@{user.\+c}}
+\subsubsection[{Print\+Rejected}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Rejected (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}\label{user_8c_afb40dc85cc1d4b23f9a1a95ef4abc6f5}
+
+
+Print the rejected list for user. 
+
+
+
+Definition at line {\bf 56} of file {\bf user.\+c}.
+
+\index{user.\+c@{user.\+c}!strcicmp@{strcicmp}}
+\index{strcicmp@{strcicmp}!user.\+c@{user.\+c}}
+\subsubsection[{strcicmp}]{\setlength{\rightskip}{0pt plus 5cm}int strcicmp (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a, }
+\item[{char const $\ast$}]{b}
+\end{DoxyParamCaption}
+)}\label{user_8c_ae2842cb0cbdf6aa210eba0b735e63312}
+
+
+Definition at line {\bf 29} of file {\bf user.\+c}.
+

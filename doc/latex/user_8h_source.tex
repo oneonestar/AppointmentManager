@@ -1,0 +1,33 @@
+\section{user.\+h}
+\label{user_8h_source}\index{user.\+h@{user.\+h}}
+
+\begin{DoxyCode}
+00001 
+00022 \textcolor{preprocessor}{#ifndef USER}
+00023 \textcolor{preprocessor}{#define USER}
+00024 
+00028 \textcolor{preprocessor}{#define USER\_NUMBER 10}
+00029 
+00034 \textcolor{preprocessor}{#define MAX\_USERNAME 31}
+00035 
+00040 \textcolor{keyword}{struct }User
+00041 \{
+00042     \textcolor{keywordtype}{char} username[MAX_USERNAME];
+00043     \textcolor{keyword}{struct }AppointmentList *accepted;
+00044     \textcolor{keyword}{struct }AppointmentList *rejected;
+00045 \};
+00046 
+00050 \textcolor{keyword}{struct }User user[USER_NUMBER];
+00051 
+00055 \textcolor{keywordtype}{int} NumOfUser;
+00056 
+00062 \textcolor{keywordtype}{int} GetUserID(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *username);
+00063 
+00067 \textcolor{keywordtype}{void} PrintAccepted(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user);
+00068 
+00072 \textcolor{keywordtype}{void} PrintRejected(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user);
+00073 
+00077 \textcolor{keywordtype}{void} PrintAllUser();
+00078 
+00079 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

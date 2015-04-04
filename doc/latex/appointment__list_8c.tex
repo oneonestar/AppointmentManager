@@ -1,0 +1,415 @@
+\section{appointment\+\_\+list.\+c File Reference}
+\label{appointment__list_8c}\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+
+
+Handling the appointments and appointment list.  
+
+
+{\ttfamily \#include \char`\"{}appointment\+\_\+list.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Appointment\+List} $\ast$ {\bf Create\+Appointment\+List} ()
+\begin{DoxyCompactList}\small\item\em Create a appointment list and init the value. \end{DoxyCompactList}\item 
+struct {\bf Appointment} $\ast$ {\bf Create\+Appointment} ()
+\begin{DoxyCompactList}\small\item\em Create a appointment and init the value. \end{DoxyCompactList}\item 
+void {\bf Add\+Appointment} (struct {\bf Appointment\+List} $\ast$list, const struct {\bf Appointment} $\ast$new\+Item)
+\begin{DoxyCompactList}\small\item\em Insert a copy of the appointment into the end of the appointment list. \end{DoxyCompactList}\item 
+void {\bf Add\+Appointment\+Ordered} (struct {\bf Appointment\+List} $\ast$list, const struct {\bf Appointment} $\ast$new\+Item)
+\begin{DoxyCompactList}\small\item\em Insert a copy of the appointment into the sorted appointment list. Using the start time then end time as the sorting condition. \end{DoxyCompactList}\item 
+void {\bf Add\+Appointment\+From\+List} (struct {\bf Appointment\+List} $\ast$dst\+\_\+list, const struct {\bf Appointment\+List} $\ast$src\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Insert a copy of the appointment into the end of the appointment list. \end{DoxyCompactList}\item 
+void {\bf Add\+Appointment\+Ordered\+From\+List} (struct {\bf Appointment\+List} $\ast$dst\+\_\+list, const struct {\bf Appointment\+List} $\ast$src\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Insert a copy of the appointment into the sorted appointment list. Using the start time then end time as the sorting condition. \end{DoxyCompactList}\item 
+int {\bf Compare\+Appointment} (const struct {\bf Appointment} $\ast$a, const struct {\bf Appointment} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Compare the start time and then end time of the appointment. Used to keep the ordered appointment list. \end{DoxyCompactList}\item 
+int {\bf Compare\+Appointment\+Priority} (const struct {\bf Appointment} $\ast$a, const struct {\bf Appointment} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Compare the appointment by it's priority. \end{DoxyCompactList}\item 
+void {\bf Remove\+Item\+From\+List} (struct {\bf Appointment\+List} $\ast$list, const struct {\bf Appointment} $\ast$item)
+\begin{DoxyCompactList}\small\item\em Remove an item from the list. Items should be unique inside the list. Delete if the two item have the same id. \end{DoxyCompactList}\item 
+void {\bf Remove\+List\+From\+List} (struct {\bf Appointment\+List} $\ast$ori\+\_\+list, const struct {\bf Appointment\+List} $\ast$del\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Remove a list of items from the list. Items should be unique inside the list. Delete if the two item have the same id. \end{DoxyCompactList}\item 
+void {\bf Print\+Appointment} (const struct {\bf Appointment} $\ast$item)
+\begin{DoxyCompactList}\small\item\em Print out the appointment. \end{DoxyCompactList}\item 
+void {\bf Print\+Appointment\+List} (const struct {\bf Appointment\+List} $\ast$list)
+\begin{DoxyCompactList}\small\item\em Print out the appointment list. \end{DoxyCompactList}\item 
+int {\bf Is\+Conflict} (const struct {\bf Appointment} $\ast$a, const struct {\bf Appointment} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Check whether if two appointments have time conflict. \end{DoxyCompactList}\item 
+int {\bf Is\+Conflict\+In\+List} (const struct {\bf Appointment\+List} $\ast$list, const struct {\bf Appointment} $\ast$item)
+\begin{DoxyCompactList}\small\item\em Check whether if the appointment item have conflict with the list. \end{DoxyCompactList}\item 
+struct {\bf Appointment\+List} $\ast$ {\bf Conflict\+In\+List} (const struct {\bf Appointment\+List} $\ast$list, const struct {\bf Appointment} $\ast$item)
+\begin{DoxyCompactList}\small\item\em Check whether the the new appointment is conflict with the existing appointments that are already in the list. \end{DoxyCompactList}\item 
+struct {\bf Appointment} $\ast$ {\bf Get\+Appointment\+By\+Id} (const struct {\bf Appointment\+List} $\ast$list, int id)
+\begin{DoxyCompactList}\small\item\em Return the appointment that match the id in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf Appointment\+Type\+Str} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handling the appointments and appointment list. 
+
+\begin{DoxyAuthor}{Author}
+oneonestar {\tt oneonestar@gmail.\+com} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+2015
+\end{DoxyCopyright}
+\subsection{L\+I\+C\+E\+N\+S\+E}\label{user_8h_LICENSE}
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details. You should have received a copy of the G\+N\+U General Public License along with this program. If not, see {\tt http\+://www.\+gnu.\+org/licenses/}. 
+
+Definition in file {\bf appointment\+\_\+list.\+c}.
+
+
+
+\subsection{Function Documentation}
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Add\+Appointment@{Add\+Appointment}}
+\index{Add\+Appointment@{Add\+Appointment}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Add\+Appointment}]{\setlength{\rightskip}{0pt plus 5cm}void Add\+Appointment (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{const struct {\bf Appointment} $\ast$}]{new\+Item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a635c283773bcc48d69358673c08a8b56}
+
+
+Insert a copy of the appointment into the end of the appointment list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em list} & The destination appointment list. \\
+\hline
+\mbox{\tt in}  & {\em new\+Item} & The item that needs to add into the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 64} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Add\+Appointment\+From\+List@{Add\+Appointment\+From\+List}}
+\index{Add\+Appointment\+From\+List@{Add\+Appointment\+From\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Add\+Appointment\+From\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Add\+Appointment\+From\+List (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{dst\+\_\+list, }
+\item[{const struct {\bf Appointment\+List} $\ast$}]{src\+\_\+list}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a7918ffa2e84a94a567571ab9f412b10f}
+
+
+Insert a copy of the appointment into the end of the appointment list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em list} & The destination appointment list. \\
+\hline
+\mbox{\tt in}  & {\em new\+Item} & The item that needs to add into the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 124} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Add\+Appointment\+Ordered@{Add\+Appointment\+Ordered}}
+\index{Add\+Appointment\+Ordered@{Add\+Appointment\+Ordered}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Add\+Appointment\+Ordered}]{\setlength{\rightskip}{0pt plus 5cm}void Add\+Appointment\+Ordered (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{const struct {\bf Appointment} $\ast$}]{new\+Item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_af47030d6bc395c4e7dd7076b57f888ad}
+
+
+Insert a copy of the appointment into the sorted appointment list. Using the start time then end time as the sorting condition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em list} & The destination appointment list. \\
+\hline
+\mbox{\tt in}  & {\em new\+Item} & The item that needs to add into the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 83} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Add\+Appointment\+Ordered\+From\+List@{Add\+Appointment\+Ordered\+From\+List}}
+\index{Add\+Appointment\+Ordered\+From\+List@{Add\+Appointment\+Ordered\+From\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Add\+Appointment\+Ordered\+From\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Add\+Appointment\+Ordered\+From\+List (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{dst\+\_\+list, }
+\item[{const struct {\bf Appointment\+List} $\ast$}]{src\+\_\+list}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a78ce94ba7a26b6a1fa0b12e1f6b4adf9}
+
+
+Insert a copy of the appointment into the sorted appointment list. Using the start time then end time as the sorting condition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em list} & The destination appointment list. \\
+\hline
+\mbox{\tt in}  & {\em new\+Item} & The item that needs to add into the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 134} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Compare\+Appointment@{Compare\+Appointment}}
+\index{Compare\+Appointment@{Compare\+Appointment}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Compare\+Appointment}]{\setlength{\rightskip}{0pt plus 5cm}int Compare\+Appointment (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment} $\ast$}]{a, }
+\item[{const struct {\bf Appointment} $\ast$}]{b}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_ae858f56fdbeffe1fac3760ada442eef1}
+
+
+Compare the start time and then end time of the appointment. Used to keep the ordered appointment list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & \doxyref{Appointment}{p.}{struct_appointment} to be compared. \\
+\hline
+\mbox{\tt in}  & {\em b} & \doxyref{Appointment}{p.}{struct_appointment} to be compared. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $<$0} & a is before b \\
+\hline
+{\em 0} & a is equal to b \\
+\hline
+{\em $>$0} & a is after b \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line {\bf 144} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Compare\+Appointment\+Priority@{Compare\+Appointment\+Priority}}
+\index{Compare\+Appointment\+Priority@{Compare\+Appointment\+Priority}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Compare\+Appointment\+Priority}]{\setlength{\rightskip}{0pt plus 5cm}int Compare\+Appointment\+Priority (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment} $\ast$}]{a, }
+\item[{const struct {\bf Appointment} $\ast$}]{b}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a0151a26f5b009b55519c7e495c8ecca5}
+
+
+Compare the appointment by it's priority. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & \doxyref{Appointment}{p.}{struct_appointment} to be compared. \\
+\hline
+\mbox{\tt in}  & {\em b} & \doxyref{Appointment}{p.}{struct_appointment} to be compared. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $<$0} & a is before b \\
+\hline
+{\em 0} & a is equal to b \\
+\hline
+{\em $>$0} & a is after b \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line {\bf 154} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Conflict\+In\+List@{Conflict\+In\+List}}
+\index{Conflict\+In\+List@{Conflict\+In\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Conflict\+In\+List}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment\+List}$\ast$ Conflict\+In\+List (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{const struct {\bf Appointment} $\ast$}]{item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_ab7cd7c27d342ebf08bc5a8bfe6d4c0ef}
+
+
+Check whether the the new appointment is conflict with the existing appointments that are already in the list. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em list} & The destination appointment list. \\
+\hline
+\mbox{\tt in}  & {\em new\+Item} & The item that needs to add into the list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 246} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Create\+Appointment@{Create\+Appointment}}
+\index{Create\+Appointment@{Create\+Appointment}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Create\+Appointment}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment}$\ast$ Create\+Appointment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a2b5971373f06fddb3b3a805eed6fbf32}
+
+
+Create a appointment and init the value. 
+
+
+
+Definition at line {\bf 46} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Create\+Appointment\+List@{Create\+Appointment\+List}}
+\index{Create\+Appointment\+List@{Create\+Appointment\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Create\+Appointment\+List}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment\+List}$\ast$ Create\+Appointment\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a11707d2a6167706c5321e338f38dc2c0}
+
+
+Create a appointment list and init the value. 
+
+
+
+Definition at line {\bf 32} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Get\+Appointment\+By\+Id@{Get\+Appointment\+By\+Id}}
+\index{Get\+Appointment\+By\+Id@{Get\+Appointment\+By\+Id}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Get\+Appointment\+By\+Id}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment}$\ast$ Get\+Appointment\+By\+Id (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a081593ee796e57732b3df3d65c82389b}
+
+
+Return the appointment that match the id in the list. 
+
+
+
+Definition at line {\bf 261} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Is\+Conflict@{Is\+Conflict}}
+\index{Is\+Conflict@{Is\+Conflict}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Is\+Conflict}]{\setlength{\rightskip}{0pt plus 5cm}int Is\+Conflict (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment} $\ast$}]{a, }
+\item[{const struct {\bf Appointment} $\ast$}]{b}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_aecb74e3a6b71c6580a4d68c74e1fcfb3}
+
+
+Check whether if two appointments have time conflict. 
+
+
+
+Definition at line {\bf 226} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Is\+Conflict\+In\+List@{Is\+Conflict\+In\+List}}
+\index{Is\+Conflict\+In\+List@{Is\+Conflict\+In\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Is\+Conflict\+In\+List}]{\setlength{\rightskip}{0pt plus 5cm}int Is\+Conflict\+In\+List (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{const struct {\bf Appointment} $\ast$}]{item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a33343f4cce4a41904a745179053575c1}
+
+
+Check whether if the appointment item have conflict with the list. 
+
+
+
+Definition at line {\bf 232} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Print\+Appointment@{Print\+Appointment}}
+\index{Print\+Appointment@{Print\+Appointment}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Print\+Appointment}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Appointment (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment} $\ast$}]{item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_acf5ed6bf8d242fefcd70429ddfe8a2c9}
+
+
+Print out the appointment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & \doxyref{Appointment}{p.}{struct_appointment} to be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 191} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Print\+Appointment\+List@{Print\+Appointment\+List}}
+\index{Print\+Appointment\+List@{Print\+Appointment\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Print\+Appointment\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Appointment\+List (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf Appointment\+List} $\ast$}]{list}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a9ea5aa7d7b9b78cd3eb8c6869bedb3d7}
+
+
+Print out the appointment list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \doxyref{Appointment}{p.}{struct_appointment} list to be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line {\bf 216} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Remove\+Item\+From\+List@{Remove\+Item\+From\+List}}
+\index{Remove\+Item\+From\+List@{Remove\+Item\+From\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Remove\+Item\+From\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Remove\+Item\+From\+List (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{list, }
+\item[{const struct {\bf Appointment} $\ast$}]{item}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_a4b5703eec380555a637402b7eb261144}
+
+
+Remove an item from the list. Items should be unique inside the list. Delete if the two item have the same id. 
+
+
+
+Definition at line {\bf 159} of file {\bf appointment\+\_\+list.\+c}.
+
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Remove\+List\+From\+List@{Remove\+List\+From\+List}}
+\index{Remove\+List\+From\+List@{Remove\+List\+From\+List}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Remove\+List\+From\+List}]{\setlength{\rightskip}{0pt plus 5cm}void Remove\+List\+From\+List (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Appointment\+List} $\ast$}]{ori\+\_\+list, }
+\item[{const struct {\bf Appointment\+List} $\ast$}]{del\+\_\+list}
+\end{DoxyParamCaption}
+)}\label{appointment__list_8c_af53797e1c5ab2600aecbcb799296b0f0}
+
+
+Remove a list of items from the list. Items should be unique inside the list. Delete if the two item have the same id. 
+
+
+
+Definition at line {\bf 181} of file {\bf appointment\+\_\+list.\+c}.
+
+
+
+\subsection{Variable Documentation}
+\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}!Appointment\+Type\+Str@{Appointment\+Type\+Str}}
+\index{Appointment\+Type\+Str@{Appointment\+Type\+Str}!appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+\subsubsection[{Appointment\+Type\+Str}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Appointment\+Type\+Str[$\,$]}\label{appointment__list_8c_a699f36dc4b571d68507c02bbf52e0444}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{[STUDY] = \textcolor{stringliteral}{"Study"}, [ASSIGNMENT] = \textcolor{stringliteral}{"Assignment"},
+    [PROJECT] = \textcolor{stringliteral}{"Project"}, [GATHERING] = \textcolor{stringliteral}{"Gathering"}\}
+\end{DoxyCode}
+For printing 
+
+Definition at line {\bf 26} of file {\bf appointment\+\_\+list.\+c}.
+

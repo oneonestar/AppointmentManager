@@ -1,0 +1,66 @@
+\section{user.\+c}
+\label{user_8c_source}\index{user.\+c@{user.\+c}}
+
+\begin{DoxyCode}
+00001 
+00022 \textcolor{preprocessor}{#include <string.h>}
+00023 \textcolor{preprocessor}{#include <ctype.h>}
+00024 \textcolor{preprocessor}{#include <stdio.h>}
+00025 
+00026 \textcolor{preprocessor}{#include "user.h"}
+00027 \textcolor{preprocessor}{#include "appointment_list.h"}
+00028 
+00029 \textcolor{keywordtype}{int} strcicmp(\textcolor{keywordtype}{char} \textcolor{keyword}{const} *a, \textcolor{keywordtype}{char} \textcolor{keyword}{const} *b)
+00030 \{
+00031     \textcolor{keywordflow}{for} (;; a++, b++) \{
+00032         \textcolor{keywordtype}{int} d = tolower(*a) - tolower(*b);
+00033         \textcolor{keywordflow}{if} (d != 0 || !*a)
+00034             \textcolor{keywordflow}{return} d;
+00035     \}
+00036 \}
+00037 
+00038 \textcolor{keywordtype}{int} GetUserID(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *username)
+00039 \{
+00040     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00041         \textcolor{keywordflow}{if} (!strcicmp(user[i].username, username))
+00042             \textcolor{keywordflow}{return} i;
+00043     \textcolor{keywordflow}{return} -1;
+00044 \}
+00045 
+00046 
+00047 
+00048 \textcolor{keywordtype}{void} PrintAccepted(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user)
+00049 \{
+00050     printf(\textcolor{stringliteral}{"%s, you have %d appointments.\(\backslash\)n"}, user->username, user->accepted->
+      count);
+00051     PrintAppointmentList(user->accepted);
+00052 \}
+00053 
+00054 
+00055 
+00056 \textcolor{keywordtype}{void} PrintRejected(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user)
+00057 \{
+00058     printf(\textcolor{stringliteral}{"%s, you have %d appointments rejected.\(\backslash\)n"}, user->username, user->
+      rejected->count);
+00059     PrintAppointmentList(user->rejected);
+00060 \}
+00061 
+00062 
+00063 \textcolor{keywordtype}{void} PrintAllUser()
+00064 \{
+00065     printf(\textcolor{stringliteral}{"***Appointment Schedule – ACCEPTED ***\(\backslash\)n\(\backslash\)n"});
+00066     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00067     \{
+00068         PrintAccepted(&user[i]);
+00069     \}
+00070     printf(\textcolor{stringliteral}{"   -End-\(\backslash\)n"});
+00071     printf(\textcolor{stringliteral}{"===========================================================================\(\backslash\)n"});
+00072     printf(\textcolor{stringliteral}{"***Appointment Schedule – REJECTED ***\(\backslash\)n\(\backslash\)n"});
+00073     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00074     \{\
+00075 		PrintRejected(&user[i]);
+00076     \}
+00077     printf(\textcolor{stringliteral}{"   -End-\(\backslash\)n"});
+00078     printf(\textcolor{stringliteral}{"===========================================================================\(\backslash\)n"});
+00079 \}
+\end{DoxyCode}

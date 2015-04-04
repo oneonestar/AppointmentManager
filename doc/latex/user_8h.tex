@@ -1,0 +1,161 @@
+\section{user.\+h File Reference}
+\label{user_8h}\index{user.\+h@{user.\+h}}
+
+
+Handling each users.  
+
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf User}
+\begin{DoxyCompactList}\small\item\em Store the basic information of the user and the appointments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}~10
+\item 
+\#define {\bf M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}~31
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf Get\+User\+I\+D} (const char $\ast$username)
+\begin{DoxyCompactList}\small\item\em Return the user id that have the same username. \end{DoxyCompactList}\item 
+void {\bf Print\+Accepted} (const struct {\bf User} $\ast${\bf user})
+\begin{DoxyCompactList}\small\item\em Print the accepted list for user. \end{DoxyCompactList}\item 
+void {\bf Print\+Rejected} (const struct {\bf User} $\ast${\bf user})
+\begin{DoxyCompactList}\small\item\em Print the rejected list for user. \end{DoxyCompactList}\item 
+void {\bf Print\+All\+User} ()
+\begin{DoxyCompactList}\small\item\em Print the accepted \& reject list for all users. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf User} {\bf user} [{\bf U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}]
+\item 
+int {\bf Num\+Of\+User}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handling each users. 
+
+\begin{DoxyAuthor}{Author}
+oneonestar {\tt oneonestar@gmail.\+com} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+2015
+\end{DoxyCopyright}
+\subsection{L\+I\+C\+E\+N\+S\+E}\label{user_8h_LICENSE}
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details. You should have received a copy of the G\+N\+U General Public License along with this program. If not, see {\tt http\+://www.\+gnu.\+org/licenses/}. 
+
+Definition in file {\bf user.\+h}.
+
+
+
+\subsection{Macro Definition Documentation}
+\index{user.\+h@{user.\+h}!M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E@{M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}}
+\index{M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E@{M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}!user.\+h@{user.\+h}}
+\subsubsection[{M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E~31}\label{user_8h_a2d9316e742860ef57fe46a27e67d5efe}
+Maximum length of the username, 30 for the name and 1 for the null. 
+
+Definition at line {\bf 34} of file {\bf user.\+h}.
+
+\index{user.\+h@{user.\+h}!U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R@{U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}}
+\index{U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R@{U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}!user.\+h@{user.\+h}}
+\subsubsection[{U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R~10}\label{user_8h_a29710a608b9d13cff84765a2a195b6ec}
+The number of users is from 3 to 10, so maximum is 10. 
+
+Definition at line {\bf 28} of file {\bf user.\+h}.
+
+
+
+\subsection{Function Documentation}
+\index{user.\+h@{user.\+h}!Get\+User\+I\+D@{Get\+User\+I\+D}}
+\index{Get\+User\+I\+D@{Get\+User\+I\+D}!user.\+h@{user.\+h}}
+\subsubsection[{Get\+User\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}int Get\+User\+I\+D (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{username}
+\end{DoxyParamCaption}
+)}\label{user_8h_af2f23f139dbacb2a0e94029784c22ccf}
+
+
+Return the user id that have the same username. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & The username that are used to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The user id that have the same username. Return -\/1 if user is not found. 
+\end{DoxyReturn}
+
+
+Definition at line {\bf 38} of file {\bf user.\+c}.
+
+\index{user.\+h@{user.\+h}!Print\+Accepted@{Print\+Accepted}}
+\index{Print\+Accepted@{Print\+Accepted}!user.\+h@{user.\+h}}
+\subsubsection[{Print\+Accepted}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Accepted (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}\label{user_8h_a1214e8672d5a6d823eb2934cf5a82d0b}
+
+
+Print the accepted list for user. 
+
+
+
+Definition at line {\bf 48} of file {\bf user.\+c}.
+
+\index{user.\+h@{user.\+h}!Print\+All\+User@{Print\+All\+User}}
+\index{Print\+All\+User@{Print\+All\+User}!user.\+h@{user.\+h}}
+\subsubsection[{Print\+All\+User}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+All\+User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{user_8h_a393641d36b97cdf5764c257c9c259734}
+
+
+Print the accepted \& reject list for all users. 
+
+
+
+Definition at line {\bf 63} of file {\bf user.\+c}.
+
+\index{user.\+h@{user.\+h}!Print\+Rejected@{Print\+Rejected}}
+\index{Print\+Rejected@{Print\+Rejected}!user.\+h@{user.\+h}}
+\subsubsection[{Print\+Rejected}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Rejected (
+\begin{DoxyParamCaption}
+\item[{const struct {\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}\label{user_8h_afb40dc85cc1d4b23f9a1a95ef4abc6f5}
+
+
+Print the rejected list for user. 
+
+
+
+Definition at line {\bf 56} of file {\bf user.\+c}.
+
+
+
+\subsection{Variable Documentation}
+\index{user.\+h@{user.\+h}!Num\+Of\+User@{Num\+Of\+User}}
+\index{Num\+Of\+User@{Num\+Of\+User}!user.\+h@{user.\+h}}
+\subsubsection[{Num\+Of\+User}]{\setlength{\rightskip}{0pt plus 5cm}int Num\+Of\+User}\label{user_8h_aac90b1eed59a0a4b55ab8735c1561e6a}
+Global variable storing current number of user. 
+
+Definition at line {\bf 55} of file {\bf user.\+h}.
+
+\index{user.\+h@{user.\+h}!user@{user}}
+\index{user@{user}!user.\+h@{user.\+h}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf User} user[{\bf U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}]}\label{user_8h_ab69c72da1b6bf385854fb5213ae53b36}
+Global variable storing the user data. 
+
+Definition at line {\bf 50} of file {\bf user.\+h}.
+

@@ -1,0 +1,281 @@
+\section{main.\+c}
+\label{main_8c_source}\index{main.\+c@{main.\+c}}
+
+\begin{DoxyCode}
+00001 
+00023 \textcolor{preprocessor}{#include <ctype.h>}
+00024 \textcolor{preprocessor}{#include <math.h>}
+00025 \textcolor{preprocessor}{#include <signal.h>}
+00026 \textcolor{preprocessor}{#include <stdio.h>}
+00027 \textcolor{preprocessor}{#include <stdlib.h>}
+00028 \textcolor{preprocessor}{#include <string.h>}
+00029 \textcolor{preprocessor}{#include <time.h>}
+00030 \textcolor{preprocessor}{#include <unistd.h>}
+00031 \textcolor{preprocessor}{#include <sys/wait.h>}
+00032 \textcolor{preprocessor}{#include <errno.h>}
+00033 
+00034 \textcolor{preprocessor}{#include "appointment_list.h"}
+00035 \textcolor{preprocessor}{#include "scheduler.h"}
+00036 \textcolor{preprocessor}{#include "user.h"}
+00037 
+00038 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} NumOfUser;
+00039 \textcolor{keyword}{extern} \textcolor{keyword}{struct }User user[USER_NUMBER];
+00040 
+00041 \textcolor{keyword}{struct }AppointmentList *inputList;
+00042 
+00043 \textcolor{keywordtype}{void} HandleInput(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *line);
+00044 \textcolor{keywordtype}{void} HandleSchedule(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *algorithm);
+00045 \textcolor{keywordtype}{void} inputLoop(FILE *stream);
+00046 
+00047 \textcolor{keywordtype}{void} HandleSchedule(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *algorithm)
+00048 \{
+00049     \textcolor{keywordflow}{if}(inputList->count == 0)
+00050     \{
+00051         printf(\textcolor{stringliteral}{"Empty timetable.\(\backslash\)n"});
+00052         \textcolor{keywordflow}{return};
+00053     \}
+00054 
+00055 \textcolor{preprocessor}{#ifdef NO\_FORK}
+00056     \textcolor{keyword}{struct }Summary *summary = NULL;
+00057     \textcolor{comment}{//TODO: remove items from list}
+00058     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00059     \{
+00060         user[i].accepted = CreateAppointmentList();
+00061         user[i].rejected = CreateAppointmentList();
+00062     \}
+00063     \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-fcfs"}))
+00064         summary = Schedual_FCFS(inputList);
+00065     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-prio"}))
+00066         summary = Schedual_PRIO(inputList);
+00067     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-opti"}))
+00068         summary = Schedual_OPTI(inputList);
+00069     \textcolor{keywordflow}{else}
+00070     \{
+00071         printf(\textcolor{stringliteral}{"Unknown scheduler.\(\backslash\)n"});
+00072         \textcolor{keywordflow}{return};
+00073     \}
+00074     PrintAllUser();
+00075     PrintSummary(summary);
+00076 \textcolor{preprocessor}{#else}
+00077     \textcolor{keyword}{struct }Summary *summary;
+00078     \textcolor{keywordtype}{int} fd[2];
+00079     \textcolor{keywordflow}{if} (pipe(fd) < 0) \{
+00080         printf(\textcolor{stringliteral}{"Pipe creation error\(\backslash\)n"});
+00081         exit(EXIT\_FAILURE);
+00082     \}
+00083 
+00084     \textcolor{keywordtype}{int} ret=fork();
+00085     \textcolor{keywordflow}{if} (ret < 0)
+00086     \{
+00087         printf(\textcolor{stringliteral}{"error in fork!"});
+00088         exit(EXIT\_FAILURE);
+00089     \}
+00090     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ret == 0) \{    \textcolor{comment}{//Child}
+00091         \textcolor{comment}{//TODO: remove items from list}
+00092         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00093         \{
+00094             user[i].accepted = CreateAppointmentList();
+00095             user[i].rejected = CreateAppointmentList();
+00096         \}
+00097         \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-fcfs"}))
+00098             summary = Schedual_FCFS(inputList);
+00099         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-prio"}))
+00100             summary = Schedual_PRIO(inputList);
+00101         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(algorithm, \textcolor{stringliteral}{"-opti"}))
+00102             summary = Schedual_OPTI(inputList);
+00103         \textcolor{keywordflow}{else}
+00104         \{
+00105             printf(\textcolor{stringliteral}{"Unknown scheduler.\(\backslash\)n"});
+00106             \textcolor{keywordflow}{return};
+00107         \}
+00108         PrintAllUser();
+00109         \textcolor{keywordflow}{if}(write(fd[1], summary, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary)) < 0)
+00110             printf(\textcolor{stringliteral}{"Oh dear, something went wrong with write()! %s\(\backslash\)n"}, strerror(errno));
+00111         \_exit(EXIT\_SUCCESS);
+00112     \}
+00113 
+00114     summary = (\textcolor{keyword}{struct }Summary *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
+00115     \textcolor{keywordflow}{if}(read(fd[0], summary, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary)) < 0)
+00116             printf(\textcolor{stringliteral}{"Oh dear, something went wrong with read()! %s\(\backslash\)n"}, strerror(errno));
+00117     wait(NULL);
+00118     PrintSummary(summary);
+00119 \textcolor{preprocessor}{#endif}
+00120 \}
+00121 
+00122 \textcolor{keywordtype}{void} HandleInput(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *line)
+00123 \{
+00124     \textcolor{keywordtype}{char} command[25];
+00125     \textcolor{keywordtype}{char} caller[MAX_USERNAME];
+00126     \textcolor{keywordtype}{int} year, month, day;
+00127     \textcolor{keywordtype}{int} hour, minutes;
+00128     \textcolor{keywordtype}{float} duration;
+00129     \textcolor{keywordtype}{int} callee\_count = 0;
+00130     \textcolor{keywordtype}{char} *pch;
+00131     
+00132     \textcolor{keyword}{struct }Appointment *item = CreateAppointment();
+00133     \textcolor{keywordtype}{char} myLine[255];
+00134     strcpy(myLine, line);
+00135 
+00136     \textcolor{comment}{//parse the command}
+00137     pch = strtok(myLine, \textcolor{stringliteral}{" \(\backslash\)n"});
+00138     \textcolor{keywordflow}{if}(!pch)
+00139         \textcolor{keywordflow}{goto} UNKNOWN;   \textcolor{comment}{//eg. strtok("\(\backslash\)n", " \(\backslash\)n") will return null from strtok, goto unknown command}
+00140     strcpy(command, pch);
+00141     \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"addStudy"}))
+00142         item->type = STUDY;
+00143     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"addAssignment"}))
+00144         item->type = ASSIGNMENT;
+00145     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"addProject"}))
+00146         item->type = PROJECT;
+00147     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"addGathering"}))
+00148         item->type = GATHERING;
+00149     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"addBatch"}))
+00150     \{
+00151         pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00152         \textcolor{keywordtype}{char} filename[255];
+00153         strcpy(filename, pch);
+00154         FILE *f = fopen(filename+1, \textcolor{stringliteral}{"r"});   \textcolor{comment}{//offset +1 to remove the '-'}
+00155         \textcolor{keywordflow}{if}(!f)
+00156         \{
+00157             fprintf(stderr, \textcolor{stringliteral}{"Failed to open file %s.\(\backslash\)n"}, filename);
+00158             \textcolor{keywordflow}{return};
+00159             \textcolor{comment}{// exit(EXIT\_FAILURE);}
+00160         \}
+00161         inputLoop(f);
+00162         \textcolor{keywordflow}{return};
+00163     \}
+00164     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"printSchd"}))
+00165     \{
+00166         pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00167         \textcolor{keywordtype}{char} algorithmStr[30];
+00168         strcpy(algorithmStr, pch);
+00169         HandleSchedule(algorithmStr);
+00170         \textcolor{keywordflow}{return};
+00171     \}
+00172     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!strcmp(command, \textcolor{stringliteral}{"endProgram"}))
+00173     \{
+00174         printf(\textcolor{stringliteral}{"Received end program command.\(\backslash\)n"});
+00175         exit(EXIT\_SUCCESS);
+00176     \}
+00177     \textcolor{keywordflow}{else}
+00178     \{
+00179         UNKNOWN:
+00180         printf(\textcolor{stringliteral}{"Unknown command: %s"}, line);
+00181         \textcolor{keywordflow}{return};
+00182     \}
+00183 
+00184     pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00185     strcpy(caller, pch+1);
+00186 
+00187     pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00188     sscanf(pch, \textcolor{stringliteral}{"%d-%d-%d"}, &year, &month, &day);
+00189     
+00190     pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00191     sscanf(pch, \textcolor{stringliteral}{"%d:%d"}, &hour, &minutes);
+00192     
+00193     pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"}); duration = atof(pch);
+00194 
+00195     \textcolor{keywordflow}{while}(1)
+00196     \{
+00197         pch = strtok(NULL, \textcolor{stringliteral}{" \(\backslash\)n"});
+00198         \textcolor{keywordflow}{if}(!pch)
+00199             \textcolor{keywordflow}{break};
+00200         \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = GetUserID(pch);
+00201         item->callee_id[callee\_count++] = id;
+00202     \}
+00203 
+00204     item->caller_id = GetUserID(caller);
+00205     \textcolor{comment}{//time}
+00206     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
+00207     memset(&timeinfo, 0, \textcolor{keyword}{sizeof}(timeinfo));
+00208     timeinfo.tm\_isdst = -1;
+00209     timeinfo.tm\_year = year - 1900;
+00210     timeinfo.tm\_mon = month - 1;
+00211     timeinfo.tm\_mday = day;
+00212     \textcolor{comment}{//start time}
+00213     \textcolor{comment}{//convert ot half hour base}
+00214     timeinfo.tm\_hour = hour;
+00215     \textcolor{keywordflow}{if}(minutes>=0 && minutes <= 30)
+00216         timeinfo.tm\_min = 0;
+00217     \textcolor{keywordflow}{else}
+00218         timeinfo.tm\_min = 30;
+00219 
+00220     timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
+00221     item->start = mktime(&timeinfo\_tmp);
+00222     \textcolor{comment}{//convert duration to end time}
+00223     \textcolor{keywordtype}{double} \_;
+00224     \textcolor{keywordtype}{double} fractional = modf(duration, &\_);
+00225     minutes += fractional*60;
+00226     hour = hour+(int)duration;
+00227     \textcolor{keywordflow}{if}(minutes>=60)
+00228         hour++;
+00229     minutes %= 60;
+00230 
+00231     timeinfo.tm\_hour = hour;
+00232     \textcolor{keywordflow}{if}(minutes>0 && minutes <= 30)
+00233         timeinfo.tm\_min = 0;
+00234     \textcolor{keywordflow}{else}
+00235         timeinfo.tm\_min = 30;
+00236     item->end = mktime(&timeinfo);
+00237 
+00238     item->id = inputList->count;
+00239     AddAppointment(inputList, item);
+00240     printf(\textcolor{stringliteral}{"-> [Pending]\(\backslash\)n"});
+00241 \}
+00242 
+00243 
+00244 \textcolor{keywordtype}{void} inputLoop(FILE *stream)
+00245 \{
+00246     \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_CHAR = 255;
+00247     \textcolor{keywordtype}{char} line[MAX\_CHAR];
+00248     \textcolor{keywordtype}{char} *return\_val;
+00249     \textcolor{keywordflow}{while}(1)
+00250     \{
+00251         printf(\textcolor{stringliteral}{"Please enter appointment:\(\backslash\)n"});
+00252         return\_val = fgets(line, MAX\_CHAR, stream);
+00253         \textcolor{keywordflow}{if}(!return\_val)
+00254         \{
+00255             \textcolor{keywordflow}{if}(feof(stream))
+00256             \{
+00257                 printf(\textcolor{stringliteral}{"Received EOF.\(\backslash\)n"});
+00258                 \textcolor{keywordflow}{return};
+00259             \}
+00260             \textcolor{keywordflow}{else}
+00261             \{
+00262                 fprintf(stderr, \textcolor{stringliteral}{"IO error, existing program.\(\backslash\)n"});
+00263                 \textcolor{keywordflow}{return};
+00264                 \textcolor{comment}{// exit(EXIT\_FAILURE);}
+00265             \}
+00266         \}
+00267         HandleInput(line);
+00268     \}
+00269 \}
+00270 
+00271 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+00272 \{
+00273     \textcolor{keywordflow}{if} (argc < 4 || argc > 11)
+00274     \{
+00275         fprintf(stderr, \textcolor{stringliteral}{"Error: The number of users should between 3 and 10.\(\backslash\)n"});
+00276         \textcolor{keywordflow}{return} EXIT\_FAILURE;
+00277     \}
+00278     NumOfUser = argc - 1;
+00279     \textcolor{comment}{//Initialize each user in struct user[];}
+00280     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00281     \{
+00282         \textcolor{keywordflow}{if}(GetUserID(argv[i+1]) != -1)
+00283         \{
+00284             printf(\textcolor{stringliteral}{"Duplicate names of users!\(\backslash\)n"});
+00285             exit(EXIT\_FAILURE);
+00286         \}
+00287         strcpy(user[i].username, argv[i+1]);
+00288         user[i].username[0] = toupper(user[i].username[0]);
+00289         user[i].accepted = CreateAppointmentList();
+00290         user[i].rejected = CreateAppointmentList();
+00291     \}
+00292     inputList = CreateAppointmentList();
+00293 
+00294     printf(\textcolor{stringliteral}{"~~WELCOME TO AMR~~\(\backslash\)n"});
+00295     inputLoop(stdin);
+00296     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
+00297 \}
+\end{DoxyCode}

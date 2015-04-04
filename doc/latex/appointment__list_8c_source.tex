@@ -1,0 +1,268 @@
+\section{appointment\+\_\+list.\+c}
+\label{appointment__list_8c_source}\index{appointment\+\_\+list.\+c@{appointment\+\_\+list.\+c}}
+
+\begin{DoxyCode}
+00001 
+00022 \textcolor{preprocessor}{#include "appointment_list.h"}
+00023 \textcolor{preprocessor}{#include "user.h"}
+00024 
+00026 \textcolor{keyword}{const} \textcolor{keywordtype}{char} *AppointmentTypeStr[] = \{[STUDY] = \textcolor{stringliteral}{"Study"}, [ASSIGNMENT] = \textcolor{stringliteral}{"Assignment"},
+00027     [PROJECT] = \textcolor{stringliteral}{"Project"}, [GATHERING] = \textcolor{stringliteral}{"Gathering"}\};
+00028 
+00029 \textcolor{comment}{/***************************************************}
+00030 \textcolor{comment}{ * Implementation}
+00031 \textcolor{comment}{ ***************************************************/}
+00032 \textcolor{keyword}{struct }AppointmentList* CreateAppointmentList()
+00033 \{
+00034     \textcolor{keyword}{struct }AppointmentList *list = (\textcolor{keyword}{struct }AppointmentList*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} 
+      AppointmentList));
+00035     \textcolor{keywordflow}{if}(!list)
+00036     \{
+00037         fprintf(stderr, \textcolor{stringliteral}{"Failed to allocate memory.\(\backslash\)n"});
+00038         exit(EXIT\_FAILURE);
+00039     \}
+00040     list->count = 0;
+00041     list->head = NULL;
+00042     list->tail = NULL;
+00043     \textcolor{keywordflow}{return} list;
+00044 \}
+00045 
+00046 \textcolor{keyword}{struct }Appointment* CreateAppointment()
+00047 \{
+00048     \textcolor{keyword}{struct }Appointment *item = (\textcolor{keyword}{struct }Appointment*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} 
+      Appointment));
+00049     \textcolor{keywordflow}{if}(!item)
+00050     \{
+00051         fprintf(stderr, \textcolor{stringliteral}{"Failed to allocate memory.\(\backslash\)n"});
+00052         exit(EXIT\_FAILURE);
+00053     \}
+00054     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
+00055         item->callee_id[i] = -1;
+00056     item->is_accepted = 0;
+00057     item->id = -1;
+00058     item->rescheduled = 0;
+00059     item->prev = NULL;
+00060     item->next = NULL;
+00061     \textcolor{keywordflow}{return} item;
+00062 \}
+00063 
+00064 \textcolor{keywordtype}{void} AddAppointment(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *newItem)
+00065 \{
+00066     \textcolor{keyword}{struct }Appointment *item = CreateAppointment();
+00067     *item = *newItem;
+00068     item->next = item->prev = 0;
+00069     \textcolor{keywordflow}{if}(!list->head) \textcolor{comment}{//if the list is empty}
+00070     \{
+00071         list->head = item;
+00072         list->tail = item;
+00073     \}
+00074     \textcolor{keywordflow}{else}
+00075     \{
+00076         list->tail->next = item;
+00077     \}
+00078     item->prev = list->tail;
+00079     list->tail = item;
+00080     list->count++;
+00081 \}
+00082 
+00083 \textcolor{keywordtype}{void} AddAppointmentOrdered(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *newItem)
+00084 \{
+00085     \textcolor{keyword}{struct }Appointment *item = CreateAppointment();
+00086     *item = *newItem;
+00087     item->next = item->prev = 0;
+00088     \textcolor{keyword}{struct }Appointment *ptr = list->head;
+00089     \textcolor{comment}{//if the list is empty}
+00090     \textcolor{keywordflow}{if}(!ptr)
+00091     \{
+00092         list->head = item;
+00093         list->tail = item;
+00094     \}
+00095     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(CompareAppointment(item, ptr)<0)    \textcolor{comment}{//if insert at the head}
+00096     \{
+00097         \textcolor{keywordflow}{if}(!list->head)
+00098             list->head->prev = item;
+00099         item->next = list->head;
+00100         list->head = item;
+00101     \}
+00102     \textcolor{keywordflow}{else}    \textcolor{comment}{//insert at middle or at the tail}
+00103     \{
+00104         \textcolor{keywordflow}{while}(ptr->next)    \textcolor{comment}{//find the insertion position}
+00105         \{
+00106             \textcolor{keywordflow}{if}(difftime(item->start, ptr->next->start)<0)
+00107                 \textcolor{keywordflow}{break};
+00108             ptr = ptr->next;
+00109         \}
+00110         \textcolor{keywordflow}{if}(!ptr)    \textcolor{comment}{//insert at the tail}
+00111         \{
+00112             ptr = list->tail;
+00113             list->tail = item;
+00114         \}
+00115         item->prev = ptr;   \textcolor{comment}{//insert after ptr}
+00116         item->next = ptr->next;
+00117         \textcolor{keywordflow}{if}(item->next)
+00118             item->next->prev = item;
+00119         ptr->next = item;
+00120     \}
+00121     list->count++;
+00122 \}
+00123 
+00124 \textcolor{keywordtype}{void} AddAppointmentFromList(\textcolor{keyword}{struct} AppointmentList *dst\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *src\_list)
+00125 \{
+00126     \textcolor{keyword}{struct }Appointment *newItem = src\_list->head;
+00127     \textcolor{keywordflow}{while}(newItem)
+00128     \{
+00129         AddAppointment(dst\_list, newItem);
+00130         newItem = newItem->next;
+00131     \}
+00132 \}
+00133 
+00134 \textcolor{keywordtype}{void} AddAppointmentOrderedFromList(\textcolor{keyword}{struct} AppointmentList *dst\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *src\_list)
+00135 \{
+00136     \textcolor{keyword}{struct }Appointment *newItem = src\_list->head;
+00137     \textcolor{keywordflow}{while}(newItem)
+00138     \{
+00139         AddAppointmentOrdered(dst\_list, newItem);
+00140         newItem = newItem->next;
+00141     \}
+00142 \}
+00143 
+00144 \textcolor{keywordtype}{int} CompareAppointment(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *b)
+00145 \{
+00146     \textcolor{keywordflow}{if}(difftime(a->start, b->start)<0)
+00147         \textcolor{keywordflow}{return} -1;  \textcolor{comment}{//a before b}
+00148     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(difftime(a->start, b->start)==0)
+00149         \textcolor{keywordflow}{return} difftime(a->end, b->end);
+00150     \textcolor{keywordflow}{else}
+00151         \textcolor{keywordflow}{return} 1;
+00152 \}
+00153 
+00154 \textcolor{keywordtype}{int} CompareAppointmentPriority(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *b)
+00155 \{
+00156     \textcolor{keywordflow}{return} a->type - b->type;
+00157 \}
+00158 
+00159 \textcolor{keywordtype}{void} RemoveItemFromList(\textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00160 \{
+00161     \textcolor{keyword}{struct }Appointment *delItem = list->head;
+00162     \textcolor{keywordflow}{while}(delItem)
+00163     \{
+00164         \textcolor{keywordflow}{if}(delItem->id == item->id)
+00165         \{
+00166             \textcolor{keywordflow}{if}(!delItem->prev)  \textcolor{comment}{//if prev is null, first item in list}
+00167                 list->head = delItem->next;
+00168             \textcolor{keywordflow}{else}
+00169                 delItem->prev->next = delItem->next;
+00170             \textcolor{keywordflow}{if}(!delItem->next)  \textcolor{comment}{//if next is null, last item in list}
+00171                 list->tail = delItem->prev;
+00172             \textcolor{keywordflow}{else}
+00173                 delItem->next->prev = delItem->prev;
+00174             list->count--;
+00175             \textcolor{keywordflow}{return};
+00176         \}
+00177         delItem = delItem->next;
+00178     \}
+00179 \}
+00180 
+00181 \textcolor{keywordtype}{void} RemoveListFromList(\textcolor{keyword}{struct} AppointmentList *ori\_list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      AppointmentList *del\_list)
+00182 \{
+00183     \textcolor{keyword}{struct }Appointment *delItem = del\_list->head;
+00184     \textcolor{keywordflow}{while}(delItem)
+00185     \{
+00186         RemoveItemFromList(ori\_list, delItem);
+00187         delItem = delItem->next;
+00188     \}
+00189 \}
+00190 
+00191 \textcolor{keywordtype}{void} PrintAppointment(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00192 \{
+00193     \textcolor{keyword}{struct }tm tm\_start, tm\_end;
+00194     memcpy(&tm\_start, localtime (&item->start), \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} tm));
+00195     memcpy(&tm\_end, localtime (&item->end), \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} tm));
+00196     printf(\textcolor{stringliteral}{"%d "}, item->id);
+00197     printf(\textcolor{stringliteral}{"%4d-%02d-%02d   %02d:%02d   %02d:%02d   %-12s "}, tm\_start.tm\_year+1900, tm\_start.tm\_mon+1, 
+      tm\_start.tm\_mday, tm\_start.tm\_hour,
+00198      tm\_start.tm\_min, tm\_end.tm\_hour, tm\_end.tm\_min, AppointmentTypeStr[item->
+      type]);
+00199     \textcolor{keywordflow}{if}(item->rescheduled)
+00200         printf(\textcolor{stringliteral}{"%-9c "},  \textcolor{charliteral}{'Y'});
+00201     \textcolor{keywordflow}{else}
+00202         printf(\textcolor{stringliteral}{"%-9c "}, \textcolor{charliteral}{'N'});
+00203     \textcolor{keywordflow}{if}(item->callee_id[0] == -1)
+00204         printf(\textcolor{stringliteral}{"-"});
+00205     \textcolor{keywordflow}{else}
+00206         printf(\textcolor{stringliteral}{"%s "}, user[item->caller_id].username);
+00207     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
+00208     \{
+00209         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
+00210             \textcolor{keywordflow}{break};
+00211         printf(\textcolor{stringliteral}{"%s "}, user[item->callee_id[i]].username);
+00212     \}
+00213     printf(\textcolor{stringliteral}{"\(\backslash\)n"});
+00214 \}
+00215 
+00216 \textcolor{keywordtype}{void} PrintAppointmentList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list)
+00217 \{
+00218     \textcolor{keyword}{struct }Appointment *ptr = list->head;
+00219     \textcolor{keywordflow}{while}(ptr!=NULL)
+00220     \{
+00221         PrintAppointment(ptr);
+00222         ptr = ptr->next;
+00223     \}
+00224 \}
+00225 
+00226 \textcolor{keywordtype}{int} IsConflict(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *a, \textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *b)
+00227 \{
+00228     \textcolor{keywordflow}{return} !(difftime(a->end, b->start)<=0 ||   \textcolor{comment}{//a before b}
+00229         difftime(a->start, b->end)>=0);     \textcolor{comment}{//a after b}
+00230 \}
+00231 
+00232 \textcolor{keywordtype}{int} IsConflictInList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *item)
+00233 \{
+00234     \textcolor{keywordflow}{if}(!list || !item)
+00235         \textcolor{keywordflow}{return} 0;
+00236     \textcolor{keyword}{struct }Appointment *ptr = list->head;
+00237     \textcolor{keywordflow}{while}(ptr)
+00238     \{
+00239         \textcolor{keywordflow}{if}(IsConflict(ptr, item))
+00240             \textcolor{keywordflow}{return} 1;
+00241         ptr = ptr->next;
+00242     \}
+00243     \textcolor{keywordflow}{return} 0;
+00244 \}
+00245 
+00246 \textcolor{keyword}{struct }AppointmentList* ConflictInList(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keyword}{const} \textcolor{keyword}{struct} 
+      Appointment *item)
+00247 \{
+00248     \textcolor{keywordflow}{if}(!list || !item)
+00249         \textcolor{keywordflow}{return} NULL;
+00250     \textcolor{keyword}{struct }AppointmentList *conflict\_list = CreateAppointmentList();
+00251     \textcolor{keyword}{struct }Appointment *ptr = list->head;
+00252     \textcolor{keywordflow}{while}(ptr)
+00253     \{
+00254         \textcolor{keywordflow}{if}(IsConflict(ptr, item))
+00255             AddAppointment(conflict\_list, ptr);
+00256         ptr = ptr->next;
+00257     \}
+00258     \textcolor{keywordflow}{return} conflict\_list;
+00259 \}
+00260 
+00261 \textcolor{keyword}{struct }Appointment* GetAppointmentById(\textcolor{keyword}{const} \textcolor{keyword}{struct} AppointmentList *list, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id})
+00262 \{
+00263     \textcolor{keywordflow}{if}(!list)
+00264         \textcolor{keywordflow}{return} NULL;
+00265     \textcolor{keyword}{struct }Appointment *ptr = list->head;
+00266     \textcolor{keywordflow}{while}(ptr)
+00267     \{
+00268         \textcolor{keywordflow}{if}(ptr->id == \textcolor{keywordtype}{id})
+00269             \textcolor{keywordflow}{return} ptr;
+00270         ptr = ptr->next;
+00271     \}
+00272     \textcolor{keywordflow}{return} NULL;
+00273 \}
+\end{DoxyCode}
