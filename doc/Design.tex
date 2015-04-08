@@ -31,6 +31,31 @@ a3paper% other options: a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6
 \newcommand{\In}{\textbf{in}\,}
 \algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
 
+\usepackage{color}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.87, 0.87, 0.87}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=,
+    %stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                
+    keepspaces=true,         
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    columns=fullflexible,
+}
+\lstset{style=mystyle}
+\lstset{language=Bash}
+
 \author{
 CHEUNG Wai Fai 13003551D\\
 POON Yat Sing 13040015D\\
@@ -70,7 +95,7 @@ Pipe is a mechanism in the OS which allows multiple processes communicate throug
 For the unnamed pipe, it is created with system call pipe(). Pipe allows parent and child communication and it’s created before fork(). A pipe itself allow two way communication. However, as OS cannot control which process read the output, it is danger to use one pipe to handle both read and write. We will close() the unused pipe to prevent accidental use.
 
 For the named pipe, it is actually a special file created by mkfifo() what multiple process can read and write at the same time. Those processes does not necessary in a parent and child relationship. The pipe name is assigned by the program. Several processes connect together with the same name. The disadvantage of using named pipe is it may create a security issue as anyone can read and write into the file as long as they have the name of the pipe.
-\subsection{Interprocess communication}
+\section{Process Scheduling}
 For the appointment scheduling in our system, we basically follow the concept of CPU scheduling. We focus on First Come First Serve (FCFS) and Priority Scheduling.
 \subsubsection{FCFS}
 For the FCFS, it basically accept and entertain the process that come earlier in time. In terms of CPU scheduling, the CPU will process the whole earlier coming process before entertaining the next one. The waiting process will queue according to their arrive time. Note that each process will be assigned a process ID. Normally process come earlier will have a smaller PID in UNIX/Linux. Which means a process with smaller PID will be processed first if 2 processes come at around the same time.
@@ -344,6 +369,10 @@ This scheduling algorithm will allocate the timeslot to the first appointment. T
 \State Move $Item_{new}$ to accepted list
 \end{algorithmic}
 \end{algorithm}
+\subsubsection{Performance Analysis:}
+First come first served algorithm is easy to implement. Also the execution time is fast compare to the other two scheduler. It is because when a new appointment is added into the timetable, it only needs to compare is there any time conflict between the existing one and the new one. It doesn't need to take care priority of the appointments.
+
+The drawback of this algorithm is that it it not intelligent. If some important appointment such as assignment has been added, the program may still allocate the time to the gathering. Also the timeslot usage will be poor because no re-scheduling has been done and the user needs to take care the time reallocation.
 \subsection{Priority}
 This scheduling algorithm will allocate the timeslot to the appointment which has the highest priority. The priority should follow the requirement documented in \autoref{Requirement:Priority}.
 \begin{algorithm}
@@ -373,7 +402,10 @@ This scheduling algorithm will allocate the timeslot to the appointment which ha
 \State Move $Item_{new}$ to accepted list
 \end{algorithmic}
 \end{algorithm}
+\subsubsection{Performance Analysis:}
+Priority has a slower execution time compare to FCFS. It is because it needs to calculate the priority in order to decide whether the new appointment should be accepted or not. It is more intelligent because the timeslot will be allocated to the more important jobs. But still the algorithm doesn't have a re-schedule function. Since we need to move the already accepted item to reject list, the algorithm will be a lot more complicated to implement.
 \subsection{Optimal}
+The optimal algorithm first allocate the timeslot using the priority scheduler to ensure the timeslot will be kept for the high priority appointments. After that, the algorithm will go through the rejected list and try to re-schedule them as much as possible. In our design, the rejected job will be reallocated between the day of the appointment and 3 days after that. If there are no available timeslot between this 3 days, this appointment will be rejected.
 \begin{algorithm}
 \caption{Optimal}\label{Psudo:Opti}
 \begin{algorithmic}
@@ -393,9 +425,50 @@ This scheduling algorithm will allocate the timeslot to the appointment which ha
 \EndFor
 \end{algorithmic}
 \end{algorithm}
+\subsubsection{Performance Analysis:}
+Compare to the above algorithms, this algorithm is most complicated and require the most computational time. Also, this is the most intelligent algorithm. Because it will first allow the high priority appointment to use the timeslot. Then it will go through the rejected appointments one-by-one and try to re-schedule the rejected appointments. Thus, this algorithm will have a higher timeslot usage rate. The user will be able to finish the important job first and then use the spare time for the lower priority job.
 \chapter{Implementation}
 \section{Software Structure}
+The program is divided into multiple modules. This can improve the readability and reusability of the code. Each module has a header file with comments to describe it's API. In this section, we will only describe the modules briefly. Please refer to the appendix for the detailed API documentation.
+\begin{enumerate}
+\item Appointment
+\item Scheduler
+\item User
+\item Main Input Loop
+\end{enumerate}
+\subsection{Appointment Module}
+This modules contain the \texttt{Appointment} and \texttt{AppointmentList} structure. Also, it contains the functions that are useful for handling these two structure. The list is a double-linked list. All the create, insert, delete and sorting algorithms done on \texttt{AppointmentList} are included in this module. This module is the fundamental part of the program and other modules heavily depends on this module. Also, we use the \texttt{AppointmentList} to store all the input appointments and the scheduled accept appointments.
+\subsection{User Module}
+This modules contain the \texttt{user} structure that are responsible for storing the important parts.
+\subsection{Scheduler Module}
+This modules contain the three scheduling algorithms. All the algrithm
+
+\subsection{Appointment Module}
+This modules contain the \texttt{Appointment} and \texttt{AppointmentList} structure. Also, it contains the functions that are useful for handling these two structure. The list is a double-linked list. All the create, insert, delete and sorting algorithms done on \texttt{AppointmentList} are included in this module. This module is the fundamental part of the program and other modules heavily depends on this module. Also, we use the \texttt{AppointmentList} to store all the input appointments and the scheduled accept appointments.
+\chapter{Testing}
 \chapter{Deployment}
 \section{Build}
+To compile the program:
+\begin{lstlisting}[language=bash,basicstyle=\ttfamily,keywordstyle=\bfseries]
+make
+\end{lstlisting}
+The executable program is located in \texttt{bin}.
+
+To clean up the object files:
+\begin{lstlisting}[language=bash,basicstyle=\ttfamily,keywordstyle=\bfseries]
+make clean
+\end{lstlisting}
+
+To clean up the object files and the executable file:
+\begin{lstlisting}[language=bash,basicstyle=\ttfamily,keywordstyle=\bfseries]
+make remove
+\end{lstlisting}
+
+To join the source files into one AMR.c file:
+\begin{lstlisting}[language=bash,basicstyle=\ttfamily,keywordstyle=\bfseries]
+make onefile
+\end{lstlisting}
+\appendix
 \chapter{Testing}
+\label{Appendix:Testing}
 \end{document}

@@ -25,7 +25,7 @@
 
 #include "scheduler.h"
 
-int IsAllAvailable(const struct Appointment *item)
+static int AllAvailable(const struct Appointment *item)
 {
 	if(!item)
 		return 0;
@@ -33,7 +33,7 @@ int IsAllAvailable(const struct Appointment *item)
 	//check caller timetable
 	temp_list = ConflictInList(user[item->caller_id].accepted, item);
 	if(temp_list->count)
-		return 0;
+		return item->caller_id;
 	//check callees timetable
 	for(int i=0; i<USER_NUMBER; i++)
 	{
@@ -41,12 +41,12 @@ int IsAllAvailable(const struct Appointment *item)
 			break;
 		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
 		if(temp_list->count)
-			return 0;
+			return item->callee_id[i];
 	}
-	return 1;
+	return -1;
 }
 
-int IsAllAvailablePriority(const struct Appointment *item)
+static int AllAvailablePriority(const struct Appointment *item)
 {
 	struct AppointmentList *temp_list;
 	struct Appointment *ptr;
@@ -56,7 +56,7 @@ int IsAllAvailablePriority(const struct Appointment *item)
 	while(ptr)
 	{
 		if(CompareAppointmentPriority(item, ptr)>=0)	//if item has equal or lower priority
-			return 0;	//not available
+			return item->caller_id;	//not available
 		ptr = ptr->next;
 	}
 	//check callees timetable
@@ -70,15 +70,16 @@ int IsAllAvailablePriority(const struct Appointment *item)
 		while(ptr)
 		{
 			if(CompareAppointmentPriority(item, ptr)>=0)	//if item has equal or lower priority
-				return 0;	//not available
+				return item->callee_id[i];	//not available
 			ptr = ptr->next;
 		}
 	}
-	return 1;	//available
+	return -1;	//available
 }
 
-void AddToAllAccept(const struct Appointment *item)
+static void AddToAllAccept(struct Appointment *item)
 {
+	strcpy(item->reason, "");
 	AddAppointmentOrdered(user[item->caller_id].accepted, item);
 	for(int i=0; i<USER_NUMBER; i++)
 	{
@@ -88,15 +89,17 @@ void AddToAllAccept(const struct Appointment *item)
 	}
 }
 
-void AddToAllAcceptForced(const struct Appointment *item)
+static void AddToAllAcceptForced(struct Appointment *item)
 {
 	struct AppointmentList *temp_list;
+	strcpy(item->reason, "");
 	//caller
 	//delete old appointments from accepted list
 	temp_list = ConflictInList(user[item->caller_id].accepted, item);
 	RemoveListFromList(user[item->caller_id].accepted, temp_list);
 	//add to accept and reject lsit
 	AddAppointmentOrdered(user[item->caller_id].accepted, item);
+	SetReasonForList(temp_list, "Higher priority item being added.");
 	AddAppointmentOrderedFromList(user[item->caller_id].rejected, temp_list);
 	for(int i=0; i<USER_NUMBER; i++)
 	{
@@ -106,12 +109,13 @@ void AddToAllAcceptForced(const struct Appointment *item)
 		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
 		RemoveListFromList(user[item->callee_id[i]].accepted, temp_list);
 		//add to accept and reject lsit
+		SetReasonForList(temp_list, "Higher priority item being added.");
 		AddAppointmentOrdered(user[item->callee_id[i]].accepted, item);
 		AddAppointmentOrderedFromList(user[item->callee_id[i]].rejected, temp_list);
 	}
 }
 
-void AddToAllReject(const struct Appointment *item)
+static void AddToAllReject(const struct Appointment *item)
 {
 	AddAppointmentOrdered(user[item->caller_id].rejected, item);
 	for(int i=0; i<USER_NUMBER; i++)
@@ -250,12 +254,17 @@ struct Summary* Schedual_FCFS(struct AppointmentList *inputList)
 	struct Appointment *ptr = inputList->head;
 	while(ptr)
 	{
-		if(IsAllAvailable(ptr))
+		int ret = AllAvailable(ptr);
+		if(ret<0)
 		{
 			AddToAllAccept(ptr);
 		}
 		else
 		{
+			char reason[50];
+			strcpy(reason, user[ret].username);
+			strcat(reason, " is unavailable.");
+			strcpy(ptr->reason, reason);
 			AddToAllReject(ptr);
 		}
 		ptr = ptr->next;
@@ -293,12 +302,17 @@ struct Summary* Schedual_PRIO(struct AppointmentList *inputList)
 	struct Appointment *ptr = inputList->head;
 	while(ptr)
 	{
-		if(IsAllAvailablePriority(ptr))
+		int ret = AllAvailablePriority(ptr);
+		if(ret<0)
 		{
 			AddToAllAcceptForced(ptr);
 		}
 		else
 		{
+			char reason[50];
+			strcpy(reason, user[ret].username);
+			strcat(reason, " is unavailable.");
+			strcpy(ptr->reason, reason);
 			AddToAllReject(ptr);
 		}
 		ptr = ptr->next;
@@ -353,7 +367,8 @@ struct Summary* Schedual_OPTI(struct AppointmentList *inputList)
 				item->start = timeslot->start;
 				item->end = item->start + duration;
 
-				if(IsAllAvailable(item))
+				int ret = AllAvailable(item);
+				if(ret<0)
 				{
 					item->rescheduled = 1;
 					AddToAllAccept(item);
@@ -363,6 +378,7 @@ struct Summary* Schedual_OPTI(struct AppointmentList *inputList)
 						RemoveItemFromList(user[j].rejected, temp);
 					goto NEXT_ITEM;
 				}
+				strcpy(item->reason, "No available timeslot for the reschedule.");
 				item->start = ori_start;
 				item->end = ori_end;
 				timeslot = timeslot->next;

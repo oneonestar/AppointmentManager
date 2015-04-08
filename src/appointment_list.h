@@ -55,6 +55,7 @@ struct Appointment
 	time_t end;
 	int is_accepted;
 	int rescheduled;
+	char reason[50];
 	struct Appointment *prev;
 	struct Appointment *next;
 };
@@ -178,5 +179,10 @@ void PrintAppointmentList(const struct AppointmentList *list);
  * @brief Return the appointment that match the id in the list.
  */
 struct Appointment* GetAppointmentById(const struct AppointmentList *list, int id);
+
+/**
+ * @brief Set the reject reason.
+ */
+void SetReasonForList(struct AppointmentList *list, const char *reason);
 
 #endif

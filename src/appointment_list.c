@@ -58,6 +58,7 @@ struct Appointment* CreateAppointment()
 	item->rescheduled = 0;
 	item->prev = NULL;
 	item->next = NULL;
+	strcpy(item->reason, "");
 	return item;
 }
 
@@ -193,22 +194,29 @@ void PrintAppointment(const struct Appointment *item)
 	struct tm tm_start, tm_end;
 	memcpy(&tm_start, localtime (&item->start), sizeof(struct tm));
 	memcpy(&tm_end, localtime (&item->end), sizeof(struct tm));
-	printf("%d ", item->id);
+	printf("%2d ", item->id);
 	printf("%4d-%02d-%02d   %02d:%02d   %02d:%02d   %-12s ", tm_start.tm_year+1900, tm_start.tm_mon+1, tm_start.tm_mday, tm_start.tm_hour,
 	 tm_start.tm_min, tm_end.tm_hour, tm_end.tm_min, AppointmentTypeStr[item->type]);
 	if(item->rescheduled)
 		printf("%-9c ",  'Y');
 	else
 		printf("%-9c ", 'N');
-	if(item->callee_id[0] == -1)
-		printf("-");
-	else
-		printf("%s ", user[item->caller_id].username);
-	for(int i=0; i<USER_NUMBER; i++)
+	if(strcmp(item->reason, ""))
 	{
-		if(item->callee_id[i]==-1)
-			break;
-		printf("%s ", user[item->callee_id[i]].username);
+		printf(" %s", item->reason);
+	}
+	else
+	{
+		if(item->callee_id[0] == -1)
+			printf("-");
+		else
+			printf("%s ", user[item->caller_id].username);
+		for(int i=0; i<USER_NUMBER; i++)
+		{
+			if(item->callee_id[i]==-1)
+				break;
+			printf("%s ", user[item->callee_id[i]].username);
+		}
 	}
 	printf("\n");
 }
@@ -270,4 +278,17 @@ struct Appointment* GetAppointmentById(const struct AppointmentList *list, int i
 		ptr = ptr->next;
 	}
 	return NULL;
+}
+
+
+void SetReasonForList(struct AppointmentList *list, const char *reason)
+{
+	if(!list)
+		return;
+	struct Appointment *ptr = list->head;
+	while(ptr)
+	{
+		strcpy(ptr->reason, reason);
+		ptr = ptr->next;
+	}
 }
