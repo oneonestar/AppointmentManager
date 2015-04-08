@@ -16,5 +16,6 @@ var appointment__list_8c =
     [ "PrintAppointmentList", "appointment__list_8c.html#a9ea5aa7d7b9b78cd3eb8c6869bedb3d7", null ],
     [ "RemoveItemFromList", "appointment__list_8c.html#a4b5703eec380555a637402b7eb261144", null ],
     [ "RemoveListFromList", "appointment__list_8c.html#af53797e1c5ab2600aecbcb799296b0f0", null ],
+    [ "SetReasonForList", "appointment__list_8c.html#aca3a237cf3de627dc7ad352ec4060be0", null ],
     [ "AppointmentTypeStr", "appointment__list_8c.html#a699f36dc4b571d68507c02bbf52e0444", null ]
 ];

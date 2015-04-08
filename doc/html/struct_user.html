@@ -68,7 +68,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
-      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -91,7 +90,7 @@ $(document).ready(function(){initNavTree('struct_user.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,61 +114,21 @@ $(document).ready(function(){initNavTree('struct_user.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a63e4da517f59a6510a3b12d66f7e306e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user.html#a63e4da517f59a6510a3b12d66f7e306e">username</a> [<a class="el" href="user_8h.html#a2d9316e742860ef57fe46a27e67d5efe">MAX_USERNAME</a>]</td></tr>
+<tr class="memitem:a63e4da517f59a6510a3b12d66f7e306e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63e4da517f59a6510a3b12d66f7e306e"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>username</b> [<a class="el" href="user_8h.html#a2d9316e742860ef57fe46a27e67d5efe">MAX_USERNAME</a>]</td></tr>
 <tr class="separator:a63e4da517f59a6510a3b12d66f7e306e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0ad1da30e04d195e45f919bc254b340"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_appointment_list.html">AppointmentList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user.html#ae0ad1da30e04d195e45f919bc254b340">accepted</a></td></tr>
+<tr class="memitem:ae0ad1da30e04d195e45f919bc254b340"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0ad1da30e04d195e45f919bc254b340"></a>
+struct <a class="el" href="struct_appointment_list.html">AppointmentList</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>accepted</b></td></tr>
 <tr class="separator:ae0ad1da30e04d195e45f919bc254b340"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60d127ce8fdd7d91700bbf1f4278506f"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_appointment_list.html">AppointmentList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_user.html#a60d127ce8fdd7d91700bbf1f4278506f">rejected</a></td></tr>
+<tr class="memitem:a60d127ce8fdd7d91700bbf1f4278506f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60d127ce8fdd7d91700bbf1f4278506f"></a>
+struct <a class="el" href="struct_appointment_list.html">AppointmentList</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>rejected</b></td></tr>
 <tr class="separator:a60d127ce8fdd7d91700bbf1f4278506f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Store the basic information of the user and the appointments. </p>
 
 <p>Definition at line <a class="el" href="user_8h_source.html#l00040">40</a> of file <a class="el" href="user_8h_source.html">user.h</a>.</p>
-</div><h2 class="groupheader">Field Documentation</h2>
-<a class="anchor" id="ae0ad1da30e04d195e45f919bc254b340"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="struct_appointment_list.html">AppointmentList</a>* accepted</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="user_8h_source.html#l00043">43</a> of file <a class="el" href="user_8h_source.html">user.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a60d127ce8fdd7d91700bbf1f4278506f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="struct_appointment_list.html">AppointmentList</a>* rejected</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="user_8h_source.html#l00044">44</a> of file <a class="el" href="user_8h_source.html">user.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a63e4da517f59a6510a3b12d66f7e306e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char username[<a class="el" href="user_8h.html#a2d9316e742860ef57fe46a27e67d5efe">MAX_USERNAME</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="user_8h_source.html#l00042">42</a> of file <a class="el" href="user_8h_source.html">user.h</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="user_8h_source.html">user.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -178,7 +137,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct_user.html">User</a></li>
-    <li class="footer">Generated on Sat Apr 4 2015 15:11:03 for Appointment Manager (AMR) by
+    <li class="footer">Generated on Wed Apr 8 2015 21:34:51 for Appointment Manager (AMR) by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

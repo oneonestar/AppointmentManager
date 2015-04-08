@@ -1,304 +1,106 @@
 \begin{theindex}
 
-  \item {A\+S\+S\+I\+G\+N\+M\+E\+N\+T}
-    \subitem {appointment\+\_\+list.\+h}, 22
-  \item {accepted}
-    \subitem {Summary}, 10
-    \subitem {User}, 11
   \item {Add\+Appointment}
-    \subitem {appointment\+\_\+list.\+c}, 14
-    \subitem {appointment\+\_\+list.\+h}, 22
+    \subitem {appointment\+\_\+list.\+c}, 12
+    \subitem {appointment\+\_\+list.\+h}, 20
   \item {Add\+Appointment\+From\+List}
-    \subitem {appointment\+\_\+list.\+c}, 15
-    \subitem {appointment\+\_\+list.\+h}, 23
+    \subitem {appointment\+\_\+list.\+c}, 13
+    \subitem {appointment\+\_\+list.\+h}, 20
   \item {Add\+Appointment\+Ordered}
-    \subitem {appointment\+\_\+list.\+c}, 15
-    \subitem {appointment\+\_\+list.\+h}, 23
+    \subitem {appointment\+\_\+list.\+c}, 13
+    \subitem {appointment\+\_\+list.\+h}, 20
   \item {Add\+Appointment\+Ordered\+From\+List}
-    \subitem {appointment\+\_\+list.\+c}, 15
-    \subitem {appointment\+\_\+list.\+h}, 23
-  \item {Add\+To\+All\+Accept}
-    \subitem {scheduler.\+c}, 33
-  \item {Add\+To\+All\+Accept\+Forced}
-    \subitem {scheduler.\+c}, 33
-  \item {Add\+To\+All\+Reject}
-    \subitem {scheduler.\+c}, 33
+    \subitem {appointment\+\_\+list.\+c}, 13
+    \subitem {appointment\+\_\+list.\+h}, 20
   \item {Appointment}, 7
-    \subitem {callee\+\_\+id}, 7
-    \subitem {caller\+\_\+id}, 7
-    \subitem {end}, 7
-    \subitem {id}, 7
-    \subitem {is\+\_\+accepted}, 8
-    \subitem {next}, 8
-    \subitem {prev}, 8
-    \subitem {rescheduled}, 8
-    \subitem {start}, 8
-    \subitem {type}, 8
-  \item {appointment\+\_\+list.\+c}, 13, 17
-    \subitem {Add\+Appointment}, 14
-    \subitem {Add\+Appointment\+From\+List}, 15
-    \subitem {Add\+Appointment\+Ordered}, 15
-    \subitem {Add\+Appointment\+Ordered\+From\+List}, 15
-    \subitem {Appointment\+Type\+Str}, 17
-    \subitem {Compare\+Appointment}, 15
-    \subitem {Compare\+Appointment\+Priority}, 15
-    \subitem {Conflict\+In\+List}, 16
-    \subitem {Create\+Appointment}, 16
-    \subitem {Create\+Appointment\+List}, 16
-    \subitem {Get\+Appointment\+By\+Id}, 16
-    \subitem {Is\+Conflict}, 16
-    \subitem {Is\+Conflict\+In\+List}, 16
-    \subitem {Print\+Appointment}, 16
-    \subitem {Print\+Appointment\+List}, 17
-    \subitem {Remove\+Item\+From\+List}, 17
-    \subitem {Remove\+List\+From\+List}, 17
-  \item {appointment\+\_\+list.\+h}, 20, 25
-    \subitem {A\+S\+S\+I\+G\+N\+M\+E\+N\+T}, 22
-    \subitem {Add\+Appointment}, 22
-    \subitem {Add\+Appointment\+From\+List}, 23
-    \subitem {Add\+Appointment\+Ordered}, 23
-    \subitem {Add\+Appointment\+Ordered\+From\+List}, 23
-    \subitem {Appointment\+Type}, 22
-    \subitem {Compare\+Appointment}, 23
-    \subitem {Compare\+Appointment\+Priority}, 24
-    \subitem {Conflict\+In\+List}, 24
-    \subitem {Create\+Appointment}, 24
-    \subitem {Create\+Appointment\+List}, 24
-    \subitem {G\+A\+T\+H\+E\+R\+I\+N\+G}, 22
-    \subitem {Get\+Appointment\+By\+Id}, 24
-    \subitem {Is\+Conflict}, 24
-    \subitem {Is\+Conflict\+In\+List}, 24
-    \subitem {P\+R\+O\+J\+E\+C\+T}, 22
-    \subitem {Print\+Appointment}, 25
-    \subitem {Print\+Appointment\+List}, 25
-    \subitem {Remove\+Item\+From\+List}, 25
-    \subitem {Remove\+List\+From\+List}, 25
-    \subitem {S\+T\+U\+D\+Y}, 22
-  \item {Appointment\+List}, 8
-    \subitem {count}, 9
-    \subitem {head}, 9
-    \subitem {tail}, 9
-  \item {Appointment\+Type}, 9
-    \subitem {appointment\+\_\+list.\+h}, 22
+  \item {appointment\+\_\+list.\+c}, 11, 15
+    \subitem {Add\+Appointment}, 12
+    \subitem {Add\+Appointment\+From\+List}, 13
+    \subitem {Add\+Appointment\+Ordered}, 13
+    \subitem {Add\+Appointment\+Ordered\+From\+List}, 13
+    \subitem {Appointment\+Type\+Str}, 14
+    \subitem {Compare\+Appointment}, 13
+    \subitem {Compare\+Appointment\+Priority}, 14
+    \subitem {Conflict\+In\+List}, 14
+    \subitem {Print\+Appointment}, 14
+    \subitem {Print\+Appointment\+List}, 14
+  \item {appointment\+\_\+list.\+h}, 18, 22
+    \subitem {Add\+Appointment}, 20
+    \subitem {Add\+Appointment\+From\+List}, 20
+    \subitem {Add\+Appointment\+Ordered}, 20
+    \subitem {Add\+Appointment\+Ordered\+From\+List}, 20
+    \subitem {Compare\+Appointment}, 21
+    \subitem {Compare\+Appointment\+Priority}, 21
+    \subitem {Conflict\+In\+List}, 21
+    \subitem {Print\+Appointment}, 21
+    \subitem {Print\+Appointment\+List}, 22
+  \item {Appointment\+List}, 7
+  \item {Appointment\+Type}, 8
   \item {Appointment\+Type\+Str}
-    \subitem {appointment\+\_\+list.\+c}, 17
+    \subitem {appointment\+\_\+list.\+c}, 14
 
   \indexspace
 
-  \item {callee\+\_\+id}
-    \subitem {Appointment}, 7
-  \item {caller\+\_\+id}
-    \subitem {Appointment}, 7
   \item {Compare\+Appointment}
-    \subitem {appointment\+\_\+list.\+c}, 15
-    \subitem {appointment\+\_\+list.\+h}, 23
+    \subitem {appointment\+\_\+list.\+c}, 13
+    \subitem {appointment\+\_\+list.\+h}, 21
   \item {Compare\+Appointment\+Priority}
-    \subitem {appointment\+\_\+list.\+c}, 15
-    \subitem {appointment\+\_\+list.\+h}, 24
+    \subitem {appointment\+\_\+list.\+c}, 14
+    \subitem {appointment\+\_\+list.\+h}, 21
   \item {Conflict\+In\+List}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
-  \item {count}
-    \subitem {Appointment\+List}, 9
-  \item {Create\+Appointment}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
-  \item {Create\+Appointment\+List}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
+    \subitem {appointment\+\_\+list.\+c}, 14
+    \subitem {appointment\+\_\+list.\+h}, 21
 
   \indexspace
 
-  \item {empty\+\_\+timeslot}
-    \subitem {Summary}, 10
-  \item {end}
-    \subitem {Appointment}, 7
-    \subitem {Summary}, 10
-
-  \indexspace
-
-  \item {G\+A\+T\+H\+E\+R\+I\+N\+G}
-    \subitem {appointment\+\_\+list.\+h}, 22
-  \item {Get\+Appointment\+By\+Id}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
   \item {Get\+User\+I\+D}
-    \subitem {user.\+c}, 42
-    \subitem {user.\+h}, 44
-
-  \indexspace
-
-  \item {Handle\+Input}
-    \subitem {main.\+c}, 27
-  \item {Handle\+Schedule}
-    \subitem {main.\+c}, 27
-  \item {head}
-    \subitem {Appointment\+List}, 9
-
-  \indexspace
-
-  \item {id}
-    \subitem {Appointment}, 7
-  \item {input\+List}
-    \subitem {main.\+c}, 28
-  \item {input\+Loop}
-    \subitem {main.\+c}, 27
-  \item {is\+\_\+accepted}
-    \subitem {Appointment}, 8
-  \item {Is\+All\+Available}
-    \subitem {scheduler.\+c}, 33
-  \item {Is\+All\+Available\+Priority}
-    \subitem {scheduler.\+c}, 33
-  \item {Is\+Conflict}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
-  \item {Is\+Conflict\+In\+List}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 24
+    \subitem {user.\+c}, 36
+    \subitem {user.\+h}, 38
 
   \indexspace
 
   \item {M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}
-    \subitem {user.\+h}, 44
-  \item {main}
-    \subitem {main.\+c}, 27
-  \item {main.\+c}, 26, 28
-    \subitem {Handle\+Input}, 27
-    \subitem {Handle\+Schedule}, 27
-    \subitem {input\+List}, 28
-    \subitem {input\+Loop}, 27
-    \subitem {main}, 27
-    \subitem {Num\+Of\+User}, 28
-    \subitem {user}, 28
+    \subitem {user.\+h}, 38
+  \item {main.\+c}, 23, 24
+    \subitem {Num\+Of\+User}, 24
+    \subitem {user}, 24
 
   \indexspace
 
-  \item {next}
-    \subitem {Appointment}, 8
   \item {Num\+Of\+User}
-    \subitem {main.\+c}, 28
-    \subitem {user.\+h}, 45
+    \subitem {main.\+c}, 24
+    \subitem {user.\+h}, 39
 
   \indexspace
 
-  \item {P\+R\+O\+J\+E\+C\+T}
-    \subitem {appointment\+\_\+list.\+h}, 22
-  \item {prev}
-    \subitem {Appointment}, 8
-  \item {Print\+Accepted}
-    \subitem {user.\+c}, 42
-    \subitem {user.\+h}, 45
-  \item {Print\+All\+User}
-    \subitem {user.\+c}, 42
-    \subitem {user.\+h}, 45
   \item {Print\+Appointment}
-    \subitem {appointment\+\_\+list.\+c}, 16
-    \subitem {appointment\+\_\+list.\+h}, 25
+    \subitem {appointment\+\_\+list.\+c}, 14
+    \subitem {appointment\+\_\+list.\+h}, 21
   \item {Print\+Appointment\+List}
-    \subitem {appointment\+\_\+list.\+c}, 17
-    \subitem {appointment\+\_\+list.\+h}, 25
-  \item {Print\+Rejected}
-    \subitem {user.\+c}, 42
-    \subitem {user.\+h}, 45
-  \item {Print\+Summary}
-    \subitem {scheduler.\+c}, 33
-    \subitem {scheduler.\+h}, 40
-
-  \indexspace
-
-  \item {R\+E\+A\+D\+M\+E.\+md}, 31
-  \item {rejected}
-    \subitem {Summary}, 10
-    \subitem {User}, 11
-  \item {Remove\+Item\+From\+List}
-    \subitem {appointment\+\_\+list.\+c}, 17
-    \subitem {appointment\+\_\+list.\+h}, 25
-  \item {Remove\+List\+From\+List}
-    \subitem {appointment\+\_\+list.\+c}, 17
-    \subitem {appointment\+\_\+list.\+h}, 25
-  \item {rescheduled}
-    \subitem {Appointment}, 8
-
-  \indexspace
-
-  \item {S\+T\+U\+D\+Y}
+    \subitem {appointment\+\_\+list.\+c}, 14
     \subitem {appointment\+\_\+list.\+h}, 22
-  \item {Schedual\+\_\+\+F\+C\+F\+S}
-    \subitem {scheduler.\+c}, 33
-    \subitem {scheduler.\+h}, 40
-  \item {Schedual\+\_\+\+O\+P\+T\+I}
-    \subitem {scheduler.\+c}, 33
-    \subitem {scheduler.\+h}, 40
-  \item {Schedual\+\_\+\+P\+R\+I\+O}
-    \subitem {scheduler.\+c}, 34
-    \subitem {scheduler.\+h}, 40
-  \item {scheduler.\+c}, 32, 34
-    \subitem {Add\+To\+All\+Accept}, 33
-    \subitem {Add\+To\+All\+Accept\+Forced}, 33
-    \subitem {Add\+To\+All\+Reject}, 33
-    \subitem {Is\+All\+Available}, 33
-    \subitem {Is\+All\+Available\+Priority}, 33
-    \subitem {Print\+Summary}, 33
-    \subitem {Schedual\+\_\+\+F\+C\+F\+S}, 33
-    \subitem {Schedual\+\_\+\+O\+P\+T\+I}, 33
-    \subitem {Schedual\+\_\+\+P\+R\+I\+O}, 34
-  \item {scheduler.\+h}, 39, 40
-    \subitem {Print\+Summary}, 40
-    \subitem {Schedual\+\_\+\+F\+C\+F\+S}, 40
-    \subitem {Schedual\+\_\+\+O\+P\+T\+I}, 40
-    \subitem {Schedual\+\_\+\+P\+R\+I\+O}, 40
-  \item {start}
-    \subitem {Appointment}, 8
-    \subitem {Summary}, 10
-  \item {strcicmp}
-    \subitem {user.\+c}, 42
-  \item {Summary}, 9
-    \subitem {accepted}, 10
-    \subitem {empty\+\_\+timeslot}, 10
-    \subitem {end}, 10
-    \subitem {rejected}, 10
-    \subitem {start}, 10
-    \subitem {total\+\_\+accepted}, 10
-    \subitem {total\+\_\+rejected}, 10
 
   \indexspace
 
-  \item {tail}
-    \subitem {Appointment\+List}, 9
-  \item {total\+\_\+accepted}
-    \subitem {Summary}, 10
-  \item {total\+\_\+rejected}
-    \subitem {Summary}, 10
-  \item {type}
-    \subitem {Appointment}, 8
+  \item {scheduler.\+c}, 28, 29
+  \item {scheduler.\+h}, 34, 35
+  \item {Summary}, 8
 
   \indexspace
 
   \item {U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}
-    \subitem {user.\+h}, 44
-  \item {User}, 10
-    \subitem {accepted}, 11
-    \subitem {rejected}, 11
-    \subitem {username}, 11
+    \subitem {user.\+h}, 38
+  \item {User}, 9
   \item {user}
-    \subitem {main.\+c}, 28
-    \subitem {user.\+h}, 45
-  \item {user.\+c}, 41, 42
-    \subitem {Get\+User\+I\+D}, 42
-    \subitem {Print\+Accepted}, 42
-    \subitem {Print\+All\+User}, 42
-    \subitem {Print\+Rejected}, 42
-    \subitem {strcicmp}, 42
-  \item {user.\+h}, 43, 45
-    \subitem {Get\+User\+I\+D}, 44
-    \subitem {M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}, 44
-    \subitem {Num\+Of\+User}, 45
-    \subitem {Print\+Accepted}, 45
-    \subitem {Print\+All\+User}, 45
-    \subitem {Print\+Rejected}, 45
-    \subitem {U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}, 44
-    \subitem {user}, 45
-  \item {username}
-    \subitem {User}, 11
+    \subitem {main.\+c}, 24
+    \subitem {user.\+h}, 39
+  \item {user.\+c}, 35, 36
+    \subitem {Get\+User\+I\+D}, 36
+  \item {user.\+h}, 37, 39
+    \subitem {Get\+User\+I\+D}, 38
+    \subitem {M\+A\+X\+\_\+\+U\+S\+E\+R\+N\+A\+M\+E}, 38
+    \subitem {Num\+Of\+User}, 39
+    \subitem {U\+S\+E\+R\+\_\+\+N\+U\+M\+B\+E\+R}, 38
+    \subitem {user}, 39
 
 \end{theindex}

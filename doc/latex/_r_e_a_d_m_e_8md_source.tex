@@ -30,10 +30,25 @@
 00027 
 00028 Documentation
 00029 -------------
-00030 doc/latex/dox.pdf
-00031 
-00032 File structure
-00033 --------------
-00034 -bin/
-00035 -src/ .... source and header files
+00030 Project doucmentationi:
+00031 doc/AMRReport.pdf
+00032 
+00033 API documentation:
+00034 doc/API.pdf
+00035 
+00036 File structure
+00037 --------------
+00038 -bin/ ..... executable file
+00039 -src/ ..... source and header files
+00040 -obj/ ..... object files during make
+00041 -doc/ ..... documentations
+00042 -test/in .. testing input
+00043 -test/out . testing output
+00044 
+00045 How to test
+00046 --------------
+00047 Use input redirection
+00048 ./bin/amr alice bob charlie < test/in/fcfs.in
+00049 ./bin/amr alice bob charlie < test/in/prio.in
+00050 ./bin/amr alice bob charlie < test/in/opti.in
 \end{DoxyCode}

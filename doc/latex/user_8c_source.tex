@@ -31,8 +31,7 @@
 00047 
 00048 \textcolor{keywordtype}{void} PrintAccepted(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user)
 00049 \{
-00050     printf(\textcolor{stringliteral}{"%s, you have %d appointments.\(\backslash\)n"}, user->username, user->accepted->
-      count);
+00050     printf(\textcolor{stringliteral}{"%s, you have %d appointments.\(\backslash\)n"}, user->username, user->accepted->count);
 00051     PrintAppointmentList(user->accepted);
 00052 \}
 00053 
@@ -40,8 +39,7 @@
 00055 
 00056 \textcolor{keywordtype}{void} PrintRejected(\textcolor{keyword}{const} \textcolor{keyword}{struct} User *user)
 00057 \{
-00058     printf(\textcolor{stringliteral}{"%s, you have %d appointments rejected.\(\backslash\)n"}, user->username, user->
-      rejected->count);
+00058     printf(\textcolor{stringliteral}{"%s, you have %d appointments rejected.\(\backslash\)n"}, user->username, user->rejected->count);
 00059     PrintAppointmentList(user->rejected);
 00060 \}
 00061 

@@ -7,6 +7,7 @@ var struct_appointment =
     [ "is_accepted", "struct_appointment.html#a30449d2de0bda7cca32135a283b0162b", null ],
     [ "next", "struct_appointment.html#a7a0b65c736183dbc90fdeb836add2a10", null ],
     [ "prev", "struct_appointment.html#a76cac42b207c5cf8c9175afad72b7bd2", null ],
+    [ "reason", "struct_appointment.html#a578cf64f7f41b31eeda6f51fdd99b971", null ],
     [ "rescheduled", "struct_appointment.html#a7d53dc414f2d787dc031b868da72e703", null ],
     [ "start", "struct_appointment.html#ada310e7f72b38fadd4b24d80ed3438ee", null ],
     [ "type", "struct_appointment.html#ae7b6c9fdabaf04275e5799e5daf7eecd", null ]

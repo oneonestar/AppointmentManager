@@ -13,15 +13,19 @@ Handling each users.
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int {\bf strcicmp} (char const $\ast$a, char const $\ast$b)
+int {\bfseries strcicmp} (char const $\ast$a, char const $\ast$b)\label{user_8c_ae2842cb0cbdf6aa210eba0b735e63312}
+
 \item 
 int {\bf Get\+User\+I\+D} (const char $\ast$username)
 \begin{DoxyCompactList}\small\item\em Return the user id that have the same username. \end{DoxyCompactList}\item 
-void {\bf Print\+Accepted} (const struct {\bf User} $\ast${\bf user})
+void {\bf Print\+Accepted} (const struct {\bf User} $\ast${\bf user})\label{user_8c_a1214e8672d5a6d823eb2934cf5a82d0b}
+
 \begin{DoxyCompactList}\small\item\em Print the accepted list for user. \end{DoxyCompactList}\item 
-void {\bf Print\+Rejected} (const struct {\bf User} $\ast${\bf user})
+void {\bf Print\+Rejected} (const struct {\bf User} $\ast${\bf user})\label{user_8c_afb40dc85cc1d4b23f9a1a95ef4abc6f5}
+
 \begin{DoxyCompactList}\small\item\em Print the rejected list for user. \end{DoxyCompactList}\item 
-void {\bf Print\+All\+User} ()
+void {\bf Print\+All\+User} ()\label{user_8c_a393641d36b97cdf5764c257c9c259734}
+
 \begin{DoxyCompactList}\small\item\em Print the accepted \& reject list for all users. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -67,61 +71,4 @@ The user id that have the same username. Return -\/1 if user is not found.
 
 
 Definition at line {\bf 38} of file {\bf user.\+c}.
-
-\index{user.\+c@{user.\+c}!Print\+Accepted@{Print\+Accepted}}
-\index{Print\+Accepted@{Print\+Accepted}!user.\+c@{user.\+c}}
-\subsubsection[{Print\+Accepted}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Accepted (
-\begin{DoxyParamCaption}
-\item[{const struct {\bf User} $\ast$}]{user}
-\end{DoxyParamCaption}
-)}\label{user_8c_a1214e8672d5a6d823eb2934cf5a82d0b}
-
-
-Print the accepted list for user. 
-
-
-
-Definition at line {\bf 48} of file {\bf user.\+c}.
-
-\index{user.\+c@{user.\+c}!Print\+All\+User@{Print\+All\+User}}
-\index{Print\+All\+User@{Print\+All\+User}!user.\+c@{user.\+c}}
-\subsubsection[{Print\+All\+User}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+All\+User (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\label{user_8c_a393641d36b97cdf5764c257c9c259734}
-
-
-Print the accepted \& reject list for all users. 
-
-
-
-Definition at line {\bf 63} of file {\bf user.\+c}.
-
-\index{user.\+c@{user.\+c}!Print\+Rejected@{Print\+Rejected}}
-\index{Print\+Rejected@{Print\+Rejected}!user.\+c@{user.\+c}}
-\subsubsection[{Print\+Rejected}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Rejected (
-\begin{DoxyParamCaption}
-\item[{const struct {\bf User} $\ast$}]{user}
-\end{DoxyParamCaption}
-)}\label{user_8c_afb40dc85cc1d4b23f9a1a95ef4abc6f5}
-
-
-Print the rejected list for user. 
-
-
-
-Definition at line {\bf 56} of file {\bf user.\+c}.
-
-\index{user.\+c@{user.\+c}!strcicmp@{strcicmp}}
-\index{strcicmp@{strcicmp}!user.\+c@{user.\+c}}
-\subsubsection[{strcicmp}]{\setlength{\rightskip}{0pt plus 5cm}int strcicmp (
-\begin{DoxyParamCaption}
-\item[{char const $\ast$}]{a, }
-\item[{char const $\ast$}]{b}
-\end{DoxyParamCaption}
-)}\label{user_8c_ae2842cb0cbdf6aa210eba0b735e63312}
-
-
-Definition at line {\bf 29} of file {\bf user.\+c}.
 

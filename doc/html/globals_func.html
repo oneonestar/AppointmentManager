@@ -75,8 +75,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>All</span></a></li>
       <li class="current"><a href="globals_func.html"><span>Functions</span></a></li>
       <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
-      <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
     </ul>
   </div>
@@ -85,9 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
-      <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
-      <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li class="current"><a href="#index_s"><span>s</span></a></li>
@@ -113,7 +109,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -141,15 +137,6 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <li>AddAppointmentOrderedFromList()
 : <a class="el" href="appointment__list_8h.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9">appointment_list.h</a>
 , <a class="el" href="appointment__list_8c.html#a78ce94ba7a26b6a1fa0b12e1f6b4adf9">appointment_list.c</a>
-</li>
-<li>AddToAllAccept()
-: <a class="el" href="scheduler_8c.html#a08bbf44ef1b6d77c25693f0b843414cb">scheduler.c</a>
-</li>
-<li>AddToAllAcceptForced()
-: <a class="el" href="scheduler_8c.html#a1c999fa71ea5308529b6e80cd9270982">scheduler.c</a>
-</li>
-<li>AddToAllReject()
-: <a class="el" href="scheduler_8c.html#a2a577108137093a19962fb10725c72db">scheduler.c</a>
 </li>
 </ul>
 
@@ -190,40 +177,14 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 </ul>
 
 
-<h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
-<li>HandleInput()
-: <a class="el" href="main_8c.html#a78f207561c985e1bdec727e427244add">main.c</a>
-</li>
-<li>HandleSchedule()
-: <a class="el" href="main_8c.html#aaa622b97644b29ef66b985f40ea77e48">main.c</a>
-</li>
-</ul>
-
-
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
-<li>inputLoop()
-: <a class="el" href="main_8c.html#a0c6ffb137c6a02d32b66910c63db1d6a">main.c</a>
-</li>
-<li>IsAllAvailable()
-: <a class="el" href="scheduler_8c.html#ac507dfc313f857dcdb79155700120d16">scheduler.c</a>
-</li>
-<li>IsAllAvailablePriority()
-: <a class="el" href="scheduler_8c.html#a4ec1286868c6b5e88cdb592ef166c1e2">scheduler.c</a>
-</li>
 <li>IsConflict()
-: <a class="el" href="appointment__list_8h.html#aecb74e3a6b71c6580a4d68c74e1fcfb3">appointment_list.h</a>
-, <a class="el" href="appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3">appointment_list.c</a>
+: <a class="el" href="appointment__list_8c.html#aecb74e3a6b71c6580a4d68c74e1fcfb3">appointment_list.c</a>
+, <a class="el" href="appointment__list_8h.html#aecb74e3a6b71c6580a4d68c74e1fcfb3">appointment_list.h</a>
 </li>
 <li>IsConflictInList()
 : <a class="el" href="appointment__list_8c.html#a33343f4cce4a41904a745179053575c1">appointment_list.c</a>
 , <a class="el" href="appointment__list_8h.html#a33343f4cce4a41904a745179053575c1">appointment_list.h</a>
-</li>
-</ul>
-
-
-<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
-<li>main()
-: <a class="el" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main.c</a>
 </li>
 </ul>
 
@@ -278,11 +239,12 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 , <a class="el" href="scheduler_8c.html#a00e50377d32b3bee0e5d5982da684eb2">scheduler.c</a>
 </li>
 <li>Schedual_PRIO()
-: <a class="el" href="scheduler_8h.html#ace53e33f078566371bac6500f263b9e4">scheduler.h</a>
-, <a class="el" href="scheduler_8c.html#ace53e33f078566371bac6500f263b9e4">scheduler.c</a>
+: <a class="el" href="scheduler_8c.html#ace53e33f078566371bac6500f263b9e4">scheduler.c</a>
+, <a class="el" href="scheduler_8h.html#ace53e33f078566371bac6500f263b9e4">scheduler.h</a>
 </li>
-<li>strcicmp()
-: <a class="el" href="user_8c.html#ae2842cb0cbdf6aa210eba0b735e63312">user.c</a>
+<li>SetReasonForList()
+: <a class="el" href="appointment__list_8h.html#aca3a237cf3de627dc7ad352ec4060be0">appointment_list.h</a>
+, <a class="el" href="appointment__list_8c.html#aca3a237cf3de627dc7ad352ec4060be0">appointment_list.c</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -290,7 +252,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Apr 4 2015 15:11:03 for Appointment Manager (AMR) by
+    <li class="footer">Generated on Wed Apr 8 2015 21:34:51 for Appointment Manager (AMR) by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

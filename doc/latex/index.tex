@@ -12,8 +12,14 @@ To join the source files into one A\+M\+R.\+c file ``` make onefile ```
 
 \subsection*{Documentation }
 
-doc/latex/dox.\+pdf
+Project doucmentationi\+: doc/\+A\+M\+R\+Report.\+pdf
+
+A\+P\+I documentation\+: doc/\+A\+P\+I.\+pdf
 
 \subsection*{File structure }
 
--\/bin/ -\/src/ .... source and header files 
+-\/bin/ ..... executable file -\/src/ ..... source and header files -\/obj/ ..... object files during make -\/doc/ ..... documentations -\/test/in .. testing input -\/test/out . testing output
+
+\subsection*{How to test }
+
+Use input redirection ./bin/amr alice bob charlie $<$ test/in/fcfs.\+in ./bin/amr alice bob charlie $<$ test/in/prio.\+in ./bin/amr alice bob charlie $<$ test/in/opti.\+in 

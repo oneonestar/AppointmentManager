@@ -15,13 +15,17 @@ struct {\bf Summary}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+F\+C\+F\+S} (struct {\bf Appointment\+List} $\ast${\bf input\+List})
+struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+F\+C\+F\+S} (struct {\bf Appointment\+List} $\ast$input\+List)\label{scheduler_8h_ab1a6239f9cfb939239ea5a6327fc5396}
+
 \begin{DoxyCompactList}\small\item\em First come first served. The order is folloing the input order. The result will be putted into the each user's appointment lists (accept / reject). \end{DoxyCompactList}\item 
-struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+P\+R\+I\+O} (struct {\bf Appointment\+List} $\ast${\bf input\+List})
+struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+P\+R\+I\+O} (struct {\bf Appointment\+List} $\ast$input\+List)\label{scheduler_8h_ace53e33f078566371bac6500f263b9e4}
+
 \begin{DoxyCompactList}\small\item\em Priority. The order is folloing the pre-\/defined priority. The result will be putted into the each user's appointment lists (accept / reject). \end{DoxyCompactList}\item 
-struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+O\+P\+T\+I} (struct {\bf Appointment\+List} $\ast${\bf input\+List})
+struct {\bf Summary} $\ast$ {\bf Schedual\+\_\+\+O\+P\+T\+I} (struct {\bf Appointment\+List} $\ast$input\+List)\label{scheduler_8h_a00e50377d32b3bee0e5d5982da684eb2}
+
 \begin{DoxyCompactList}\small\item\em Optimized. Bonus part, reschedule those rejected appointments. The result will be putted into the each user's appointment lists (accept / reject). \end{DoxyCompactList}\item 
-void {\bf Print\+Summary} (struct {\bf Summary} $\ast$summary)
+void {\bf Print\+Summary} (struct {\bf Summary} $\ast$summary)\label{scheduler_8h_aff1618f427d441142f2d7706441e8113}
+
 \begin{DoxyCompactList}\small\item\em Print out the summary about the scheduling. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -41,67 +45,4 @@ oneonestar {\tt oneonestar@gmail.\+com}
 This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+N\+U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+U\+T A\+N\+Y W\+A\+R\+R\+A\+N\+T\+Y; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+T\+Y or F\+I\+T\+N\+E\+S\+S F\+O\+R A P\+A\+R\+T\+I\+C\+U\+L\+A\+R P\+U\+R\+P\+O\+S\+E. See the G\+N\+U General Public License for more details. You should have received a copy of the G\+N\+U General Public License along with this program. If not, see {\tt http\+://www.\+gnu.\+org/licenses/}. 
 
 Definition in file {\bf scheduler.\+h}.
-
-
-
-\subsection{Function Documentation}
-\index{scheduler.\+h@{scheduler.\+h}!Print\+Summary@{Print\+Summary}}
-\index{Print\+Summary@{Print\+Summary}!scheduler.\+h@{scheduler.\+h}}
-\subsubsection[{Print\+Summary}]{\setlength{\rightskip}{0pt plus 5cm}void Print\+Summary (
-\begin{DoxyParamCaption}
-\item[{struct {\bf Summary} $\ast$}]{summary}
-\end{DoxyParamCaption}
-)}\label{scheduler_8h_aff1618f427d441142f2d7706441e8113}
-
-
-Print out the summary about the scheduling. 
-
-
-
-Definition at line {\bf 404} of file {\bf scheduler.\+c}.
-
-\index{scheduler.\+h@{scheduler.\+h}!Schedual\+\_\+\+F\+C\+F\+S@{Schedual\+\_\+\+F\+C\+F\+S}}
-\index{Schedual\+\_\+\+F\+C\+F\+S@{Schedual\+\_\+\+F\+C\+F\+S}!scheduler.\+h@{scheduler.\+h}}
-\subsubsection[{Schedual\+\_\+\+F\+C\+F\+S}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Summary}$\ast$ Schedual\+\_\+\+F\+C\+F\+S (
-\begin{DoxyParamCaption}
-\item[{struct {\bf Appointment\+List} $\ast$}]{input\+List}
-\end{DoxyParamCaption}
-)}\label{scheduler_8h_ab1a6239f9cfb939239ea5a6327fc5396}
-
-
-First come first served. The order is folloing the input order. The result will be putted into the each user's appointment lists (accept / reject). 
-
-
-
-Definition at line {\bf 248} of file {\bf scheduler.\+c}.
-
-\index{scheduler.\+h@{scheduler.\+h}!Schedual\+\_\+\+O\+P\+T\+I@{Schedual\+\_\+\+O\+P\+T\+I}}
-\index{Schedual\+\_\+\+O\+P\+T\+I@{Schedual\+\_\+\+O\+P\+T\+I}!scheduler.\+h@{scheduler.\+h}}
-\subsubsection[{Schedual\+\_\+\+O\+P\+T\+I}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Summary}$\ast$ Schedual\+\_\+\+O\+P\+T\+I (
-\begin{DoxyParamCaption}
-\item[{struct {\bf Appointment\+List} $\ast$}]{input\+List}
-\end{DoxyParamCaption}
-)}\label{scheduler_8h_a00e50377d32b3bee0e5d5982da684eb2}
-
-
-Optimized. Bonus part, reschedule those rejected appointments. The result will be putted into the each user's appointment lists (accept / reject). 
-
-
-
-Definition at line {\bf 332} of file {\bf scheduler.\+c}.
-
-\index{scheduler.\+h@{scheduler.\+h}!Schedual\+\_\+\+P\+R\+I\+O@{Schedual\+\_\+\+P\+R\+I\+O}}
-\index{Schedual\+\_\+\+P\+R\+I\+O@{Schedual\+\_\+\+P\+R\+I\+O}!scheduler.\+h@{scheduler.\+h}}
-\subsubsection[{Schedual\+\_\+\+P\+R\+I\+O}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Summary}$\ast$ Schedual\+\_\+\+P\+R\+I\+O (
-\begin{DoxyParamCaption}
-\item[{struct {\bf Appointment\+List} $\ast$}]{input\+List}
-\end{DoxyParamCaption}
-)}\label{scheduler_8h_ace53e33f078566371bac6500f263b9e4}
-
-
-Priority. The order is folloing the pre-\/defined priority. The result will be putted into the each user's appointment lists (accept / reject). 
-
-
-
-Definition at line {\bf 291} of file {\bf scheduler.\+c}.
 

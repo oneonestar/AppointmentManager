@@ -10,413 +10,429 @@
 00025 
 00026 \textcolor{preprocessor}{#include "scheduler.h"}
 00027 
-00028 \textcolor{keywordtype}{int} IsAllAvailable(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00028 \textcolor{keyword}{static} \textcolor{keywordtype}{int} AllAvailable(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
 00029 \{
 00030     \textcolor{keywordflow}{if}(!item)
 00031         \textcolor{keywordflow}{return} 0;
 00032     \textcolor{keyword}{struct }AppointmentList *temp\_list;
 00033     \textcolor{comment}{//check caller timetable}
-00034     temp\_list = ConflictInList(user[item->caller_id].accepted, item);
+00034     temp\_list = ConflictInList(user[item->caller\_id].accepted, item);
 00035     \textcolor{keywordflow}{if}(temp\_list->count)
-00036         \textcolor{keywordflow}{return} 0;
+00036         \textcolor{keywordflow}{return} item->caller\_id;
 00037     \textcolor{comment}{//check callees timetable}
 00038     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
 00039     \{
-00040         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
+00040         \textcolor{keywordflow}{if}(item->callee\_id[i]==-1)
 00041             \textcolor{keywordflow}{break};
-00042         temp\_list = ConflictInList(user[item->callee_id[i]].accepted, item);
+00042         temp\_list = ConflictInList(user[item->callee\_id[i]].accepted, item);
 00043         \textcolor{keywordflow}{if}(temp\_list->count)
-00044             \textcolor{keywordflow}{return} 0;
+00044             \textcolor{keywordflow}{return} item->callee\_id[i];
 00045     \}
-00046     \textcolor{keywordflow}{return} 1;
+00046     \textcolor{keywordflow}{return} -1;
 00047 \}
 00048 
-00049 \textcolor{keywordtype}{int} IsAllAvailablePriority(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00049 \textcolor{keyword}{static} \textcolor{keywordtype}{int} AllAvailablePriority(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
 00050 \{
 00051     \textcolor{keyword}{struct }AppointmentList *temp\_list;
 00052     \textcolor{keyword}{struct }Appointment *ptr;
 00053     \textcolor{comment}{//check caller timetable}
-00054     temp\_list = ConflictInList(user[item->caller_id].accepted, item);
+00054     temp\_list = ConflictInList(user[item->caller\_id].accepted, item);
 00055     ptr = temp\_list->head;
 00056     \textcolor{keywordflow}{while}(ptr)
 00057     \{
 00058         \textcolor{keywordflow}{if}(CompareAppointmentPriority(item, ptr)>=0)    \textcolor{comment}{//if item has equal or lower priority}
-00059             \textcolor{keywordflow}{return} 0;   \textcolor{comment}{//not available}
+00059             \textcolor{keywordflow}{return} item->caller\_id; \textcolor{comment}{//not available}
 00060         ptr = ptr->next;
 00061     \}
 00062     \textcolor{comment}{//check callees timetable}
 00063     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
 00064     \{
-00065         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
+00065         \textcolor{keywordflow}{if}(item->callee\_id[i]==-1)
 00066             \textcolor{keywordflow}{break};
 00067         \textcolor{comment}{//TODO: may need refactoring}
-00068         temp\_list = ConflictInList(user[item->callee_id[i]].accepted, item);
+00068         temp\_list = ConflictInList(user[item->callee\_id[i]].accepted, item);
 00069         ptr = temp\_list->head;
 00070         \textcolor{keywordflow}{while}(ptr)
 00071         \{
 00072             \textcolor{keywordflow}{if}(CompareAppointmentPriority(item, ptr)>=0)    \textcolor{comment}{//if item has equal or lower priority}
-00073                 \textcolor{keywordflow}{return} 0;   \textcolor{comment}{//not available}
+00073                 \textcolor{keywordflow}{return} item->callee\_id[i];  \textcolor{comment}{//not available}
 00074             ptr = ptr->next;
 00075         \}
 00076     \}
-00077     \textcolor{keywordflow}{return} 1;   \textcolor{comment}{//available}
+00077     \textcolor{keywordflow}{return} -1;  \textcolor{comment}{//available}
 00078 \}
 00079 
-00080 \textcolor{keywordtype}{void} AddToAllAccept(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00080 \textcolor{keyword}{static} \textcolor{keywordtype}{void} AddToAllAccept(\textcolor{keyword}{struct} Appointment *item)
 00081 \{
-00082     AddAppointmentOrdered(user[item->caller_id].accepted, item);
-00083     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
-00084     \{
-00085         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
-00086             \textcolor{keywordflow}{break};
-00087         AddAppointmentOrdered(user[item->callee_id[i]].accepted, item);
-00088     \}
-00089 \}
-00090 
-00091 \textcolor{keywordtype}{void} AddToAllAcceptForced(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
-00092 \{
-00093     \textcolor{keyword}{struct }AppointmentList *temp\_list;
-00094     \textcolor{comment}{//caller}
-00095     \textcolor{comment}{//delete old appointments from accepted list}
-00096     temp\_list = ConflictInList(user[item->caller_id].accepted, item);
-00097     RemoveListFromList(user[item->caller_id].accepted, temp\_list);
-00098     \textcolor{comment}{//add to accept and reject lsit}
-00099     AddAppointmentOrdered(user[item->caller_id].accepted, item);
-00100     AddAppointmentOrderedFromList(user[item->caller_id].rejected, temp\_list);
-00101     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
-00102     \{
-00103         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
-00104             \textcolor{keywordflow}{break};
-00105         \textcolor{comment}{//delete old appointments from accepted list}
-00106         temp\_list = ConflictInList(user[item->callee_id[i]].accepted, item);
-00107         RemoveListFromList(user[item->callee_id[i]].accepted, temp\_list);
-00108         \textcolor{comment}{//add to accept and reject lsit}
-00109         AddAppointmentOrdered(user[item->callee_id[i]].accepted, item);
-00110         AddAppointmentOrderedFromList(user[item->callee_id[i]].rejected, temp\_list);
-00111     \}
-00112 \}
-00113 
-00114 \textcolor{keywordtype}{void} AddToAllReject(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
-00115 \{
-00116     AddAppointmentOrdered(user[item->caller_id].rejected, item);
-00117     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
-00118     \{
-00119         \textcolor{keywordflow}{if}(item->callee_id[i]==-1)
-00120             \textcolor{keywordflow}{break};
-00121         AddAppointmentOrdered(user[item->callee_id[i]].rejected, item);
-00122     \}
-00123 \}
-00124 
-00126 \textcolor{keyword}{static} \textcolor{keywordtype}{void} SetAppointmentAccepted(\textcolor{keyword}{struct} AppointmentList *inputList)
-00127 \{
-00128     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00129     \{
-00130         \textcolor{keyword}{struct }Appointment *ptr = user[i].accepted->head;
-00131         \textcolor{keywordflow}{while}(ptr)
-00132         \{
-00133             GetAppointmentById(inputList, ptr->id)->is_accepted = 1;
-00134             ptr = ptr->next;
-00135         \}
-00136     \}
-00137 \}
-00138 
-00139 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetEmptyTimeSlotInDay(\textcolor{keyword}{struct} AppointmentList *userList, time\_t date)
-00140 \{
-00141     \textcolor{keyword}{struct }AppointmentList *empty\_list = CreateAppointmentList();
-00142     \textcolor{comment}{//18:00-22:00}
-00143     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
-00144     timeinfo = *localtime (&date);
-00145 
-00146     \textcolor{comment}{//foreach 18:00-22:00 half hour timeslot}
-00147     timeinfo.tm\_hour = 18;
-00148     \textcolor{keywordflow}{while}(timeinfo.tm\_hour<22)
-00149     \{
-00150         \textcolor{keyword}{struct }Appointment *item = CreateAppointment();
-00151         \textcolor{comment}{//first half hour}
-00152         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
-00153         item->start = mktime(&timeinfo\_tmp);
-00154         timeinfo.tm\_min = 30;
-00155         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
-00156         item->end = mktime(&timeinfo\_tmp);
-00157         \textcolor{keywordflow}{if}(!IsConflictInList(userList, item))
-00158             AddAppointmentOrdered(empty\_list, item);
-00159 
-00160 
-00161         \textcolor{comment}{//second half hour}
-00162         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
-00163         item->start = mktime(&timeinfo\_tmp);
-00164         timeinfo.tm\_hour++;
-00165         timeinfo.tm\_min = 0;
+00082     strcpy(item->reason, \textcolor{stringliteral}{""});
+00083     AddAppointmentOrdered(user[item->caller\_id].accepted, item);
+00084     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
+00085     \{
+00086         \textcolor{keywordflow}{if}(item->callee\_id[i]==-1)
+00087             \textcolor{keywordflow}{break};
+00088         AddAppointmentOrdered(user[item->callee\_id[i]].accepted, item);
+00089     \}
+00090 \}
+00091 
+00092 \textcolor{keyword}{static} \textcolor{keywordtype}{void} AddToAllAcceptForced(\textcolor{keyword}{struct} Appointment *item)
+00093 \{
+00094     \textcolor{keyword}{struct }AppointmentList *temp\_list;
+00095     strcpy(item->reason, \textcolor{stringliteral}{""});
+00096     \textcolor{comment}{//caller}
+00097     \textcolor{comment}{//delete old appointments from accepted list}
+00098     temp\_list = ConflictInList(user[item->caller\_id].accepted, item);
+00099     RemoveListFromList(user[item->caller\_id].accepted, temp\_list);
+00100     \textcolor{comment}{//add to accept and reject lsit}
+00101     AddAppointmentOrdered(user[item->caller\_id].accepted, item);
+00102     SetReasonForList(temp\_list, \textcolor{stringliteral}{"Higher priority item being added."});
+00103     AddAppointmentOrderedFromList(user[item->caller\_id].rejected, temp\_list);
+00104     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
+00105     \{
+00106         \textcolor{keywordflow}{if}(item->callee\_id[i]==-1)
+00107             \textcolor{keywordflow}{break};
+00108         \textcolor{comment}{//delete old appointments from accepted list}
+00109         temp\_list = ConflictInList(user[item->callee\_id[i]].accepted, item);
+00110         RemoveListFromList(user[item->callee\_id[i]].accepted, temp\_list);
+00111         \textcolor{comment}{//add to accept and reject lsit}
+00112         SetReasonForList(temp\_list, \textcolor{stringliteral}{"Higher priority item being added."});
+00113         AddAppointmentOrdered(user[item->callee\_id[i]].accepted, item);
+00114         AddAppointmentOrderedFromList(user[item->callee\_id[i]].rejected, temp\_list);
+00115     \}
+00116 \}
+00117 
+00118 \textcolor{keyword}{static} \textcolor{keywordtype}{void} AddToAllReject(\textcolor{keyword}{const} \textcolor{keyword}{struct} Appointment *item)
+00119 \{
+00120     AddAppointmentOrdered(user[item->caller\_id].rejected, item);
+00121     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<USER_NUMBER; i++)
+00122     \{
+00123         \textcolor{keywordflow}{if}(item->callee\_id[i]==-1)
+00124             \textcolor{keywordflow}{break};
+00125         AddAppointmentOrdered(user[item->callee\_id[i]].rejected, item);
+00126     \}
+00127 \}
+00128 
+00130 \textcolor{keyword}{static} \textcolor{keywordtype}{void} SetAppointmentAccepted(\textcolor{keyword}{struct} AppointmentList *inputList)
+00131 \{
+00132     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00133     \{
+00134         \textcolor{keyword}{struct }Appointment *ptr = user[i].accepted->head;
+00135         \textcolor{keywordflow}{while}(ptr)
+00136         \{
+00137             GetAppointmentById(inputList, ptr->id)->is\_accepted = 1;
+00138             ptr = ptr->next;
+00139         \}
+00140     \}
+00141 \}
+00142 
+00143 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetEmptyTimeSlotInDay(\textcolor{keyword}{struct} AppointmentList *userList, time\_t date)
+00144 \{
+00145     \textcolor{keyword}{struct }AppointmentList *empty\_list = CreateAppointmentList();
+00146     \textcolor{comment}{//18:00-22:00}
+00147     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
+00148     timeinfo = *localtime (&date);
+00149 
+00150     \textcolor{comment}{//foreach 18:00-22:00 half hour timeslot}
+00151     timeinfo.tm\_hour = 18;
+00152     \textcolor{keywordflow}{while}(timeinfo.tm\_hour<22)
+00153     \{
+00154         \textcolor{keyword}{struct }Appointment *item = CreateAppointment();
+00155         \textcolor{comment}{//first half hour}
+00156         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
+00157         item->start = mktime(&timeinfo\_tmp);
+00158         timeinfo.tm\_min = 30;
+00159         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
+00160         item->end = mktime(&timeinfo\_tmp);
+00161         \textcolor{keywordflow}{if}(!IsConflictInList(userList, item))
+00162             AddAppointmentOrdered(empty\_list, item);
+00163 
+00164 
+00165         \textcolor{comment}{//second half hour}
 00166         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
-00167         item->end = mktime(&timeinfo\_tmp);
-00168         \textcolor{keywordflow}{if}(!IsConflictInList(userList, item))
-00169             AddAppointmentOrdered(empty\_list, item);
-00170     \}
-00171     \textcolor{keywordflow}{return} empty\_list;
-00172 \}
-00173 
-00174 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetEmptyTimeSlotInRange(\textcolor{keyword}{struct} AppointmentList *userList, time\_t start\_date,
+00167         item->start = mktime(&timeinfo\_tmp);
+00168         timeinfo.tm\_hour++;
+00169         timeinfo.tm\_min = 0;
+00170         timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
+00171         item->end = mktime(&timeinfo\_tmp);
+00172         \textcolor{keywordflow}{if}(!IsConflictInList(userList, item))
+00173             AddAppointmentOrdered(empty\_list, item);
+00174     \}
+00175     \textcolor{keywordflow}{return} empty\_list;
+00176 \}
+00177 
+00178 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetEmptyTimeSlotInRange(\textcolor{keyword}{struct} AppointmentList *userList, time\_t start\_date,
        time\_t end\_date)
-00175 \{
-00176     \textcolor{keyword}{struct }AppointmentList *empty\_list = CreateAppointmentList();
-00177     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
-00178 
-00179     \textcolor{comment}{//set the time start<end so that we can use difftime() to compare the date.}
-00180     timeinfo = *localtime (&start\_date);
-00181     timeinfo.tm\_hour = 1;
-00182     timeinfo\_tmp = timeinfo;
-00183     start\_date = mktime(&timeinfo\_tmp);
-00184 
-00185     timeinfo = *localtime (&end\_date);
-00186     timeinfo.tm\_hour = 2;
-00187     timeinfo\_tmp = timeinfo;
-00188     end\_date = mktime(&timeinfo\_tmp);
-00189 
-00190     timeinfo = *localtime (&start\_date);
-00191     \textcolor{keywordflow}{while}(difftime(start\_date, end\_date)<0)
-00192     \{
-00193         AddAppointmentFromList(empty\_list, GetEmptyTimeSlotInDay(userList, start\_date));
-00194 
-00195         timeinfo.tm\_mday++;
-00196         timeinfo\_tmp = timeinfo;
-00197         start\_date = mktime(&timeinfo\_tmp);
-00198     \}
-00199     \textcolor{keywordflow}{return} empty\_list;
-00200 \}
-00201 
-00202 \textcolor{keyword}{static} time\_t GetEarliestStartTime(\textcolor{keyword}{struct} AppointmentList *list)
-00203 \{
-00204     \textcolor{keyword}{struct }Appointment *item = list->head;
-00205     time\_t earliest = item->start;
-00206     \textcolor{keywordflow}{while}(item)
-00207     \{
-00208         \textcolor{keywordflow}{if}(difftime(item->start, earliest)<0)
-00209             earliest = item->start;
-00210         item = item->next;
-00211     \}
-00212     \textcolor{keywordflow}{return} earliest;
-00213 \}
-00214 
-00215 \textcolor{keyword}{static} time\_t GetLatestEndTime(\textcolor{keyword}{struct} AppointmentList *list)
-00216 \{
-00217     \textcolor{keyword}{struct }Appointment *item = list->head;
-00218     time\_t latest = item->end;
-00219     \textcolor{keywordflow}{while}(item)
-00220     \{
-00221         \textcolor{keywordflow}{if}(difftime(latest, item->end)<0)
-00222             latest = item->end;
-00223         item = item->next;
-00224     \}
-00225     \textcolor{keywordflow}{return} latest;
-00226 \}
-00227 
-00228 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetContinueTimeslotFromList(\textcolor{keyword}{const} \textcolor{keyword}{struct} 
+00179 \{
+00180     \textcolor{keyword}{struct }AppointmentList *empty\_list = CreateAppointmentList();
+00181     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
+00182 
+00183     \textcolor{comment}{//set the time start<end so that we can use difftime() to compare the date.}
+00184     timeinfo = *localtime (&start\_date);
+00185     timeinfo.tm\_hour = 1;
+00186     timeinfo\_tmp = timeinfo;
+00187     start\_date = mktime(&timeinfo\_tmp);
+00188 
+00189     timeinfo = *localtime (&end\_date);
+00190     timeinfo.tm\_hour = 2;
+00191     timeinfo\_tmp = timeinfo;
+00192     end\_date = mktime(&timeinfo\_tmp);
+00193 
+00194     timeinfo = *localtime (&start\_date);
+00195     \textcolor{keywordflow}{while}(difftime(start\_date, end\_date)<0)
+00196     \{
+00197         AddAppointmentFromList(empty\_list, GetEmptyTimeSlotInDay(userList, start\_date));
+00198 
+00199         timeinfo.tm\_mday++;
+00200         timeinfo\_tmp = timeinfo;
+00201         start\_date = mktime(&timeinfo\_tmp);
+00202     \}
+00203     \textcolor{keywordflow}{return} empty\_list;
+00204 \}
+00205 
+00206 \textcolor{keyword}{static} time\_t GetEarliestStartTime(\textcolor{keyword}{struct} AppointmentList *list)
+00207 \{
+00208     \textcolor{keyword}{struct }Appointment *item = list->head;
+00209     time\_t earliest = item->start;
+00210     \textcolor{keywordflow}{while}(item)
+00211     \{
+00212         \textcolor{keywordflow}{if}(difftime(item->start, earliest)<0)
+00213             earliest = item->start;
+00214         item = item->next;
+00215     \}
+00216     \textcolor{keywordflow}{return} earliest;
+00217 \}
+00218 
+00219 \textcolor{keyword}{static} time\_t GetLatestEndTime(\textcolor{keyword}{struct} AppointmentList *list)
+00220 \{
+00221     \textcolor{keyword}{struct }Appointment *item = list->head;
+00222     time\_t latest = item->end;
+00223     \textcolor{keywordflow}{while}(item)
+00224     \{
+00225         \textcolor{keywordflow}{if}(difftime(latest, item->end)<0)
+00226             latest = item->end;
+00227         item = item->next;
+00228     \}
+00229     \textcolor{keywordflow}{return} latest;
+00230 \}
+00231 
+00232 \textcolor{keyword}{static} \textcolor{keyword}{struct }AppointmentList* GetContinueTimeslotFromList(\textcolor{keyword}{const} \textcolor{keyword}{struct} 
       AppointmentList *list, time\_t duration)
-00229 \{
-00230     \textcolor{keyword}{struct }Appointment *ptr;
-00231     \textcolor{keyword}{struct }Appointment *item = list->head;
-00232     \textcolor{keyword}{struct }AppointmentList *ret\_list = CreateAppointmentList();
-00233     \textcolor{keywordtype}{int} timeslot = duration / 60 / 30 - 1;  \textcolor{comment}{//how many half hour}
-00234     \textcolor{keywordflow}{while}(item)
-00235     \{
-00236         ptr = item;
-00237         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<timeslot; i++)
-00238             ptr = ptr->next;
-00239         \textcolor{keywordflow}{if}(!ptr)
-00240             \textcolor{keywordflow}{return} ret\_list;
-00241         \textcolor{keywordflow}{if}(difftime(ptr->end, item->start)==duration)
-00242             AddAppointmentOrdered(ret\_list, item);
-00243         item = item->next;
-00244     \}
-00245     \textcolor{keywordflow}{return} ret\_list;
-00246 \}
-00247 
-00248 \textcolor{keyword}{struct }Summary* Schedual_FCFS(\textcolor{keyword}{struct} AppointmentList *inputList)
-00249 \{
-00250     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
-00251     \textcolor{keywordflow}{while}(ptr)
-00252     \{
-00253         \textcolor{keywordflow}{if}(IsAllAvailable(ptr))
-00254         \{
-00255             AddToAllAccept(ptr);
-00256         \}
-00257         \textcolor{keywordflow}{else}
-00258         \{
-00259             AddToAllReject(ptr);
-00260         \}
-00261         ptr = ptr->next;
-00262     \}
-00263 
-00264     \textcolor{comment}{//Summary}
-00265     \textcolor{keyword}{struct }Summary *summary = (\textcolor{keyword}{struct }Summary *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
-00266     summary->start = GetEarliestStartTime(inputList);
-00267     summary->end = GetLatestEndTime(inputList);
-00268     
-00269     SetAppointmentAccepted(inputList);
-00270     ptr = inputList->head;
-00271     \textcolor{keywordflow}{while}(ptr)
-00272     \{
-00273         \textcolor{keywordflow}{if}(ptr->is_accepted)
-00274             summary->total_accepted++;
-00275         \textcolor{keywordflow}{else}
-00276             summary->total_rejected++;
-00277         ptr = ptr->next;
-00278     \}
-00279     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00280     \{
-00281         summary->accepted[i] = user[i].accepted->count;
-00282         summary->rejected[i] = user[i].rejected->count;
-00283         summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->
-      start, summary->end)->count;
-00284 
-00285         \textcolor{comment}{// PrintAppointmentList(GetContinueTimeslotFromList(GetEmptyTimeSlotInRange(user[i].accepted,
-       summary->start, summary->end), 2*60*30));}
-00286         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
+00233 \{
+00234     \textcolor{keyword}{struct }Appointment *ptr;
+00235     \textcolor{keyword}{struct }Appointment *item = list->head;
+00236     \textcolor{keyword}{struct }AppointmentList *ret\_list = CreateAppointmentList();
+00237     \textcolor{keywordtype}{int} timeslot = duration / 60 / 30 - 1;  \textcolor{comment}{//how many half hour}
+00238     \textcolor{keywordflow}{while}(item)
+00239     \{
+00240         ptr = item;
+00241         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<timeslot; i++)
+00242             ptr = ptr->next;
+00243         \textcolor{keywordflow}{if}(!ptr)
+00244             \textcolor{keywordflow}{return} ret\_list;
+00245         \textcolor{keywordflow}{if}(difftime(ptr->end, item->start)==duration)
+00246             AddAppointmentOrdered(ret\_list, item);
+00247         item = item->next;
+00248     \}
+00249     \textcolor{keywordflow}{return} ret\_list;
+00250 \}
+00251 
+00252 \textcolor{keyword}{struct }Summary* Schedual_FCFS(\textcolor{keyword}{struct} AppointmentList *inputList)
+00253 \{
+00254     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
+00255     \textcolor{keywordflow}{while}(ptr)
+00256     \{
+00257         \textcolor{keywordtype}{int} ret = AllAvailable(ptr);
+00258         \textcolor{keywordflow}{if}(ret<0)
+00259         \{
+00260             AddToAllAccept(ptr);
+00261         \}
+00262         \textcolor{keywordflow}{else}
+00263         \{
+00264             \textcolor{keywordtype}{char} reason[50];
+00265             strcpy(reason, user[ret].username);
+00266             strcat(reason, \textcolor{stringliteral}{" is unavailable."});
+00267             strcpy(ptr->reason, reason);
+00268             AddToAllReject(ptr);
+00269         \}
+00270         ptr = ptr->next;
+00271     \}
+00272 
+00273     \textcolor{comment}{//Summary}
+00274     \textcolor{keyword}{struct }Summary *summary = (\textcolor{keyword}{struct }Summary *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
+00275     summary->start = GetEarliestStartTime(inputList);
+00276     summary->end = GetLatestEndTime(inputList);
+00277     
+00278     SetAppointmentAccepted(inputList);
+00279     ptr = inputList->head;
+00280     \textcolor{keywordflow}{while}(ptr)
+00281     \{
+00282         \textcolor{keywordflow}{if}(ptr->is\_accepted)
+00283             summary->total\_accepted++;
+00284         \textcolor{keywordflow}{else}
+00285             summary->total\_rejected++;
+00286         ptr = ptr->next;
 00287     \}
-00288     \textcolor{keywordflow}{return} summary;
-00289 \}
-00290 
-00291 \textcolor{keyword}{struct }Summary* Schedual_PRIO(\textcolor{keyword}{struct} AppointmentList *inputList)
-00292 \{
-00293     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
-00294     \textcolor{keywordflow}{while}(ptr)
-00295     \{
-00296         \textcolor{keywordflow}{if}(IsAllAvailablePriority(ptr))
-00297         \{
-00298             AddToAllAcceptForced(ptr);
-00299         \}
-00300         \textcolor{keywordflow}{else}
-00301         \{
-00302             AddToAllReject(ptr);
-00303         \}
-00304         ptr = ptr->next;
-00305     \}
-00306 
-00307     \textcolor{comment}{//Summary}
-00308     \textcolor{keyword}{struct }Summary *summary = (\textcolor{keyword}{struct }Summary *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
-00309     summary->start = GetEarliestStartTime(inputList);
-00310     summary->end = GetLatestEndTime(inputList);
-00311     
-00312     SetAppointmentAccepted(inputList);
-00313     ptr = inputList->head;
-00314     \textcolor{keywordflow}{while}(ptr)
-00315     \{
-00316         \textcolor{keywordflow}{if}(ptr->is_accepted)
-00317             summary->total_accepted++;
-00318         \textcolor{keywordflow}{else}
-00319             summary->total_rejected++;
-00320         ptr = ptr->next;
-00321     \}
-00322     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00323     \{
-00324         summary->accepted[i] = user[i].accepted->count;
-00325         summary->rejected[i] = user[i].rejected->count;
-00326         summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->
-      start, summary->end)->count;
-00327         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
-00328     \}
-00329     \textcolor{keywordflow}{return} summary;
-00330 \}
-00331 
-00332 \textcolor{keyword}{struct }Summary* Schedual_OPTI(\textcolor{keyword}{struct} AppointmentList *inputList)
-00333 \{
-00334     \textcolor{keyword}{struct }Summary *summary = Schedual_PRIO(inputList);
-00335     time\_t day = 60*60*24;
-00336 
-00337     \textcolor{comment}{//For each user, try to reschedule their rejected jobs}
-00338     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00339     \{
-00340         \textcolor{keyword}{struct }Appointment *item = user[i].rejected->head;
-00341         NEXT\_ITEM:
-00342         \textcolor{keywordflow}{while}(item)
-00343         \{
-00344             time\_t ori\_start = item->start;
-00345             time\_t ori\_end = item->end;
-00346             time\_t duration = difftime(item->end, item->start);
-00347             \textcolor{keyword}{struct }AppointmentList *list = GetEmptyTimeSlotInRange(user[i].accepted, item->
-      start, item->start+3*day);
-00348             \textcolor{keyword}{struct }AppointmentList *c\_list = GetContinueTimeslotFromList(list, duration);
-00349 
-00350             \textcolor{keyword}{struct }Appointment *timeslot = c\_list->head;
-00351             \textcolor{keywordflow}{while}(timeslot)
-00352             \{
-00353                 item->start = timeslot->start;
-00354                 item->end = item->start + duration;
-00355 
-00356                 \textcolor{keywordflow}{if}(IsAllAvailable(item))
-00357                 \{
-00358                     item->rescheduled = 1;
-00359                     AddToAllAccept(item);
-00360                     \textcolor{keyword}{struct }Appointment *temp = item;
-00361                     item = item->next;
-00362                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<NumOfUser; j++)
-00363                         RemoveItemFromList(user[j].rejected, temp);
-00364                     \textcolor{keywordflow}{goto} NEXT\_ITEM;
-00365                 \}
-00366                 item->start = ori\_start;
-00367                 item->end = ori\_end;
-00368                 timeslot = timeslot->next;
-00369             \}
-00370             item = item->next;
-00371         \}
-00372     \}
-00373 
-00374     \textcolor{comment}{//Re-calculate the summary}
-00375     memset(summary, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
-00376     summary->start = GetEarliestStartTime(inputList);
-00377     summary->end = GetLatestEndTime(inputList);
-00378     SetAppointmentAccepted(inputList);
-00379     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
-00380     \textcolor{keywordflow}{while}(ptr)
-00381     \{
-00382         \textcolor{keywordflow}{if}(ptr->is_accepted)
-00383             summary->total_accepted++;
-00384         \textcolor{keywordflow}{else}
-00385             summary->total_rejected++;
-00386         ptr = ptr->next;
-00387     \}
-00388     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00389     \{
-00390         summary->accepted[i] = user[i].accepted->count;
-00391         summary->rejected[i] = user[i].rejected->count;
-00392         summary->empty_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->
-      start, summary->end)->count;
-00393         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
-00394     \}
-00395     \textcolor{keywordflow}{return} summary;
-00396 \}
-00397 
-00398 \textcolor{keyword}{static} \textcolor{keywordtype}{int} rdn(\textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} d) \{
-00399     \textcolor{keywordflow}{if} (m < 3)
-00400         y--, m += 12;
-00401     \textcolor{keywordflow}{return} 365*y + y/4 - y/100 + y/400 + (153*m - 457)/5 + d - 306;
-00402 \}
-00403 
-00404 \textcolor{keywordtype}{void} PrintSummary(\textcolor{keyword}{struct} Summary *summary)
-00405 \{
-00406     \textcolor{keywordtype}{float} total = summary->total_accepted+summary->total_rejected;
-00407     \textcolor{keyword}{struct }tm timeinfo, timeinfo2;
-00408     \textcolor{keywordtype}{int} days;
-00409     
-00410     printf(\textcolor{stringliteral}{"Performance:\(\backslash\)n"});
-00411     timeinfo = *localtime(&summary->start);
-00412     printf(\textcolor{stringliteral}{"Date start: %4d-%02d-%02d\(\backslash\)n"}, timeinfo.tm\_year+1900, timeinfo.tm\_mon+1, timeinfo.tm\_mday);
-00413     timeinfo2 = *localtime(&summary->end);
-00414     printf(\textcolor{stringliteral}{"Date end: %4d-%02d-%02d\(\backslash\)n\(\backslash\)n"}, timeinfo2.tm\_year+1900, timeinfo2.tm\_mon+1, timeinfo2.tm\_mday);
-00415 
-00416     printf(\textcolor{stringliteral}{"Total Number of Appointment Assigned: %d (%.1f%%)\(\backslash\)n"}, summary->
-      total_accepted, summary->total_accepted/total*100);
-00417     printf(\textcolor{stringliteral}{"Total Number of Appointment Rejected: %d (%.1f%%)\(\backslash\)n"}, summary->
-      total_rejected, summary->total_rejected/total*100);
-00418 
-00419     days = rdn(timeinfo2.tm\_year, timeinfo2.tm\_mon+1, timeinfo2.tm\_mday) - rdn(timeinfo.tm\_year, timeinfo.
-      tm\_mon+1, timeinfo.tm\_mday) + 1;
-00420     printf(\textcolor{stringliteral}{"Utilization of Time Slot: (%d days)\(\backslash\)n"}, days+1);
-00421     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00422     \{
-00423         printf(\textcolor{stringliteral}{"    %-10s - %.1f%%\(\backslash\)n"}, user[i].username, (days*2*4-(\textcolor{keywordtype}{float})summary->
-      empty_timeslot[i])/(days*2*4)*100); \textcolor{comment}{//each day have 2*8 timeslots}
-00424     \}
+00288     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00289     \{
+00290         summary->accepted[i] = user[i].accepted->count;
+00291         summary->rejected[i] = user[i].rejected->count;
+00292         summary->empty\_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end
+      )->count;
+00293 
+00294         \textcolor{comment}{// PrintAppointmentList(GetContinueTimeslotFromList(GetEmptyTimeSlotInRange(user[i].accepted,
+       summary->start, summary->end), 2*60*30));}
+00295         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
+00296     \}
+00297     \textcolor{keywordflow}{return} summary;
+00298 \}
+00299 
+00300 \textcolor{keyword}{struct }Summary* Schedual_PRIO(\textcolor{keyword}{struct} AppointmentList *inputList)
+00301 \{
+00302     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
+00303     \textcolor{keywordflow}{while}(ptr)
+00304     \{
+00305         \textcolor{keywordtype}{int} ret = AllAvailablePriority(ptr);
+00306         \textcolor{keywordflow}{if}(ret<0)
+00307         \{
+00308             AddToAllAcceptForced(ptr);
+00309         \}
+00310         \textcolor{keywordflow}{else}
+00311         \{
+00312             \textcolor{keywordtype}{char} reason[50];
+00313             strcpy(reason, user[ret].username);
+00314             strcat(reason, \textcolor{stringliteral}{" is unavailable."});
+00315             strcpy(ptr->reason, reason);
+00316             AddToAllReject(ptr);
+00317         \}
+00318         ptr = ptr->next;
+00319     \}
+00320 
+00321     \textcolor{comment}{//Summary}
+00322     \textcolor{keyword}{struct }Summary *summary = (\textcolor{keyword}{struct }Summary *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
+00323     summary->start = GetEarliestStartTime(inputList);
+00324     summary->end = GetLatestEndTime(inputList);
+00325     
+00326     SetAppointmentAccepted(inputList);
+00327     ptr = inputList->head;
+00328     \textcolor{keywordflow}{while}(ptr)
+00329     \{
+00330         \textcolor{keywordflow}{if}(ptr->is\_accepted)
+00331             summary->total\_accepted++;
+00332         \textcolor{keywordflow}{else}
+00333             summary->total\_rejected++;
+00334         ptr = ptr->next;
+00335     \}
+00336     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00337     \{
+00338         summary->accepted[i] = user[i].accepted->count;
+00339         summary->rejected[i] = user[i].rejected->count;
+00340         summary->empty\_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end
+      )->count;
+00341         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
+00342     \}
+00343     \textcolor{keywordflow}{return} summary;
+00344 \}
+00345 
+00346 \textcolor{keyword}{struct }Summary* Schedual_OPTI(\textcolor{keyword}{struct} AppointmentList *inputList)
+00347 \{
+00348     \textcolor{keyword}{struct }Summary *summary = Schedual_PRIO(inputList);
+00349     time\_t day = 60*60*24;
+00350 
+00351     \textcolor{comment}{//For each user, try to reschedule their rejected jobs}
+00352     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00353     \{
+00354         \textcolor{keyword}{struct }Appointment *item = user[i].rejected->head;
+00355         NEXT\_ITEM:
+00356         \textcolor{keywordflow}{while}(item)
+00357         \{
+00358             time\_t ori\_start = item->start;
+00359             time\_t ori\_end = item->end;
+00360             time\_t duration = difftime(item->end, item->start);
+00361             \textcolor{keyword}{struct }AppointmentList *list = GetEmptyTimeSlotInRange(user[i].accepted, item->start, item->
+      start+3*day);
+00362             \textcolor{keyword}{struct }AppointmentList *c\_list = GetContinueTimeslotFromList(list, duration);
+00363 
+00364             \textcolor{keyword}{struct }Appointment *timeslot = c\_list->head;
+00365             \textcolor{keywordflow}{while}(timeslot)
+00366             \{
+00367                 item->start = timeslot->start;
+00368                 item->end = item->start + duration;
+00369 
+00370                 \textcolor{keywordtype}{int} ret = AllAvailable(item);
+00371                 \textcolor{keywordflow}{if}(ret<0)
+00372                 \{
+00373                     item->rescheduled = 1;
+00374                     AddToAllAccept(item);
+00375                     \textcolor{keyword}{struct }Appointment *temp = item;
+00376                     item = item->next;
+00377                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<NumOfUser; j++)
+00378                         RemoveItemFromList(user[j].rejected, temp);
+00379                     \textcolor{keywordflow}{goto} NEXT\_ITEM;
+00380                 \}
+00381                 strcpy(item->reason, \textcolor{stringliteral}{"No available timeslot for the reschedule."});
+00382                 item->start = ori\_start;
+00383                 item->end = ori\_end;
+00384                 timeslot = timeslot->next;
+00385             \}
+00386             item = item->next;
+00387         \}
+00388     \}
+00389 
+00390     \textcolor{comment}{//Re-calculate the summary}
+00391     memset(summary, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} Summary));
+00392     summary->start = GetEarliestStartTime(inputList);
+00393     summary->end = GetLatestEndTime(inputList);
+00394     SetAppointmentAccepted(inputList);
+00395     \textcolor{keyword}{struct }Appointment *ptr = inputList->head;
+00396     \textcolor{keywordflow}{while}(ptr)
+00397     \{
+00398         \textcolor{keywordflow}{if}(ptr->is\_accepted)
+00399             summary->total\_accepted++;
+00400         \textcolor{keywordflow}{else}
+00401             summary->total\_rejected++;
+00402         ptr = ptr->next;
+00403     \}
+00404     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00405     \{
+00406         summary->accepted[i] = user[i].accepted->count;
+00407         summary->rejected[i] = user[i].rejected->count;
+00408         summary->empty\_timeslot[i] = GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end
+      )->count;
+00409         \textcolor{comment}{// PrintAppointmentList(GetEmptyTimeSlotInRange(user[i].accepted, summary->start, summary->end));}
+00410     \}
+00411     \textcolor{keywordflow}{return} summary;
+00412 \}
+00413 
+00414 \textcolor{keyword}{static} \textcolor{keywordtype}{int} rdn(\textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} d) \{
+00415     \textcolor{keywordflow}{if} (m < 3)
+00416         y--, m += 12;
+00417     \textcolor{keywordflow}{return} 365*y + y/4 - y/100 + y/400 + (153*m - 457)/5 + d - 306;
+00418 \}
+00419 
+00420 \textcolor{keywordtype}{void} PrintSummary(\textcolor{keyword}{struct} Summary *summary)
+00421 \{
+00422     \textcolor{keywordtype}{float} total = summary->total\_accepted+summary->total\_rejected;
+00423     \textcolor{keyword}{struct }tm timeinfo, timeinfo2;
+00424     \textcolor{keywordtype}{int} days;
 00425     
-00426 \}
+00426     printf(\textcolor{stringliteral}{"Performance:\(\backslash\)n"});
+00427     timeinfo = *localtime(&summary->start);
+00428     printf(\textcolor{stringliteral}{"Date start: %4d-%02d-%02d\(\backslash\)n"}, timeinfo.tm\_year+1900, timeinfo.tm\_mon+1, timeinfo.tm\_mday);
+00429     timeinfo2 = *localtime(&summary->end);
+00430     printf(\textcolor{stringliteral}{"Date end: %4d-%02d-%02d\(\backslash\)n\(\backslash\)n"}, timeinfo2.tm\_year+1900, timeinfo2.tm\_mon+1, timeinfo2.tm\_mday);
+00431 
+00432     printf(\textcolor{stringliteral}{"Total Number of Appointment Assigned: %d (%.1f%%)\(\backslash\)n"}, summary->total\_accepted, summary->
+      total\_accepted/total*100);
+00433     printf(\textcolor{stringliteral}{"Total Number of Appointment Rejected: %d (%.1f%%)\(\backslash\)n"}, summary->total\_rejected, summary->
+      total\_rejected/total*100);
+00434 
+00435     days = rdn(timeinfo2.tm\_year, timeinfo2.tm\_mon+1, timeinfo2.tm\_mday) - rdn(timeinfo.tm\_year, timeinfo.
+      tm\_mon+1, timeinfo.tm\_mday) + 1;
+00436     printf(\textcolor{stringliteral}{"Utilization of Time Slot: (%d days)\(\backslash\)n"}, days+1);
+00437     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00438     \{
+00439         printf(\textcolor{stringliteral}{"    %-10s - %.1f%%\(\backslash\)n"}, user[i].username, (days*2*4-(\textcolor{keywordtype}{float})summary->empty\_timeslot[i])/(days
+      *2*4)*100);  \textcolor{comment}{//each day have 2*8 timeslots}
+00440     \}
+00441     
+00442 \}
 \end{DoxyCode}

@@ -12,25 +12,38 @@ Store a appointment record.
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-enum {\bf Appointment\+Type} {\bf type}
+enum {\bf Appointment\+Type} {\bfseries type}\label{struct_appointment_ae7b6c9fdabaf04275e5799e5daf7eecd}
+
 \item 
-int {\bf id}
+int {\bfseries id}\label{struct_appointment_a7441ef0865bcb3db9b8064dd7375c1ea}
+
 \item 
-int {\bf caller\+\_\+id}
+int {\bfseries caller\+\_\+id}\label{struct_appointment_a677c4126148ba11b303127cd76cf9e35}
+
 \item 
-int {\bf callee\+\_\+id} [10]
+int {\bfseries callee\+\_\+id} [10]\label{struct_appointment_a1c758224d618992d6bcda246e68384c3}
+
 \item 
-time\+\_\+t {\bf start}
+time\+\_\+t {\bfseries start}\label{struct_appointment_ada310e7f72b38fadd4b24d80ed3438ee}
+
 \item 
-time\+\_\+t {\bf end}
+time\+\_\+t {\bfseries end}\label{struct_appointment_a13455ba845bf5d4dba37be491bc6a036}
+
 \item 
-int {\bf is\+\_\+accepted}
+int {\bfseries is\+\_\+accepted}\label{struct_appointment_a30449d2de0bda7cca32135a283b0162b}
+
 \item 
-int {\bf rescheduled}
+int {\bfseries rescheduled}\label{struct_appointment_a7d53dc414f2d787dc031b868da72e703}
+
 \item 
-struct {\bf Appointment} $\ast$ {\bf prev}
+char {\bfseries reason} [50]\label{struct_appointment_a578cf64f7f41b31eeda6f51fdd99b971}
+
 \item 
-struct {\bf Appointment} $\ast$ {\bf next}
+struct {\bf Appointment} $\ast$ {\bfseries prev}\label{struct_appointment_a76cac42b207c5cf8c9175afad72b7bd2}
+
+\item 
+struct {\bf Appointment} $\ast$ {\bfseries next}\label{struct_appointment_a7a0b65c736183dbc90fdeb836add2a10}
+
 \end{DoxyCompactItemize}
 
 
@@ -38,79 +51,6 @@ struct {\bf Appointment} $\ast$ {\bf next}
 Store a appointment record. 
 
 Definition at line {\bf 48} of file {\bf appointment\+\_\+list.\+h}.
-
-
-
-\subsection{Field Documentation}
-\index{Appointment@{Appointment}!callee\+\_\+id@{callee\+\_\+id}}
-\index{callee\+\_\+id@{callee\+\_\+id}!Appointment@{Appointment}}
-\subsubsection[{callee\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}int callee\+\_\+id[10]}\label{struct_appointment_a1c758224d618992d6bcda246e68384c3}
-
-
-Definition at line {\bf 53} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!caller\+\_\+id@{caller\+\_\+id}}
-\index{caller\+\_\+id@{caller\+\_\+id}!Appointment@{Appointment}}
-\subsubsection[{caller\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}int caller\+\_\+id}\label{struct_appointment_a677c4126148ba11b303127cd76cf9e35}
-
-
-Definition at line {\bf 52} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!end@{end}}
-\index{end@{end}!Appointment@{Appointment}}
-\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}time\+\_\+t end}\label{struct_appointment_a13455ba845bf5d4dba37be491bc6a036}
-
-
-Definition at line {\bf 55} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!id@{id}}
-\index{id@{id}!Appointment@{Appointment}}
-\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}int id}\label{struct_appointment_a7441ef0865bcb3db9b8064dd7375c1ea}
-
-
-Definition at line {\bf 51} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!is\+\_\+accepted@{is\+\_\+accepted}}
-\index{is\+\_\+accepted@{is\+\_\+accepted}!Appointment@{Appointment}}
-\subsubsection[{is\+\_\+accepted}]{\setlength{\rightskip}{0pt plus 5cm}int is\+\_\+accepted}\label{struct_appointment_a30449d2de0bda7cca32135a283b0162b}
-
-
-Definition at line {\bf 56} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!next@{next}}
-\index{next@{next}!Appointment@{Appointment}}
-\subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment}$\ast$ next}\label{struct_appointment_a7a0b65c736183dbc90fdeb836add2a10}
-
-
-Definition at line {\bf 59} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!prev@{prev}}
-\index{prev@{prev}!Appointment@{Appointment}}
-\subsubsection[{prev}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf Appointment}$\ast$ prev}\label{struct_appointment_a76cac42b207c5cf8c9175afad72b7bd2}
-
-
-Definition at line {\bf 58} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!rescheduled@{rescheduled}}
-\index{rescheduled@{rescheduled}!Appointment@{Appointment}}
-\subsubsection[{rescheduled}]{\setlength{\rightskip}{0pt plus 5cm}int rescheduled}\label{struct_appointment_a7d53dc414f2d787dc031b868da72e703}
-
-
-Definition at line {\bf 57} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!start@{start}}
-\index{start@{start}!Appointment@{Appointment}}
-\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}time\+\_\+t start}\label{struct_appointment_ada310e7f72b38fadd4b24d80ed3438ee}
-
-
-Definition at line {\bf 54} of file {\bf appointment\+\_\+list.\+h}.
-
-\index{Appointment@{Appointment}!type@{type}}
-\index{type@{type}!Appointment@{Appointment}}
-\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Appointment\+Type} type}\label{struct_appointment_ae7b6c9fdabaf04275e5799e5daf7eecd}
-
-
-Definition at line {\bf 50} of file {\bf appointment\+\_\+list.\+h}.
 
 
 

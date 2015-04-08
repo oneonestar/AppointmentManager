@@ -181,109 +181,111 @@
 00198         \textcolor{keywordflow}{if}(!pch)
 00199             \textcolor{keywordflow}{break};
 00200         \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = GetUserID(pch);
-00201         item->callee_id[callee\_count++] = id;
-00202     \}
-00203 
-00204     item->caller_id = GetUserID(caller);
-00205     \textcolor{comment}{//time}
-00206     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
-00207     memset(&timeinfo, 0, \textcolor{keyword}{sizeof}(timeinfo));
-00208     timeinfo.tm\_isdst = -1;
-00209     timeinfo.tm\_year = year - 1900;
-00210     timeinfo.tm\_mon = month - 1;
-00211     timeinfo.tm\_mday = day;
-00212     \textcolor{comment}{//start time}
-00213     \textcolor{comment}{//convert ot half hour base}
-00214     timeinfo.tm\_hour = hour;
-00215     \textcolor{keywordflow}{if}(minutes>=0 && minutes <= 30)
-00216         timeinfo.tm\_min = 0;
-00217     \textcolor{keywordflow}{else}
-00218         timeinfo.tm\_min = 30;
-00219 
-00220     timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
-00221     item->start = mktime(&timeinfo\_tmp);
-00222     \textcolor{comment}{//convert duration to end time}
-00223     \textcolor{keywordtype}{double} \_;
-00224     \textcolor{keywordtype}{double} fractional = modf(duration, &\_);
-00225     minutes += fractional*60;
-00226     hour = hour+(int)duration;
-00227     \textcolor{keywordflow}{if}(minutes>=60)
-00228         hour++;
-00229     minutes %= 60;
-00230 
-00231     timeinfo.tm\_hour = hour;
-00232     \textcolor{keywordflow}{if}(minutes>0 && minutes <= 30)
-00233         timeinfo.tm\_min = 0;
-00234     \textcolor{keywordflow}{else}
-00235         timeinfo.tm\_min = 30;
-00236     item->end = mktime(&timeinfo);
-00237 
-00238     item->id = inputList->count;
-00239     AddAppointment(inputList, item);
-00240     printf(\textcolor{stringliteral}{"-> [Pending]\(\backslash\)n"});
-00241 \}
-00242 
-00243 
-00244 \textcolor{keywordtype}{void} inputLoop(FILE *stream)
-00245 \{
-00246     \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_CHAR = 255;
-00247     \textcolor{keywordtype}{char} line[MAX\_CHAR];
-00248     \textcolor{keywordtype}{char} *return\_val;
-00249     \textcolor{keywordflow}{while}(1)
-00250     \{
-00251         printf(\textcolor{stringliteral}{"Please enter appointment:\(\backslash\)n"});
-00252         return\_val = fgets(line, MAX\_CHAR, stream);
-00253         \textcolor{keywordflow}{if}(!return\_val)
-00254         \{
-00255             \textcolor{comment}{// sleep(10);}
-00256             \textcolor{keywordflow}{if}(feof(stream))
-00257             \{
-00258                 printf(\textcolor{stringliteral}{"Received EOF.\(\backslash\)n"});
-00259                 clearerr(stdin);
-00260                 \textcolor{comment}{//Allow ./AMR a b < input.txt, continue to read user input after EOF from stdin.}
-00261                 \textcolor{comment}{//WARNING: not portable, only works in linux!}
-00262                 \textcolor{keywordflow}{if} (!freopen(\textcolor{stringliteral}{"/dev/tty"}, \textcolor{stringliteral}{"rw"}, stdin)) \{
-00263                     perror(\textcolor{stringliteral}{"freopen"});
-00264                     exit(EXIT\_FAILURE);
-00265                 \}
-00266                 \textcolor{keywordflow}{continue};
-00267             \}
-00268             \textcolor{keywordflow}{else}
-00269             \{
-00270                 fprintf(stderr, \textcolor{stringliteral}{"IO error, existing program.\(\backslash\)n"});
-00271                 \textcolor{keywordflow}{return};
-00272                 \textcolor{comment}{// exit(EXIT\_FAILURE);}
-00273             \}
-00274         \}
-00275         HandleInput(line);
-00276     \}
-00277 \}
-00278 
-00279 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
-00280 \{
-00281     \textcolor{keywordflow}{if} (argc < 4 || argc > 11)
-00282     \{
-00283         fprintf(stderr, \textcolor{stringliteral}{"Error: The number of users should between 3 and 10.\(\backslash\)n"});
-00284         \textcolor{keywordflow}{return} EXIT\_FAILURE;
-00285     \}
-00286     NumOfUser = argc - 1;
-00287     \textcolor{comment}{//Initialize each user in struct user[];}
-00288     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
-00289     \{
-00290         \textcolor{keywordflow}{if}(GetUserID(argv[i+1]) != -1)
-00291         \{
-00292             printf(\textcolor{stringliteral}{"Duplicate names of users!\(\backslash\)n"});
-00293             exit(EXIT\_FAILURE);
-00294         \}
-00295         strcpy(user[i].username, argv[i+1]);
-00296         user[i].username[0] = toupper(user[i].username[0]);
-00297         user[i].accepted = CreateAppointmentList();
-00298         user[i].rejected = CreateAppointmentList();
-00299     \}
-00300     inputList = CreateAppointmentList();
-00301 
-00302     printf(\textcolor{stringliteral}{"~~WELCOME TO AMR~~\(\backslash\)n"});
-00303     inputLoop(stdin);
-00304     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
-00305 \}
+00201         \textcolor{keywordflow}{if}(\textcolor{keywordtype}{id}==-1)
+00202         \{
+00203             printf(\textcolor{stringliteral}{"->[Rejected: Unknown callee %s]\(\backslash\)n"}, pch);
+00204             \textcolor{keywordflow}{return};
+00205         \}
+00206         item->callee\_id[callee\_count++] = id;
+00207     \}
+00208 
+00209     item->caller\_id = GetUserID(caller);
+00210     \textcolor{keywordflow}{if}(item->caller\_id==-1)
+00211     \{
+00212         printf(\textcolor{stringliteral}{"->[Rejected: Unknown caller %s]\(\backslash\)n"}, caller);
+00213         \textcolor{keywordflow}{return};
+00214     \}
+00215     \textcolor{comment}{//time}
+00216     \textcolor{keyword}{struct }tm timeinfo, timeinfo\_tmp;
+00217     memset(&timeinfo, 0, \textcolor{keyword}{sizeof}(timeinfo));
+00218     timeinfo.tm\_isdst = -1;
+00219     timeinfo.tm\_year = year - 1900;
+00220     timeinfo.tm\_mon = month - 1;
+00221     timeinfo.tm\_mday = day;
+00222     \textcolor{comment}{//start time}
+00223     \textcolor{comment}{//convert ot half hour base}
+00224     timeinfo.tm\_hour = hour;
+00225     \textcolor{keywordflow}{if}(minutes>=0 && minutes <= 30)
+00226         timeinfo.tm\_min = 0;
+00227     \textcolor{keywordflow}{else}
+00228         timeinfo.tm\_min = 30;
+00229 
+00230     timeinfo\_tmp = timeinfo;    \textcolor{comment}{//because mktime could modify the value}
+00231     item->start = mktime(&timeinfo\_tmp);
+00232     \textcolor{comment}{//convert duration to end time}
+00233     \textcolor{keywordtype}{double} \_;
+00234     \textcolor{keywordtype}{double} fractional = modf(duration, &\_);
+00235     minutes += fractional*60;
+00236     hour = hour+(int)duration;
+00237     \textcolor{keywordflow}{if}(minutes>=60)
+00238         hour++;
+00239     minutes %= 60;
+00240 
+00241     timeinfo.tm\_hour = hour;
+00242     \textcolor{keywordflow}{if}(minutes>0 && minutes <= 30)
+00243         timeinfo.tm\_min = 0;
+00244     \textcolor{keywordflow}{else}
+00245         timeinfo.tm\_min = 30;
+00246     item->end = mktime(&timeinfo);
+00247 
+00248     item->id = inputList->count;
+00249     AddAppointment(inputList, item);
+00250     printf(\textcolor{stringliteral}{"-> [Pending]\(\backslash\)n"});
+00251 \}
+00252 
+00253 
+00254 \textcolor{keywordtype}{void} inputLoop(FILE *stream)
+00255 \{
+00256     \textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_CHAR = 255;
+00257     \textcolor{keywordtype}{char} line[MAX\_CHAR];
+00258     \textcolor{keywordtype}{char} *return\_val;
+00259     \textcolor{keywordflow}{while}(1)
+00260     \{
+00261         printf(\textcolor{stringliteral}{"Please enter appointment:\(\backslash\)n"});
+00262         return\_val = fgets(line, MAX\_CHAR, stream);
+00263         \textcolor{keywordflow}{if}(!return\_val)
+00264         \{
+00265             \textcolor{keywordflow}{if}(feof(stream))
+00266             \{
+00267                 printf(\textcolor{stringliteral}{"Received EOF.\(\backslash\)n"});
+00268                 \textcolor{keywordflow}{return};
+00269             \}
+00270             \textcolor{keywordflow}{else}
+00271             \{
+00272                 fprintf(stderr, \textcolor{stringliteral}{"IO error, existing program.\(\backslash\)n"});
+00273                 \textcolor{keywordflow}{return};
+00274                 \textcolor{comment}{// exit(EXIT\_FAILURE);}
+00275             \}
+00276         \}
+00277         HandleInput(line);
+00278     \}
+00279 \}
+00280 
+00281 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])
+00282 \{
+00283     \textcolor{keywordflow}{if} (argc < 4 || argc > 11)
+00284     \{
+00285         fprintf(stderr, \textcolor{stringliteral}{"Error: The number of users should between 3 and 10.\(\backslash\)n"});
+00286         \textcolor{keywordflow}{return} EXIT\_FAILURE;
+00287     \}
+00288     NumOfUser = argc - 1;
+00289     \textcolor{comment}{//Initialize each user in struct user[];}
+00290     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<NumOfUser; i++)
+00291     \{
+00292         \textcolor{keywordflow}{if}(GetUserID(argv[i+1]) != -1)
+00293         \{
+00294             printf(\textcolor{stringliteral}{"Duplicate names of users!\(\backslash\)n"});
+00295             exit(EXIT\_FAILURE);
+00296         \}
+00297         strcpy(user[i].username, argv[i+1]);
+00298         user[i].username[0] = toupper(user[i].username[0]);
+00299         user[i].accepted = CreateAppointmentList();
+00300         user[i].rejected = CreateAppointmentList();
+00301     \}
+00302     inputList = CreateAppointmentList();
+00303 
+00304     printf(\textcolor{stringliteral}{"~~WELCOME TO AMR~~\(\backslash\)n"});
+00305     inputLoop(stdin);
+00306     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
+00307 \}
 \end{DoxyCode}
