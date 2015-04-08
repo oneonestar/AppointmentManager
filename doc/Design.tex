@@ -31,14 +31,55 @@ a3paper% other options: a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6
 \newcommand{\In}{\textbf{in}\,}
 \algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
 
-\author{Star Poon}
+\author{
+CHEUNG Wai Fai 13003551D\\
+POON Yat Sing 13040015D\\
+LIU Wang Ho 13068152D \\
+LAM Pui Yan 12139709D \\
+KWAN Leung Yu 13027272D
+}
 \title{COMP2432 Group Project Design Documentation}
 \begin{document}
 \maketitle
 \tableofcontents
 \chapter{Foreword}
 \section{Introduction}
+\subsection{Problem Identification}
+Being a student is not easy in today’s school life. A student may take up to 7 subjects while each subject may have their own individual assignments and group projects with deadline very close to each other. In addition, students may have nonacademic activities and meetings. It is a fact that solving this problem by changing the academic system is impossible. Therefore good time management is the only solution and becomes a serious issue for today’s students. Nevertheless there are some obstacles for students to have good time scheduling.
+
+Students have hard time to arrange time for group discussions. As each group member may study different programme which have different class timetable, it is difficult to come up with a time slot which all the members are available. The problem lies on the difficulty of comparing each other’s schedule manually.
+
+Student have difficulty to rearrange their schedule for some important events. It is a fact that students’ schedule is always in a packed situation. However, there are still many cases which some emergency appointment is requested and there is no choice but to change the original schedule. Nevertheless since the schedule already packed, it is hard for students to manually search for alternative time for the original work.
+\subsection{Objective}
+To address these issues, we would like to design an Appointment Manager (AMR) in order to deal with the issue of appointment scheduling and schedules rearrangement. Our system have the following objectives.
+\begin{itemize}
+\item Allow multiple users create their own schedule
+\item Allow easy arrangement for group events such as group project discussion
+\item Provide alternative time slot in case of schedules rearrangement
+\end{itemize}
 \section{Scope}
+\subsection{Process creation}
+Process creation means a process is created when a program is running. The process that creating is the parent process. The created process is the child process. Fork() system call is used in Unix/Linux for process creation. Parent process and child process execute concurrently. It will enhance the efficiency. Parent process need to wait until child process completed. After parent process collected a child process, it will resume its process.
+
+There are 3 relationships between parent and child processes. In terms of resource sharing, as parent and child are two completely independent process, they share no resources. The child process continue to execute right at the position the process is fork(). The child process have the same variable as parent process right before it is fork(). In terms of execution, parent and child process can run concurrently. In normal case, parent process should wait it’s child terminated before terminate itself.
+\subsection{Interprocess communication}
+Interprocess communication allows processes to communicate and to synchronise. Shared memory mechanism is used to create shared memory segments within kernel memory space. Message passing mechanism allows processes to communicate via pipes and sockets. 
+
+Pipe is a mechanism in the OS which allows multiple processes communicate through channels inside kernel. This prevent unauthorised change done outside program itself. There are mainly 2 types of pipe which are unnamed and named pipe.
+
+For the unnamed pipe, it is created with system call pipe(). Pipe allows parent and child communication and it’s created before fork(). A pipe itself allow two way communication. However, as OS cannot control which process read the output, it is danger to use one pipe to handle both read and write. We will close() the unused pipe to prevent accidental use.
+
+For the named pipe, it is actually a special file created by mkfifo() what multiple process can read and write at the same time. Those processes does not necessary in a parent and child relationship. The pipe name is assigned by the program. Several processes connect together with the same name. The disadvantage of using named pipe is it may create a security issue as anyone can read and write into the file as long as they have the name of the pipe.
+\subsection{Interprocess communication}
+For the appointment scheduling in our system, we basically follow the concept of CPU scheduling. We focus on First Come First Serve (FCFS) and Priority Scheduling.
+\subsubsection{FCFS}
+For the FCFS, it basically accept and entertain the process that come earlier in time. In terms of CPU scheduling, the CPU will process the whole earlier coming process before entertaining the next one. The waiting process will queue according to their arrive time. Note that each process will be assigned a process ID. Normally process come earlier will have a smaller PID in UNIX/Linux. Which means a process with smaller PID will be processed first if 2 processes come at around the same time.
+
+In terms of our system, FCFS means appointment comes earlier will be scheduled first as long as the timeslots are available.
+\subsubsection{Priority Scheduling}
+For the priority, the idea is to accept the process according to its priority. Each coming process will also be manually assigned with a priority. The process with higher priority will run first. If a higher priority process arrive while a lower priority process is running, the current running process will be suspended and let the higher priority process run first. The lower priority process will be resumed after the higher priority process terminated.
+
+In terms of our system. If a time slot is available, any appointment will be accepted. However if the time slot is filled, the system will compare the priority of the new and current appointments. If the new appointment have a higher priority, the new appointment will replace the original appointment.
 \chapter{Requirement Analysis}
 \section{Input commands}
 Input formats follow the examples and make no difference and we simply assume all the input formats are correct.
@@ -232,7 +273,7 @@ The system should be divided into different modules logically. System call \text
 \subsection{Timeslot}
 Every 30 minutes as one time slot. The events will be from 18:00 to 22:00 on weekdays. The system shall support at least two weeks' time. Once part of the time slot is occupied, the whole time slot would be treated as unavailable. The system shall support the overflow situation where appointments are more than the available timeslot.
 
-\chapter{Design and Implementation}
+\chapter{Design}
 \section{Data Structure}
 \subsection{struct Appointment}
 The starting time of the appointment is stored in the type \textit{time\_t} which is defined in the standard C library \textless time.h\textgreater. This library provides some time manipulation and conversion functions that are useful in the system design.
@@ -352,4 +393,9 @@ This scheduling algorithm will allocate the timeslot to the appointment which ha
 \EndFor
 \end{algorithmic}
 \end{algorithm}
+\chapter{Implementation}
+\section{Software Structure}
+\chapter{Deployment}
+\section{Build}
+\chapter{Testing}
 \end{document}
