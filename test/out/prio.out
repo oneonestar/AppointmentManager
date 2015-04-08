@@ -1,0 +1,55 @@
+~~WELCOME TO AMR~~
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+-> [Pending]
+Please enter appointment:
+***Appointment Schedule – ACCEPTED ***
+
+Alice, you have 1 appointments.
+ 3 2015-08-04   20:00   23:30   Assignment   N         -
+Bob, you have 1 appointments.
+ 1 2015-08-04   18:00   21:30   Assignment   N         -
+Charlie, you have 2 appointments.
+ 2 2015-08-04   19:00   21:00   Gathering    N         -
+ 5 2015-08-04   22:00   01:30   Study        N         -
+   -End-
+===========================================================================
+***Appointment Schedule – REJECTED ***
+
+Alice, you have 3 appointments rejected.
+ 6 2015-08-04   17:00   19:30   Project      N          Bob is unavailable.
+ 7 2015-08-04   17:00   20:30   Gathering    N          Bob is unavailable.
+ 0 2015-08-04   18:00   21:30   Study        N          Higher priority item being added.
+Bob, you have 3 appointments rejected.
+ 6 2015-08-04   17:00   19:30   Project      N          Bob is unavailable.
+ 7 2015-08-04   17:00   20:30   Gathering    N          Bob is unavailable.
+ 4 2015-08-04   20:00   23:30   Study        N          Bob is unavailable.
+Charlie, you have 1 appointments rejected.
+ 7 2015-08-04   17:00   20:30   Gathering    N          Bob is unavailable.
+   -End-
+===========================================================================
+Performance:
+Date start: 2015-08-04
+Date end: 2015-08-05
+
+Total Number of Appointment Assigned: 4 (50.0%)
+Total Number of Appointment Rejected: 4 (50.0%)
+Utilization of Time Slot: (3 days)
+    Alice      - 25.0%
+    Bob        - 43.8%
+    Charlie    - 25.0%
+Please enter appointment:
+Received EOF.

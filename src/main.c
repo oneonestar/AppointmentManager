@@ -262,7 +262,6 @@ void inputLoop(FILE *stream)
 		return_val = fgets(line, MAX_CHAR, stream);
 		if(!return_val)
 		{
-			// sleep(10);
 			if(feof(stream))
 			{
 				printf("Received EOF.\n");

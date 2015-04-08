@@ -27,9 +27,24 @@ make onefile
 
 Documentation
 -------------
-doc/latex/dox.pdf
+Project doucmentationi:
+doc/AMRReport.pdf
+
+API documentation:
+doc/API.pdf
 
 File structure
 --------------
--bin/
--src/ .... source and header files
+-bin/ ..... executable file
+-src/ ..... source and header files
+-obj/ ..... object files during make
+-doc/ ..... documentations
+-test/in .. testing input
+-test/out . testing output
+
+How to test
+--------------
+Use input redirection
+./bin/amr alice bob charlie < test/in/fcfs.in
+./bin/amr alice bob charlie < test/in/prio.in
+./bin/amr alice bob charlie < test/in/opti.in
