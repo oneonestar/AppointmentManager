@@ -266,14 +266,7 @@ void inputLoop(FILE *stream)
 			if(feof(stream))
 			{
 				printf("Received EOF.\n");
-				clearerr(stdin);
-				//Allow ./AMR a b < input.txt, continue to read user input after EOF from stdin.
-				//WARNING: not portable, only works in linux!
-				if (!freopen("/dev/tty", "rw", stdin)) {
-					perror("freopen");
-					exit(EXIT_FAILURE);
-				}
-				continue;
+				return;
 			}
 			else
 			{

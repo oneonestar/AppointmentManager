@@ -439,12 +439,20 @@ The program is divided into multiple modules. This can improve the readability a
 \subsection{Appointment Module}
 This modules contain the \texttt{Appointment} and \texttt{AppointmentList} structure. Also, it contains the functions that are useful for handling these two structure. The list is a double-linked list. All the create, insert, delete and sorting algorithms done on \texttt{AppointmentList} are included in this module. This module is the fundamental part of the program and other modules heavily depends on this module. Also, we use the \texttt{AppointmentList} to store all the input appointments and the scheduled accept appointments.
 \subsection{User Module}
-This modules contain the \texttt{user} structure that are responsible for storing the important parts.
+This modules contain the \texttt{user} structure that are responsible for storing the individual accepted and rejected appointments. Also it will provide function to validate the username is duplicated or not.
 \subsection{Scheduler Module}
-This modules contain the three scheduling algorithms. All the algrithm
+This modules contain the three scheduling algorithms. All the algorithm will return a summary of the performance, such as total number of accepted or rejected appointments, the utilization of timeslot of each user. This modules provide functions to check if the timeslot is available across different users.
 
-\subsection{Appointment Module}
-This modules contain the \texttt{Appointment} and \texttt{AppointmentList} structure. Also, it contains the functions that are useful for handling these two structure. The list is a double-linked list. All the create, insert, delete and sorting algorithms done on \texttt{AppointmentList} are included in this module. This module is the fundamental part of the program and other modules heavily depends on this module. Also, we use the \texttt{AppointmentList} to store all the input appointments and the scheduled accept appointments.
+\subsection{Input Loop}
+When the program first startup, the program will check the command line argument. It will make sure the number of user is between 3 and 10. After that, the program will check the username and make sure there are not duplicated usernames.
+
+The program will be looping and wait for the appointment inputs until the endProgam command is received. The program allow user to adding appointment individually and using batch file. It allow recursive addBatch command inside the batch file.
+
+\section{Fork and Pipe}
+This program using the \texttt{fork()} system call to create a child to handle the scheduling and printing of appointment. After the child process finished the scheduling, it will return a summary back to the parent using \texttt{pipe()}. After the scheduling, the child will terminate itself.
+
+By using this approach, we fully utilize the property of \texttt{fork()}. The child will have the same copy of memory as the parent. This means when a scheduler is started, a child will be created and the child will own a copy of all the input appointments. After the scheduling finished, the child will print the result and terminate itself. This can prevent any memory leakage during the scheduling. The parent will continue to run after the child return the summary.
+
 \chapter{Testing}
 \chapter{Deployment}
 \section{Build}
