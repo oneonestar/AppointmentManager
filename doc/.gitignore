@@ -2,8 +2,9 @@
 
 !.gitignore
 !Doxyfile
-!Design.tex
-!Design.pdf
+!AMRReport.tex
+!AMRReport.pdf
+!API.pdf
 !html/
 !html/*
 !latex/
