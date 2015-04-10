@@ -25,6 +25,26 @@
 
 #include "scheduler.h"
 
+void RemoveListFromAllUser(const struct AppointmentList *list, const char *reason)
+{
+	struct Appointment *ptr = list->head;
+	while(ptr)
+	{
+		for(int i=0; i<NumOfUser; i++)
+		{
+			PrintAppointment(ptr);
+			int ret = RemoveItemFromList(user[i].accepted, ptr);
+			if(ret)
+			{
+				strcpy(ptr->reason, reason);
+				AddAppointmentOrdered(user[i].rejected, ptr);
+			}
+		}
+		ptr = ptr->next;
+	}
+	printf("EXIT!!!!!!!!!");
+}
+
 static int AllAvailable(const struct Appointment *item)
 {
 	if(!item)
@@ -35,7 +55,7 @@ static int AllAvailable(const struct Appointment *item)
 	if(temp_list->count)
 		return item->caller_id;
 	//check callees timetable
-	for(int i=0; i<USER_NUMBER; i++)
+	for(int i=0; i<NumOfUser; i++)
 	{
 		if(item->callee_id[i]==-1)
 			break;
@@ -60,7 +80,7 @@ static int AllAvailablePriority(const struct Appointment *item)
 		ptr = ptr->next;
 	}
 	//check callees timetable
-	for(int i=0; i<USER_NUMBER; i++)
+	for(int i=0; i<NumOfUser; i++)
 	{
 		if(item->callee_id[i]==-1)
 			break;
@@ -81,7 +101,7 @@ static void AddToAllAccept(struct Appointment *item)
 {
 	strcpy(item->reason, "");
 	AddAppointmentOrdered(user[item->caller_id].accepted, item);
-	for(int i=0; i<USER_NUMBER; i++)
+	for(int i=0; i<NumOfUser; i++)
 	{
 		if(item->callee_id[i]==-1)
 			break;
@@ -96,29 +116,26 @@ static void AddToAllAcceptForced(struct Appointment *item)
 	//caller
 	//delete old appointments from accepted list
 	temp_list = ConflictInList(user[item->caller_id].accepted, item);
-	RemoveListFromList(user[item->caller_id].accepted, temp_list);
+	RemoveListFromAllUser(temp_list, "Higher priority item being added.");
 	//add to accept and reject lsit
 	AddAppointmentOrdered(user[item->caller_id].accepted, item);
-	SetReasonForList(temp_list, "Higher priority item being added.");
-	AddAppointmentOrderedFromList(user[item->caller_id].rejected, temp_list);
-	for(int i=0; i<USER_NUMBER; i++)
+	for(int i=0; i<NumOfUser; i++)
 	{
 		if(item->callee_id[i]==-1)
 			break;
 		//delete old appointments from accepted list
 		temp_list = ConflictInList(user[item->callee_id[i]].accepted, item);
-		RemoveListFromList(user[item->callee_id[i]].accepted, temp_list);
+		RemoveListFromAllUser(temp_list, "Higher priority item being added.");
 		//add to accept and reject lsit
-		SetReasonForList(temp_list, "Higher priority item being added.");
 		AddAppointmentOrdered(user[item->callee_id[i]].accepted, item);
-		AddAppointmentOrderedFromList(user[item->callee_id[i]].rejected, temp_list);
+		printf("!!!%d\n", i);
 	}
 }
 
 static void AddToAllReject(const struct Appointment *item)
 {
 	AddAppointmentOrdered(user[item->caller_id].rejected, item);
-	for(int i=0; i<USER_NUMBER; i++)
+	for(int i=0; i<NumOfUser; i++)
 	{
 		if(item->callee_id[i]==-1)
 			break;

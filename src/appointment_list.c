@@ -157,8 +157,10 @@ int CompareAppointmentPriority(const struct Appointment *a, const struct Appoint
 	return a->type - b->type;
 }
 
-void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item)
+int RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item)
 {
+	if(!list)
+		return 0;
 	struct Appointment *delItem = list->head;
 	while(delItem)
 	{
@@ -173,10 +175,11 @@ void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *
 			else
 				delItem->next->prev = delItem->prev;
 			list->count--;
-			return;
+			return 1;
 		}
 		delItem = delItem->next;
 	}
+	return 0;
 }
 
 void RemoveListFromList(struct AppointmentList *ori_list, const struct AppointmentList *del_list)

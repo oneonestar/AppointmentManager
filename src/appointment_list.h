@@ -134,7 +134,7 @@ int IsConflictInList(const struct AppointmentList *list, const struct Appointmen
  * @brief Remove an item from the list. Items should be unique inside the list.
  * Delete if the two item have the same id.
  */
-void RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item);
+int RemoveItemFromList(struct AppointmentList *list, const struct Appointment *item);
 
 /**
  * @brief Remove a list of items from the list. Items should be unique inside the list.
