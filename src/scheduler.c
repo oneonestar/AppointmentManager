@@ -32,7 +32,6 @@ void RemoveListFromAllUser(const struct AppointmentList *list, const char *reaso
 	{
 		for(int i=0; i<NumOfUser; i++)
 		{
-			PrintAppointment(ptr);
 			int ret = RemoveItemFromList(user[i].accepted, ptr);
 			if(ret)
 			{
@@ -42,7 +41,6 @@ void RemoveListFromAllUser(const struct AppointmentList *list, const char *reaso
 		}
 		ptr = ptr->next;
 	}
-	printf("EXIT!!!!!!!!!");
 }
 
 static int AllAvailable(const struct Appointment *item)
